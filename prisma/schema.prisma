@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Item {
+  id            String  @id @default(cuid())
+  name          String
+  description   String?
+  securityStock Decimal @default(0)
+  shelfLife     Int?
+  color         String?
+  active        Boolean @default(true)
+  idUnit        String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  unit Unit @relation(fields: [idUnit], references: [id])
+}
+
+model Lot {
+  id              String    @id @default(cuid())
+  quantity        Decimal   @db.Decimal(10, 3)
+  manufactureDate DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+//16/12/2025 : I'm stopping here for today, I'll work on it later ...
+
+model Mouvement {
+  id       Int      @id @default(autoincrement())
+  type     String
+  quantite Decimal  @db.Decimal(10, 3)
+  date     DateTime @default(now())
+  idStock  Int      @map("id_stock")
+  idUser   Int      @map("id_user")
+  
+  @@map("mouvement")
+}
+
+model Supplier {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Unit {
+  id    String @id @default(cuid())
+  name  String
+  code  String
+  items Item[]
+}
