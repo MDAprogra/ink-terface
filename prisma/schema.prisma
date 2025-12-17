@@ -13,54 +13,85 @@ datasource db {
   provider = "postgresql"
 }
 
-model Item {
-  id            String  @id @default(cuid())
-  name          String
-  description   String?
-  securityStock Decimal @default(0)
-  shelfLife     Int?
-  color         String?
-  active        Boolean @default(true)
-  idUnit        String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  unit Unit @relation(fields: [idUnit], references: [id])
-}
-
-model Lot {
-  id              String    @id @default(cuid())
-  quantity        Decimal   @db.Decimal(10, 3)
-  manufactureDate DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-//16/12/2025 : I'm stopping here for today, I'll work on it later ...
-
-model Mouvement {
-  id       Int      @id @default(autoincrement())
-  type     String
-  quantite Decimal  @db.Decimal(10, 3)
-  date     DateTime @default(now())
-  idStock  Int      @map("id_stock")
-  idUser   Int      @map("id_user")
-  
-  @@map("mouvement")
-}
-
 model Supplier {
-  id        String   @id @default(cuid())
-  name      String   @unique
+  id   String @id @default(cuid())
+  name String @unique
+
+  items     Item[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Unit {
-  id    String @id @default(cuid())
-  name  String
-  code  String
+  id   String @id @default(cuid())
+  name String @unique
+  code String @unique
+
+  items     Item[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MovementType {
+  id   String @id @default(cuid())
+  name String
+
+  movements Movement[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model ItemType {
+  id String @id @default(cuid())
+  name String
   items Item[]
+}
+
+model Item {
+  id            String   @id @default(cuid())
+  name          String
+  description   String?
+  securityStock Decimal  @default(0)
+  shelfLife     Int?
+  color         String?
+  active        Boolean  @default(true)
+  purchasePrice Decimal? @db.Decimal(10, 3)
+
+  idTypeItem String
+  idUnit     String
+  idSupplier String
+
+  type ItemType @relation(fields: [idTypeItem], references: [id])
+  unit     Unit     @relation(fields: [idUnit], references: [id])
+  supplier Supplier @relation(fields: [idSupplier], references: [id])
+
+  stocks    Stock[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Stock {
+  id       String  @id @default(cuid())
+  quantity Decimal @db.Decimal(10, 3)
+
+  idItem String @unique
+
+  item Item @relation(fields: [idItem], references: [id])
+
+  movements Movement[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Movement {
+  id       String  @id @default(cuid())
+  quantity Decimal @db.Decimal(10, 3)
+
+  idStock        String
+  idMovementType String
+
+  stock        Stock        @relation(fields: [idStock], references: [id])
+  movementType MovementType @relation(fields: [idMovementType], references: [id])
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
