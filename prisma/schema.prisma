@@ -42,8 +42,8 @@ model MovementType {
 }
 
 model ItemType {
-  id String @id @default(cuid())
-  name String
+  id    String @id @default(cuid())
+  name  String
   items Item[]
 }
 
@@ -61,7 +61,7 @@ model Item {
   idUnit     String
   idSupplier String
 
-  type ItemType @relation(fields: [idTypeItem], references: [id])
+  type     ItemType @relation(fields: [idTypeItem], references: [id])
   unit     Unit     @relation(fields: [idUnit], references: [id])
   supplier Supplier @relation(fields: [idSupplier], references: [id])
 
@@ -89,9 +89,75 @@ model Movement {
 
   idStock        String
   idMovementType String
+  idUser         String
 
+  user         User         @relation(fields: [idUser], references: [id])
   stock        Stock        @relation(fields: [idStock], references: [id])
   movementType MovementType @relation(fields: [idMovementType], references: [id])
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
+}
+
+model User {
+  id            String     @id
+  name          String
+  email         String
+  emailVerified Boolean    @default(false)
+  image         String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  movements     Movement[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
 }
