@@ -40,6 +40,7 @@ export type MovementMinAggregateOutputType = {
   quantity: runtime.Decimal | null;
   idStock: string | null;
   idMovementType: string | null;
+  idUser: string | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -49,6 +50,7 @@ export type MovementMaxAggregateOutputType = {
   quantity: runtime.Decimal | null;
   idStock: string | null;
   idMovementType: string | null;
+  idUser: string | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -58,6 +60,7 @@ export type MovementCountAggregateOutputType = {
   quantity: number;
   idStock: number;
   idMovementType: number;
+  idUser: number;
   createdAt: number;
   updatedAt: number;
   _all: number;
@@ -76,6 +79,7 @@ export type MovementMinAggregateInputType = {
   quantity?: true;
   idStock?: true;
   idMovementType?: true;
+  idUser?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -85,6 +89,7 @@ export type MovementMaxAggregateInputType = {
   quantity?: true;
   idStock?: true;
   idMovementType?: true;
+  idUser?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -94,6 +99,7 @@ export type MovementCountAggregateInputType = {
   quantity?: true;
   idStock?: true;
   idMovementType?: true;
+  idUser?: true;
   createdAt?: true;
   updatedAt?: true;
   _all?: true;
@@ -197,6 +203,7 @@ export type MovementGroupByOutputType = {
   quantity: runtime.Decimal;
   idStock: string;
   idMovementType: string;
+  idUser: string;
   createdAt: Date;
   updatedAt: Date;
   _count: MovementCountAggregateOutputType | null;
@@ -232,8 +239,10 @@ export type MovementWhereInput = {
     | string;
   idStock?: Prisma.StringFilter<'Movement'> | string;
   idMovementType?: Prisma.StringFilter<'Movement'> | string;
+  idUser?: Prisma.StringFilter<'Movement'> | string;
   createdAt?: Prisma.DateTimeFilter<'Movement'> | Date | string;
   updatedAt?: Prisma.DateTimeFilter<'Movement'> | Date | string;
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
   stock?: Prisma.XOR<Prisma.StockScalarRelationFilter, Prisma.StockWhereInput>;
   movementType?: Prisma.XOR<
     Prisma.MovementTypeScalarRelationFilter,
@@ -246,8 +255,10 @@ export type MovementOrderByWithRelationInput = {
   quantity?: Prisma.SortOrder;
   idStock?: Prisma.SortOrder;
   idMovementType?: Prisma.SortOrder;
+  idUser?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  user?: Prisma.UserOrderByWithRelationInput;
   stock?: Prisma.StockOrderByWithRelationInput;
   movementType?: Prisma.MovementTypeOrderByWithRelationInput;
 };
@@ -266,8 +277,10 @@ export type MovementWhereUniqueInput = Prisma.AtLeast<
       | string;
     idStock?: Prisma.StringFilter<'Movement'> | string;
     idMovementType?: Prisma.StringFilter<'Movement'> | string;
+    idUser?: Prisma.StringFilter<'Movement'> | string;
     createdAt?: Prisma.DateTimeFilter<'Movement'> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<'Movement'> | Date | string;
+    user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
     stock?: Prisma.XOR<
       Prisma.StockScalarRelationFilter,
       Prisma.StockWhereInput
@@ -285,6 +298,7 @@ export type MovementOrderByWithAggregationInput = {
   quantity?: Prisma.SortOrder;
   idStock?: Prisma.SortOrder;
   idMovementType?: Prisma.SortOrder;
+  idUser?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
   _count?: Prisma.MovementCountOrderByAggregateInput;
@@ -311,6 +325,7 @@ export type MovementScalarWhereWithAggregatesInput = {
     | string;
   idStock?: Prisma.StringWithAggregatesFilter<'Movement'> | string;
   idMovementType?: Prisma.StringWithAggregatesFilter<'Movement'> | string;
+  idUser?: Prisma.StringWithAggregatesFilter<'Movement'> | string;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Movement'> | Date | string;
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<'Movement'> | Date | string;
 };
@@ -320,6 +335,7 @@ export type MovementCreateInput = {
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  user: Prisma.UserCreateNestedOneWithoutMovementsInput;
   stock: Prisma.StockCreateNestedOneWithoutMovementsInput;
   movementType: Prisma.MovementTypeCreateNestedOneWithoutMovementsInput;
 };
@@ -329,6 +345,7 @@ export type MovementUncheckedCreateInput = {
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idStock: string;
   idMovementType: string;
+  idUser: string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 };
@@ -343,6 +360,7 @@ export type MovementUpdateInput = {
     | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  user?: Prisma.UserUpdateOneRequiredWithoutMovementsNestedInput;
   stock?: Prisma.StockUpdateOneRequiredWithoutMovementsNestedInput;
   movementType?: Prisma.MovementTypeUpdateOneRequiredWithoutMovementsNestedInput;
 };
@@ -357,6 +375,7 @@ export type MovementUncheckedUpdateInput = {
     | string;
   idStock?: Prisma.StringFieldUpdateOperationsInput | string;
   idMovementType?: Prisma.StringFieldUpdateOperationsInput | string;
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -366,6 +385,7 @@ export type MovementCreateManyInput = {
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idStock: string;
   idMovementType: string;
+  idUser: string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 };
@@ -392,6 +412,7 @@ export type MovementUncheckedUpdateManyInput = {
     | string;
   idStock?: Prisma.StringFieldUpdateOperationsInput | string;
   idMovementType?: Prisma.StringFieldUpdateOperationsInput | string;
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -411,6 +432,7 @@ export type MovementCountOrderByAggregateInput = {
   quantity?: Prisma.SortOrder;
   idStock?: Prisma.SortOrder;
   idMovementType?: Prisma.SortOrder;
+  idUser?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -424,6 +446,7 @@ export type MovementMaxOrderByAggregateInput = {
   quantity?: Prisma.SortOrder;
   idStock?: Prisma.SortOrder;
   idMovementType?: Prisma.SortOrder;
+  idUser?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -433,6 +456,7 @@ export type MovementMinOrderByAggregateInput = {
   quantity?: Prisma.SortOrder;
   idStock?: Prisma.SortOrder;
   idMovementType?: Prisma.SortOrder;
+  idUser?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -629,11 +653,106 @@ export type MovementUncheckedUpdateManyWithoutStockNestedInput = {
     | Prisma.MovementScalarWhereInput[];
 };
 
+export type MovementCreateNestedManyWithoutUserInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.MovementCreateWithoutUserInput,
+        Prisma.MovementUncheckedCreateWithoutUserInput
+      >
+    | Prisma.MovementCreateWithoutUserInput[]
+    | Prisma.MovementUncheckedCreateWithoutUserInput[];
+  connectOrCreate?:
+    | Prisma.MovementCreateOrConnectWithoutUserInput
+    | Prisma.MovementCreateOrConnectWithoutUserInput[];
+  createMany?: Prisma.MovementCreateManyUserInputEnvelope;
+  connect?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[];
+};
+
+export type MovementUncheckedCreateNestedManyWithoutUserInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.MovementCreateWithoutUserInput,
+        Prisma.MovementUncheckedCreateWithoutUserInput
+      >
+    | Prisma.MovementCreateWithoutUserInput[]
+    | Prisma.MovementUncheckedCreateWithoutUserInput[];
+  connectOrCreate?:
+    | Prisma.MovementCreateOrConnectWithoutUserInput
+    | Prisma.MovementCreateOrConnectWithoutUserInput[];
+  createMany?: Prisma.MovementCreateManyUserInputEnvelope;
+  connect?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[];
+};
+
+export type MovementUpdateManyWithoutUserNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.MovementCreateWithoutUserInput,
+        Prisma.MovementUncheckedCreateWithoutUserInput
+      >
+    | Prisma.MovementCreateWithoutUserInput[]
+    | Prisma.MovementUncheckedCreateWithoutUserInput[];
+  connectOrCreate?:
+    | Prisma.MovementCreateOrConnectWithoutUserInput
+    | Prisma.MovementCreateOrConnectWithoutUserInput[];
+  upsert?:
+    | Prisma.MovementUpsertWithWhereUniqueWithoutUserInput
+    | Prisma.MovementUpsertWithWhereUniqueWithoutUserInput[];
+  createMany?: Prisma.MovementCreateManyUserInputEnvelope;
+  set?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[];
+  disconnect?:
+    | Prisma.MovementWhereUniqueInput
+    | Prisma.MovementWhereUniqueInput[];
+  delete?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[];
+  connect?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[];
+  update?:
+    | Prisma.MovementUpdateWithWhereUniqueWithoutUserInput
+    | Prisma.MovementUpdateWithWhereUniqueWithoutUserInput[];
+  updateMany?:
+    | Prisma.MovementUpdateManyWithWhereWithoutUserInput
+    | Prisma.MovementUpdateManyWithWhereWithoutUserInput[];
+  deleteMany?:
+    | Prisma.MovementScalarWhereInput
+    | Prisma.MovementScalarWhereInput[];
+};
+
+export type MovementUncheckedUpdateManyWithoutUserNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.MovementCreateWithoutUserInput,
+        Prisma.MovementUncheckedCreateWithoutUserInput
+      >
+    | Prisma.MovementCreateWithoutUserInput[]
+    | Prisma.MovementUncheckedCreateWithoutUserInput[];
+  connectOrCreate?:
+    | Prisma.MovementCreateOrConnectWithoutUserInput
+    | Prisma.MovementCreateOrConnectWithoutUserInput[];
+  upsert?:
+    | Prisma.MovementUpsertWithWhereUniqueWithoutUserInput
+    | Prisma.MovementUpsertWithWhereUniqueWithoutUserInput[];
+  createMany?: Prisma.MovementCreateManyUserInputEnvelope;
+  set?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[];
+  disconnect?:
+    | Prisma.MovementWhereUniqueInput
+    | Prisma.MovementWhereUniqueInput[];
+  delete?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[];
+  connect?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[];
+  update?:
+    | Prisma.MovementUpdateWithWhereUniqueWithoutUserInput
+    | Prisma.MovementUpdateWithWhereUniqueWithoutUserInput[];
+  updateMany?:
+    | Prisma.MovementUpdateManyWithWhereWithoutUserInput
+    | Prisma.MovementUpdateManyWithWhereWithoutUserInput[];
+  deleteMany?:
+    | Prisma.MovementScalarWhereInput
+    | Prisma.MovementScalarWhereInput[];
+};
+
 export type MovementCreateWithoutMovementTypeInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  user: Prisma.UserCreateNestedOneWithoutMovementsInput;
   stock: Prisma.StockCreateNestedOneWithoutMovementsInput;
 };
 
@@ -641,6 +760,7 @@ export type MovementUncheckedCreateWithoutMovementTypeInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idStock: string;
+  idUser: string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 };
@@ -701,6 +821,7 @@ export type MovementScalarWhereInput = {
     | string;
   idStock?: Prisma.StringFilter<'Movement'> | string;
   idMovementType?: Prisma.StringFilter<'Movement'> | string;
+  idUser?: Prisma.StringFilter<'Movement'> | string;
   createdAt?: Prisma.DateTimeFilter<'Movement'> | Date | string;
   updatedAt?: Prisma.DateTimeFilter<'Movement'> | Date | string;
 };
@@ -710,6 +831,7 @@ export type MovementCreateWithoutStockInput = {
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  user: Prisma.UserCreateNestedOneWithoutMovementsInput;
   movementType: Prisma.MovementTypeCreateNestedOneWithoutMovementsInput;
 };
 
@@ -717,6 +839,7 @@ export type MovementUncheckedCreateWithoutStockInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idMovementType: string;
+  idUser: string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 };
@@ -764,10 +887,72 @@ export type MovementUpdateManyWithWhereWithoutStockInput = {
   >;
 };
 
+export type MovementCreateWithoutUserInput = {
+  id?: string;
+  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  stock: Prisma.StockCreateNestedOneWithoutMovementsInput;
+  movementType: Prisma.MovementTypeCreateNestedOneWithoutMovementsInput;
+};
+
+export type MovementUncheckedCreateWithoutUserInput = {
+  id?: string;
+  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
+  idStock: string;
+  idMovementType: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
+
+export type MovementCreateOrConnectWithoutUserInput = {
+  where: Prisma.MovementWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.MovementCreateWithoutUserInput,
+    Prisma.MovementUncheckedCreateWithoutUserInput
+  >;
+};
+
+export type MovementCreateManyUserInputEnvelope = {
+  data:
+    | Prisma.MovementCreateManyUserInput
+    | Prisma.MovementCreateManyUserInput[];
+  skipDuplicates?: boolean;
+};
+
+export type MovementUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.MovementWhereUniqueInput;
+  update: Prisma.XOR<
+    Prisma.MovementUpdateWithoutUserInput,
+    Prisma.MovementUncheckedUpdateWithoutUserInput
+  >;
+  create: Prisma.XOR<
+    Prisma.MovementCreateWithoutUserInput,
+    Prisma.MovementUncheckedCreateWithoutUserInput
+  >;
+};
+
+export type MovementUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.MovementWhereUniqueInput;
+  data: Prisma.XOR<
+    Prisma.MovementUpdateWithoutUserInput,
+    Prisma.MovementUncheckedUpdateWithoutUserInput
+  >;
+};
+
+export type MovementUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.MovementScalarWhereInput;
+  data: Prisma.XOR<
+    Prisma.MovementUpdateManyMutationInput,
+    Prisma.MovementUncheckedUpdateManyWithoutUserInput
+  >;
+};
+
 export type MovementCreateManyMovementTypeInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idStock: string;
+  idUser: string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 };
@@ -782,6 +967,7 @@ export type MovementUpdateWithoutMovementTypeInput = {
     | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  user?: Prisma.UserUpdateOneRequiredWithoutMovementsNestedInput;
   stock?: Prisma.StockUpdateOneRequiredWithoutMovementsNestedInput;
 };
 
@@ -794,6 +980,7 @@ export type MovementUncheckedUpdateWithoutMovementTypeInput = {
     | number
     | string;
   idStock?: Prisma.StringFieldUpdateOperationsInput | string;
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -807,6 +994,7 @@ export type MovementUncheckedUpdateManyWithoutMovementTypeInput = {
     | number
     | string;
   idStock?: Prisma.StringFieldUpdateOperationsInput | string;
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -815,6 +1003,7 @@ export type MovementCreateManyStockInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idMovementType: string;
+  idUser: string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 };
@@ -829,6 +1018,7 @@ export type MovementUpdateWithoutStockInput = {
     | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  user?: Prisma.UserUpdateOneRequiredWithoutMovementsNestedInput;
   movementType?: Prisma.MovementTypeUpdateOneRequiredWithoutMovementsNestedInput;
 };
 
@@ -841,6 +1031,7 @@ export type MovementUncheckedUpdateWithoutStockInput = {
     | number
     | string;
   idMovementType?: Prisma.StringFieldUpdateOperationsInput | string;
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -853,6 +1044,58 @@ export type MovementUncheckedUpdateManyWithoutStockInput = {
     | runtime.DecimalJsLike
     | number
     | string;
+  idMovementType?: Prisma.StringFieldUpdateOperationsInput | string;
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+
+export type MovementCreateManyUserInput = {
+  id?: string;
+  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
+  idStock: string;
+  idMovementType: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
+
+export type MovementUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  quantity?:
+    | Prisma.DecimalFieldUpdateOperationsInput
+    | runtime.Decimal
+    | runtime.DecimalJsLike
+    | number
+    | string;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  stock?: Prisma.StockUpdateOneRequiredWithoutMovementsNestedInput;
+  movementType?: Prisma.MovementTypeUpdateOneRequiredWithoutMovementsNestedInput;
+};
+
+export type MovementUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  quantity?:
+    | Prisma.DecimalFieldUpdateOperationsInput
+    | runtime.Decimal
+    | runtime.DecimalJsLike
+    | number
+    | string;
+  idStock?: Prisma.StringFieldUpdateOperationsInput | string;
+  idMovementType?: Prisma.StringFieldUpdateOperationsInput | string;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+
+export type MovementUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  quantity?:
+    | Prisma.DecimalFieldUpdateOperationsInput
+    | runtime.Decimal
+    | runtime.DecimalJsLike
+    | number
+    | string;
+  idStock?: Prisma.StringFieldUpdateOperationsInput | string;
   idMovementType?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -867,8 +1110,10 @@ export type MovementSelect<
     quantity?: boolean;
     idStock?: boolean;
     idMovementType?: boolean;
+    idUser?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
     stock?: boolean | Prisma.StockDefaultArgs<ExtArgs>;
     movementType?: boolean | Prisma.MovementTypeDefaultArgs<ExtArgs>;
   },
@@ -884,8 +1129,10 @@ export type MovementSelectCreateManyAndReturn<
     quantity?: boolean;
     idStock?: boolean;
     idMovementType?: boolean;
+    idUser?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
     stock?: boolean | Prisma.StockDefaultArgs<ExtArgs>;
     movementType?: boolean | Prisma.MovementTypeDefaultArgs<ExtArgs>;
   },
@@ -901,8 +1148,10 @@ export type MovementSelectUpdateManyAndReturn<
     quantity?: boolean;
     idStock?: boolean;
     idMovementType?: boolean;
+    idUser?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
     stock?: boolean | Prisma.StockDefaultArgs<ExtArgs>;
     movementType?: boolean | Prisma.MovementTypeDefaultArgs<ExtArgs>;
   },
@@ -914,6 +1163,7 @@ export type MovementSelectScalar = {
   quantity?: boolean;
   idStock?: boolean;
   idMovementType?: boolean;
+  idUser?: boolean;
   createdAt?: boolean;
   updatedAt?: boolean;
 };
@@ -922,13 +1172,20 @@ export type MovementOmit<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  'id' | 'quantity' | 'idStock' | 'idMovementType' | 'createdAt' | 'updatedAt',
+  | 'id'
+  | 'quantity'
+  | 'idStock'
+  | 'idMovementType'
+  | 'idUser'
+  | 'createdAt'
+  | 'updatedAt',
   ExtArgs['result']['movement']
 >;
 export type MovementInclude<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
   stock?: boolean | Prisma.StockDefaultArgs<ExtArgs>;
   movementType?: boolean | Prisma.MovementTypeDefaultArgs<ExtArgs>;
 };
@@ -936,6 +1193,7 @@ export type MovementIncludeCreateManyAndReturn<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
   stock?: boolean | Prisma.StockDefaultArgs<ExtArgs>;
   movementType?: boolean | Prisma.MovementTypeDefaultArgs<ExtArgs>;
 };
@@ -943,6 +1201,7 @@ export type MovementIncludeUpdateManyAndReturn<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
   stock?: boolean | Prisma.StockDefaultArgs<ExtArgs>;
   movementType?: boolean | Prisma.MovementTypeDefaultArgs<ExtArgs>;
 };
@@ -953,6 +1212,7 @@ export type $MovementPayload<
 > = {
   name: 'Movement';
   objects: {
+    user: Prisma.$UserPayload<ExtArgs>;
     stock: Prisma.$StockPayload<ExtArgs>;
     movementType: Prisma.$MovementTypePayload<ExtArgs>;
   };
@@ -962,6 +1222,7 @@ export type $MovementPayload<
       quantity: runtime.Decimal;
       idStock: string;
       idMovementType: string;
+      idUser: string;
       createdAt: Date;
       updatedAt: Date;
     },
@@ -1514,6 +1775,20 @@ export interface Prisma__MovementClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
+  ): Prisma.Prisma__UserClient<
+    | runtime.Types.Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >
+    | Null,
+    Null,
+    ExtArgs,
+    GlobalOmitOptions
+  >;
   stock<T extends Prisma.StockDefaultArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.StockDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__StockClient<
@@ -1588,6 +1863,7 @@ export interface MovementFieldRefs {
   readonly quantity: Prisma.FieldRef<'Movement', 'Decimal'>;
   readonly idStock: Prisma.FieldRef<'Movement', 'String'>;
   readonly idMovementType: Prisma.FieldRef<'Movement', 'String'>;
+  readonly idUser: Prisma.FieldRef<'Movement', 'String'>;
   readonly createdAt: Prisma.FieldRef<'Movement', 'DateTime'>;
   readonly updatedAt: Prisma.FieldRef<'Movement', 'DateTime'>;
 }
