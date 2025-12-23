@@ -1,6 +1,6 @@
 'use client';
 
-import { Bell, Home, LogOut, Settings, User } from 'lucide-react';
+import { ArrowLeftRight, Home, LogOut, Package } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -9,10 +9,10 @@ import { Button } from '@/components/ui/button';
 import { authClient } from '@/lib/auth-client';
 
 const menuItems = [
-  { label: 'Dashboard', icon: Home, href: '/app' },
-  { label: 'Profil', icon: User, href: '/app/profile' },
-  { label: 'Notifications', icon: Bell, href: '/app/notifications' },
-  { label: 'Paramètres', icon: Settings, href: '/app/settings' },
+  { label: 'Accueil', icon: Home, href: '/app' },
+  { label: 'Stock', icon: Package, href: '/app/profile' },
+  { label: 'Mouvements', icon: ArrowLeftRight, href: '/app/notifications' },
+  //{ label: 'Paramètres', icon: Settings, href: '/app/settings' },
 ];
 
 export function UserMenu() {
