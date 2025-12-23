@@ -4,11 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.1.0",
