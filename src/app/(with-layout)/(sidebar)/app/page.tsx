@@ -1,3 +1,5 @@
+import HomePage from '@/features/Home/HomePage';
+
 export default async function Home() {
-  return <h1>Hello auth user</h1>;
+  return <HomePage />;
 }

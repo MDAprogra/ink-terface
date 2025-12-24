@@ -19,7 +19,7 @@ model Supplier {
 
   items     Item[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
 }
 
 model Unit {
@@ -29,21 +29,21 @@ model Unit {
 
   items     Item[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
 }
 
 model MovementType {
   id   String @id @default(cuid())
-  name String
+  name String @unique
 
   movements Movement[]
   createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  updatedAt DateTime?   @updatedAt
 }
 
 model ItemType {
   id    String @id @default(cuid())
-  name  String
+  name  String @unique
   items Item[]
 }
 
@@ -67,7 +67,7 @@ model Item {
 
   stocks    Stock[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
 }
 
 model Stock {
@@ -80,7 +80,7 @@ model Stock {
 
   movements Movement[]
   createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  updatedAt DateTime?   @updatedAt
 }
 
 model Movement {
@@ -95,7 +95,7 @@ model Movement {
   stock        Stock        @relation(fields: [idStock], references: [id])
   movementType MovementType @relation(fields: [idMovementType], references: [id])
   createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  updatedAt    DateTime?     @updatedAt
 }
 
 model User {
@@ -105,7 +105,7 @@ model User {
   emailVerified Boolean    @default(false)
   image         String?
   createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  updatedAt     DateTime?   @updatedAt
   sessions      Session[]
   accounts      Account[]
   movements     Movement[]
@@ -119,7 +119,7 @@ model Session {
   expiresAt DateTime
   token     String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
   ipAddress String?
   userAgent String?
   userId    String
@@ -144,7 +144,7 @@ model Account {
   scope                 String?
   password              String?
   createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
+  updatedAt             DateTime?  @updatedAt
 
   @@index([userId])
   @@map("account")
@@ -156,7 +156,7 @@ model Verification {
   value      String
   expiresAt  DateTime
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt  DateTime? @updatedAt
 
   @@index([identifier])
   @@map("verification")

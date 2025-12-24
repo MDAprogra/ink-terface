@@ -16,8 +16,7 @@ import type * as Prisma from '../internal/prismaNamespace';
  * Model Stock
  *
  */
-export type StockModel =
-  runtime.Types.Result.DefaultSelection<Prisma.$StockPayload>;
+export type StockModel = runtime.Types.Result.DefaultSelection<Prisma.$StockPayload>;
 
 export type AggregateStock = {
   _count: StockCountAggregateOutputType | null;
@@ -94,8 +93,7 @@ export type StockCountAggregateInputType = {
 };
 
 export type StockAggregateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which Stock to aggregate.
@@ -106,9 +104,7 @@ export type StockAggregateArgs<
    *
    * Determine the order of Stocks to fetch.
    */
-  orderBy?:
-    | Prisma.StockOrderByWithRelationInput
-    | Prisma.StockOrderByWithRelationInput[];
+  orderBy?: Prisma.StockOrderByWithRelationInput | Prisma.StockOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -168,13 +164,10 @@ export type GetStockAggregateType<T extends StockAggregateArgs> = {
 };
 
 export type StockGroupByArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.StockWhereInput;
-  orderBy?:
-    | Prisma.StockOrderByWithAggregationInput
-    | Prisma.StockOrderByWithAggregationInput[];
+  orderBy?: Prisma.StockOrderByWithAggregationInput | Prisma.StockOrderByWithAggregationInput[];
   by: Prisma.StockScalarFieldEnum[] | Prisma.StockScalarFieldEnum;
   having?: Prisma.StockScalarWhereWithAggregatesInput;
   take?: number;
@@ -191,7 +184,7 @@ export type StockGroupByOutputType = {
   quantity: runtime.Decimal;
   idItem: string;
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt: Date | null;
   _count: StockCountAggregateOutputType | null;
   _avg: StockAvgAggregateOutputType | null;
   _sum: StockSumAggregateOutputType | null;
@@ -216,15 +209,10 @@ export type StockWhereInput = {
   OR?: Prisma.StockWhereInput[];
   NOT?: Prisma.StockWhereInput | Prisma.StockWhereInput[];
   id?: Prisma.StringFilter<'Stock'> | string;
-  quantity?:
-    | Prisma.DecimalFilter<'Stock'>
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFilter<'Stock'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringFilter<'Stock'> | string;
   createdAt?: Prisma.DateTimeFilter<'Stock'> | Date | string;
-  updatedAt?: Prisma.DateTimeFilter<'Stock'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableFilter<'Stock'> | Date | string | null;
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>;
   movements?: Prisma.MovementListRelationFilter;
 };
@@ -234,7 +222,7 @@ export type StockOrderByWithRelationInput = {
   quantity?: Prisma.SortOrder;
   idItem?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
-  updatedAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   item?: Prisma.ItemOrderByWithRelationInput;
   movements?: Prisma.MovementOrderByRelationAggregateInput;
 };
@@ -246,14 +234,9 @@ export type StockWhereUniqueInput = Prisma.AtLeast<
     AND?: Prisma.StockWhereInput | Prisma.StockWhereInput[];
     OR?: Prisma.StockWhereInput[];
     NOT?: Prisma.StockWhereInput | Prisma.StockWhereInput[];
-    quantity?:
-      | Prisma.DecimalFilter<'Stock'>
-      | runtime.Decimal
-      | runtime.DecimalJsLike
-      | number
-      | string;
+    quantity?: Prisma.DecimalFilter<'Stock'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
     createdAt?: Prisma.DateTimeFilter<'Stock'> | Date | string;
-    updatedAt?: Prisma.DateTimeFilter<'Stock'> | Date | string;
+    updatedAt?: Prisma.DateTimeNullableFilter<'Stock'> | Date | string | null;
     item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>;
     movements?: Prisma.MovementListRelationFilter;
   },
@@ -265,7 +248,7 @@ export type StockOrderByWithAggregationInput = {
   quantity?: Prisma.SortOrder;
   idItem?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
-  updatedAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.StockCountOrderByAggregateInput;
   _avg?: Prisma.StockAvgOrderByAggregateInput;
   _max?: Prisma.StockMaxOrderByAggregateInput;
@@ -274,30 +257,21 @@ export type StockOrderByWithAggregationInput = {
 };
 
 export type StockScalarWhereWithAggregatesInput = {
-  AND?:
-    | Prisma.StockScalarWhereWithAggregatesInput
-    | Prisma.StockScalarWhereWithAggregatesInput[];
+  AND?: Prisma.StockScalarWhereWithAggregatesInput | Prisma.StockScalarWhereWithAggregatesInput[];
   OR?: Prisma.StockScalarWhereWithAggregatesInput[];
-  NOT?:
-    | Prisma.StockScalarWhereWithAggregatesInput
-    | Prisma.StockScalarWhereWithAggregatesInput[];
+  NOT?: Prisma.StockScalarWhereWithAggregatesInput | Prisma.StockScalarWhereWithAggregatesInput[];
   id?: Prisma.StringWithAggregatesFilter<'Stock'> | string;
-  quantity?:
-    | Prisma.DecimalWithAggregatesFilter<'Stock'>
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalWithAggregatesFilter<'Stock'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringWithAggregatesFilter<'Stock'> | string;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Stock'> | Date | string;
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<'Stock'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'Stock'> | Date | string | null;
 };
 
 export type StockCreateInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   item: Prisma.ItemCreateNestedOneWithoutStocksInput;
   movements?: Prisma.MovementCreateNestedManyWithoutStockInput;
 };
@@ -307,35 +281,25 @@ export type StockUncheckedCreateInput = {
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   movements?: Prisma.MovementUncheckedCreateNestedManyWithoutStockInput;
 };
 
 export type StockUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
-  quantity?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   item?: Prisma.ItemUpdateOneRequiredWithoutStocksNestedInput;
   movements?: Prisma.MovementUpdateManyWithoutStockNestedInput;
 };
 
 export type StockUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
-  quantity?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   movements?: Prisma.MovementUncheckedUpdateManyWithoutStockNestedInput;
 };
 
@@ -344,32 +308,22 @@ export type StockCreateManyInput = {
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type StockUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
-  quantity?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type StockUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
-  quantity?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type StockListRelationFilter = {
@@ -421,112 +375,71 @@ export type StockScalarRelationFilter = {
 
 export type StockCreateNestedManyWithoutItemInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.StockCreateWithoutItemInput,
-        Prisma.StockUncheckedCreateWithoutItemInput
-      >
+    | Prisma.XOR<Prisma.StockCreateWithoutItemInput, Prisma.StockUncheckedCreateWithoutItemInput>
     | Prisma.StockCreateWithoutItemInput[]
     | Prisma.StockUncheckedCreateWithoutItemInput[];
-  connectOrCreate?:
-    | Prisma.StockCreateOrConnectWithoutItemInput
-    | Prisma.StockCreateOrConnectWithoutItemInput[];
+  connectOrCreate?: Prisma.StockCreateOrConnectWithoutItemInput | Prisma.StockCreateOrConnectWithoutItemInput[];
   createMany?: Prisma.StockCreateManyItemInputEnvelope;
   connect?: Prisma.StockWhereUniqueInput | Prisma.StockWhereUniqueInput[];
 };
 
 export type StockUncheckedCreateNestedManyWithoutItemInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.StockCreateWithoutItemInput,
-        Prisma.StockUncheckedCreateWithoutItemInput
-      >
+    | Prisma.XOR<Prisma.StockCreateWithoutItemInput, Prisma.StockUncheckedCreateWithoutItemInput>
     | Prisma.StockCreateWithoutItemInput[]
     | Prisma.StockUncheckedCreateWithoutItemInput[];
-  connectOrCreate?:
-    | Prisma.StockCreateOrConnectWithoutItemInput
-    | Prisma.StockCreateOrConnectWithoutItemInput[];
+  connectOrCreate?: Prisma.StockCreateOrConnectWithoutItemInput | Prisma.StockCreateOrConnectWithoutItemInput[];
   createMany?: Prisma.StockCreateManyItemInputEnvelope;
   connect?: Prisma.StockWhereUniqueInput | Prisma.StockWhereUniqueInput[];
 };
 
 export type StockUpdateManyWithoutItemNestedInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.StockCreateWithoutItemInput,
-        Prisma.StockUncheckedCreateWithoutItemInput
-      >
+    | Prisma.XOR<Prisma.StockCreateWithoutItemInput, Prisma.StockUncheckedCreateWithoutItemInput>
     | Prisma.StockCreateWithoutItemInput[]
     | Prisma.StockUncheckedCreateWithoutItemInput[];
-  connectOrCreate?:
-    | Prisma.StockCreateOrConnectWithoutItemInput
-    | Prisma.StockCreateOrConnectWithoutItemInput[];
-  upsert?:
-    | Prisma.StockUpsertWithWhereUniqueWithoutItemInput
-    | Prisma.StockUpsertWithWhereUniqueWithoutItemInput[];
+  connectOrCreate?: Prisma.StockCreateOrConnectWithoutItemInput | Prisma.StockCreateOrConnectWithoutItemInput[];
+  upsert?: Prisma.StockUpsertWithWhereUniqueWithoutItemInput | Prisma.StockUpsertWithWhereUniqueWithoutItemInput[];
   createMany?: Prisma.StockCreateManyItemInputEnvelope;
   set?: Prisma.StockWhereUniqueInput | Prisma.StockWhereUniqueInput[];
   disconnect?: Prisma.StockWhereUniqueInput | Prisma.StockWhereUniqueInput[];
   delete?: Prisma.StockWhereUniqueInput | Prisma.StockWhereUniqueInput[];
   connect?: Prisma.StockWhereUniqueInput | Prisma.StockWhereUniqueInput[];
-  update?:
-    | Prisma.StockUpdateWithWhereUniqueWithoutItemInput
-    | Prisma.StockUpdateWithWhereUniqueWithoutItemInput[];
-  updateMany?:
-    | Prisma.StockUpdateManyWithWhereWithoutItemInput
-    | Prisma.StockUpdateManyWithWhereWithoutItemInput[];
+  update?: Prisma.StockUpdateWithWhereUniqueWithoutItemInput | Prisma.StockUpdateWithWhereUniqueWithoutItemInput[];
+  updateMany?: Prisma.StockUpdateManyWithWhereWithoutItemInput | Prisma.StockUpdateManyWithWhereWithoutItemInput[];
   deleteMany?: Prisma.StockScalarWhereInput | Prisma.StockScalarWhereInput[];
 };
 
 export type StockUncheckedUpdateManyWithoutItemNestedInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.StockCreateWithoutItemInput,
-        Prisma.StockUncheckedCreateWithoutItemInput
-      >
+    | Prisma.XOR<Prisma.StockCreateWithoutItemInput, Prisma.StockUncheckedCreateWithoutItemInput>
     | Prisma.StockCreateWithoutItemInput[]
     | Prisma.StockUncheckedCreateWithoutItemInput[];
-  connectOrCreate?:
-    | Prisma.StockCreateOrConnectWithoutItemInput
-    | Prisma.StockCreateOrConnectWithoutItemInput[];
-  upsert?:
-    | Prisma.StockUpsertWithWhereUniqueWithoutItemInput
-    | Prisma.StockUpsertWithWhereUniqueWithoutItemInput[];
+  connectOrCreate?: Prisma.StockCreateOrConnectWithoutItemInput | Prisma.StockCreateOrConnectWithoutItemInput[];
+  upsert?: Prisma.StockUpsertWithWhereUniqueWithoutItemInput | Prisma.StockUpsertWithWhereUniqueWithoutItemInput[];
   createMany?: Prisma.StockCreateManyItemInputEnvelope;
   set?: Prisma.StockWhereUniqueInput | Prisma.StockWhereUniqueInput[];
   disconnect?: Prisma.StockWhereUniqueInput | Prisma.StockWhereUniqueInput[];
   delete?: Prisma.StockWhereUniqueInput | Prisma.StockWhereUniqueInput[];
   connect?: Prisma.StockWhereUniqueInput | Prisma.StockWhereUniqueInput[];
-  update?:
-    | Prisma.StockUpdateWithWhereUniqueWithoutItemInput
-    | Prisma.StockUpdateWithWhereUniqueWithoutItemInput[];
-  updateMany?:
-    | Prisma.StockUpdateManyWithWhereWithoutItemInput
-    | Prisma.StockUpdateManyWithWhereWithoutItemInput[];
+  update?: Prisma.StockUpdateWithWhereUniqueWithoutItemInput | Prisma.StockUpdateWithWhereUniqueWithoutItemInput[];
+  updateMany?: Prisma.StockUpdateManyWithWhereWithoutItemInput | Prisma.StockUpdateManyWithWhereWithoutItemInput[];
   deleteMany?: Prisma.StockScalarWhereInput | Prisma.StockScalarWhereInput[];
 };
 
 export type StockCreateNestedOneWithoutMovementsInput = {
-  create?: Prisma.XOR<
-    Prisma.StockCreateWithoutMovementsInput,
-    Prisma.StockUncheckedCreateWithoutMovementsInput
-  >;
+  create?: Prisma.XOR<Prisma.StockCreateWithoutMovementsInput, Prisma.StockUncheckedCreateWithoutMovementsInput>;
   connectOrCreate?: Prisma.StockCreateOrConnectWithoutMovementsInput;
   connect?: Prisma.StockWhereUniqueInput;
 };
 
 export type StockUpdateOneRequiredWithoutMovementsNestedInput = {
-  create?: Prisma.XOR<
-    Prisma.StockCreateWithoutMovementsInput,
-    Prisma.StockUncheckedCreateWithoutMovementsInput
-  >;
+  create?: Prisma.XOR<Prisma.StockCreateWithoutMovementsInput, Prisma.StockUncheckedCreateWithoutMovementsInput>;
   connectOrCreate?: Prisma.StockCreateOrConnectWithoutMovementsInput;
   upsert?: Prisma.StockUpsertWithoutMovementsInput;
   connect?: Prisma.StockWhereUniqueInput;
   update?: Prisma.XOR<
-    Prisma.XOR<
-      Prisma.StockUpdateToOneWithWhereWithoutMovementsInput,
-      Prisma.StockUpdateWithoutMovementsInput
-    >,
+    Prisma.XOR<Prisma.StockUpdateToOneWithWhereWithoutMovementsInput, Prisma.StockUpdateWithoutMovementsInput>,
     Prisma.StockUncheckedUpdateWithoutMovementsInput
   >;
 };
@@ -535,7 +448,7 @@ export type StockCreateWithoutItemInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   movements?: Prisma.MovementCreateNestedManyWithoutStockInput;
 };
 
@@ -543,16 +456,13 @@ export type StockUncheckedCreateWithoutItemInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   movements?: Prisma.MovementUncheckedCreateNestedManyWithoutStockInput;
 };
 
 export type StockCreateOrConnectWithoutItemInput = {
   where: Prisma.StockWhereUniqueInput;
-  create: Prisma.XOR<
-    Prisma.StockCreateWithoutItemInput,
-    Prisma.StockUncheckedCreateWithoutItemInput
-  >;
+  create: Prisma.XOR<Prisma.StockCreateWithoutItemInput, Prisma.StockUncheckedCreateWithoutItemInput>;
 };
 
 export type StockCreateManyItemInputEnvelope = {
@@ -562,30 +472,18 @@ export type StockCreateManyItemInputEnvelope = {
 
 export type StockUpsertWithWhereUniqueWithoutItemInput = {
   where: Prisma.StockWhereUniqueInput;
-  update: Prisma.XOR<
-    Prisma.StockUpdateWithoutItemInput,
-    Prisma.StockUncheckedUpdateWithoutItemInput
-  >;
-  create: Prisma.XOR<
-    Prisma.StockCreateWithoutItemInput,
-    Prisma.StockUncheckedCreateWithoutItemInput
-  >;
+  update: Prisma.XOR<Prisma.StockUpdateWithoutItemInput, Prisma.StockUncheckedUpdateWithoutItemInput>;
+  create: Prisma.XOR<Prisma.StockCreateWithoutItemInput, Prisma.StockUncheckedCreateWithoutItemInput>;
 };
 
 export type StockUpdateWithWhereUniqueWithoutItemInput = {
   where: Prisma.StockWhereUniqueInput;
-  data: Prisma.XOR<
-    Prisma.StockUpdateWithoutItemInput,
-    Prisma.StockUncheckedUpdateWithoutItemInput
-  >;
+  data: Prisma.XOR<Prisma.StockUpdateWithoutItemInput, Prisma.StockUncheckedUpdateWithoutItemInput>;
 };
 
 export type StockUpdateManyWithWhereWithoutItemInput = {
   where: Prisma.StockScalarWhereInput;
-  data: Prisma.XOR<
-    Prisma.StockUpdateManyMutationInput,
-    Prisma.StockUncheckedUpdateManyWithoutItemInput
-  >;
+  data: Prisma.XOR<Prisma.StockUpdateManyMutationInput, Prisma.StockUncheckedUpdateManyWithoutItemInput>;
 };
 
 export type StockScalarWhereInput = {
@@ -593,22 +491,17 @@ export type StockScalarWhereInput = {
   OR?: Prisma.StockScalarWhereInput[];
   NOT?: Prisma.StockScalarWhereInput | Prisma.StockScalarWhereInput[];
   id?: Prisma.StringFilter<'Stock'> | string;
-  quantity?:
-    | Prisma.DecimalFilter<'Stock'>
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFilter<'Stock'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringFilter<'Stock'> | string;
   createdAt?: Prisma.DateTimeFilter<'Stock'> | Date | string;
-  updatedAt?: Prisma.DateTimeFilter<'Stock'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableFilter<'Stock'> | Date | string | null;
 };
 
 export type StockCreateWithoutMovementsInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   item: Prisma.ItemCreateNestedOneWithoutStocksInput;
 };
 
@@ -617,106 +510,69 @@ export type StockUncheckedCreateWithoutMovementsInput = {
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type StockCreateOrConnectWithoutMovementsInput = {
   where: Prisma.StockWhereUniqueInput;
-  create: Prisma.XOR<
-    Prisma.StockCreateWithoutMovementsInput,
-    Prisma.StockUncheckedCreateWithoutMovementsInput
-  >;
+  create: Prisma.XOR<Prisma.StockCreateWithoutMovementsInput, Prisma.StockUncheckedCreateWithoutMovementsInput>;
 };
 
 export type StockUpsertWithoutMovementsInput = {
-  update: Prisma.XOR<
-    Prisma.StockUpdateWithoutMovementsInput,
-    Prisma.StockUncheckedUpdateWithoutMovementsInput
-  >;
-  create: Prisma.XOR<
-    Prisma.StockCreateWithoutMovementsInput,
-    Prisma.StockUncheckedCreateWithoutMovementsInput
-  >;
+  update: Prisma.XOR<Prisma.StockUpdateWithoutMovementsInput, Prisma.StockUncheckedUpdateWithoutMovementsInput>;
+  create: Prisma.XOR<Prisma.StockCreateWithoutMovementsInput, Prisma.StockUncheckedCreateWithoutMovementsInput>;
   where?: Prisma.StockWhereInput;
 };
 
 export type StockUpdateToOneWithWhereWithoutMovementsInput = {
   where?: Prisma.StockWhereInput;
-  data: Prisma.XOR<
-    Prisma.StockUpdateWithoutMovementsInput,
-    Prisma.StockUncheckedUpdateWithoutMovementsInput
-  >;
+  data: Prisma.XOR<Prisma.StockUpdateWithoutMovementsInput, Prisma.StockUncheckedUpdateWithoutMovementsInput>;
 };
 
 export type StockUpdateWithoutMovementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
-  quantity?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   item?: Prisma.ItemUpdateOneRequiredWithoutStocksNestedInput;
 };
 
 export type StockUncheckedUpdateWithoutMovementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
-  quantity?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type StockCreateManyItemInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type StockUpdateWithoutItemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
-  quantity?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   movements?: Prisma.MovementUpdateManyWithoutStockNestedInput;
 };
 
 export type StockUncheckedUpdateWithoutItemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
-  quantity?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   movements?: Prisma.MovementUncheckedUpdateManyWithoutStockNestedInput;
 };
 
 export type StockUncheckedUpdateManyWithoutItemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
-  quantity?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 /**
@@ -728,8 +584,7 @@ export type StockCountOutputType = {
 };
 
 export type StockCountOutputTypeSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   movements?: boolean | StockCountOutputTypeCountMovementsArgs;
 };
@@ -738,8 +593,7 @@ export type StockCountOutputTypeSelect<
  * StockCountOutputType without action
  */
 export type StockCountOutputTypeDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the StockCountOutputType
@@ -751,32 +605,28 @@ export type StockCountOutputTypeDefaultArgs<
  * StockCountOutputType without action
  */
 export type StockCountOutputTypeCountMovementsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.MovementWhereInput;
 };
 
-export type StockSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetSelect<
-  {
-    id?: boolean;
-    quantity?: boolean;
-    idItem?: boolean;
-    createdAt?: boolean;
-    updatedAt?: boolean;
-    item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>;
-    movements?: boolean | Prisma.Stock$movementsArgs<ExtArgs>;
-    _count?: boolean | Prisma.StockCountOutputTypeDefaultArgs<ExtArgs>;
-  },
-  ExtArgs['result']['stock']
->;
+export type StockSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  runtime.Types.Extensions.GetSelect<
+    {
+      id?: boolean;
+      quantity?: boolean;
+      idItem?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>;
+      movements?: boolean | Prisma.Stock$movementsArgs<ExtArgs>;
+      _count?: boolean | Prisma.StockCountOutputTypeDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['stock']
+  >;
 
 export type StockSelectCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -790,8 +640,7 @@ export type StockSelectCreateManyAndReturn<
 >;
 
 export type StockSelectUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -812,37 +661,30 @@ export type StockSelectScalar = {
   updatedAt?: boolean;
 };
 
-export type StockOmit<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetOmit<
-  'id' | 'quantity' | 'idItem' | 'createdAt' | 'updatedAt',
-  ExtArgs['result']['stock']
->;
-export type StockInclude<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = {
-  item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>;
-  movements?: boolean | Prisma.Stock$movementsArgs<ExtArgs>;
-  _count?: boolean | Prisma.StockCountOutputTypeDefaultArgs<ExtArgs>;
-};
+export type StockOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  runtime.Types.Extensions.GetOmit<
+    'id' | 'quantity' | 'idItem' | 'createdAt' | 'updatedAt',
+    ExtArgs['result']['stock']
+  >;
+export type StockInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  {
+    item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>;
+    movements?: boolean | Prisma.Stock$movementsArgs<ExtArgs>;
+    _count?: boolean | Prisma.StockCountOutputTypeDefaultArgs<ExtArgs>;
+  };
 export type StockIncludeCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>;
 };
 export type StockIncludeUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>;
 };
 
 export type $StockPayload<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   name: 'Stock';
   objects: {
@@ -855,33 +697,29 @@ export type $StockPayload<
       quantity: runtime.Decimal;
       idItem: string;
       createdAt: Date;
-      updatedAt: Date;
+      updatedAt: Date | null;
     },
     ExtArgs['result']['stock']
   >;
   composites: {};
 };
 
-export type StockGetPayload<
-  S extends boolean | null | undefined | StockDefaultArgs,
-> = runtime.Types.Result.GetResult<Prisma.$StockPayload, S>;
+export type StockGetPayload<S extends boolean | null | undefined | StockDefaultArgs> = runtime.Types.Result.GetResult<
+  Prisma.$StockPayload,
+  S
+>;
 
 export type StockCountArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = Omit<StockFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
   select?: StockCountAggregateInputType | true;
 };
 
 export interface StockDelegate<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['Stock'];
-    meta: { name: 'Stock' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Stock']; meta: { name: 'Stock' } };
   /**
    * Find zero or one Stock that matches the filter.
    * @param {StockFindUniqueArgs} args - Arguments to find a Stock
@@ -896,12 +734,7 @@ export interface StockDelegate<
   findUnique<T extends StockFindUniqueArgs>(
     args: Prisma.SelectSubset<T, StockFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__StockClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'findUnique',
-      GlobalOmitOptions
-    > | null,
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
     null,
     ExtArgs,
     GlobalOmitOptions
@@ -922,12 +755,7 @@ export interface StockDelegate<
   findUniqueOrThrow<T extends StockFindUniqueOrThrowArgs>(
     args: Prisma.SelectSubset<T, StockFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__StockClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'findUniqueOrThrow',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -949,12 +777,7 @@ export interface StockDelegate<
   findFirst<T extends StockFindFirstArgs>(
     args?: Prisma.SelectSubset<T, StockFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__StockClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'findFirst',
-      GlobalOmitOptions
-    > | null,
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
     null,
     ExtArgs,
     GlobalOmitOptions
@@ -977,12 +800,7 @@ export interface StockDelegate<
   findFirstOrThrow<T extends StockFindFirstOrThrowArgs>(
     args?: Prisma.SelectSubset<T, StockFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__StockClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'findFirstOrThrow',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -1007,12 +825,7 @@ export interface StockDelegate<
   findMany<T extends StockFindManyArgs>(
     args?: Prisma.SelectSubset<T, StockFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'findMany',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
   >;
 
   /**
@@ -1030,12 +843,7 @@ export interface StockDelegate<
   create<T extends StockCreateArgs>(
     args: Prisma.SelectSubset<T, StockCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__StockClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'create',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -1082,12 +890,7 @@ export interface StockDelegate<
   createManyAndReturn<T extends StockCreateManyAndReturnArgs>(
     args?: Prisma.SelectSubset<T, StockCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'createManyAndReturn',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
   >;
 
   /**
@@ -1105,12 +908,7 @@ export interface StockDelegate<
   delete<T extends StockDeleteArgs>(
     args: Prisma.SelectSubset<T, StockDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__StockClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'delete',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -1134,12 +932,7 @@ export interface StockDelegate<
   update<T extends StockUpdateArgs>(
     args: Prisma.SelectSubset<T, StockUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__StockClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'update',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -1213,12 +1006,7 @@ export interface StockDelegate<
   updateManyAndReturn<T extends StockUpdateManyAndReturnArgs>(
     args: Prisma.SelectSubset<T, StockUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'updateManyAndReturn',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
   >;
 
   /**
@@ -1241,12 +1029,7 @@ export interface StockDelegate<
   upsert<T extends StockUpsertArgs>(
     args: Prisma.SelectSubset<T, StockUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__StockClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$StockPayload<ExtArgs>,
-      T,
-      'upsert',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -1323,16 +1106,11 @@ export interface StockDelegate<
    **/
   groupBy<
     T extends StockGroupByArgs,
-    HasSelectOrTake extends Prisma.Or<
-      Prisma.Extends<'skip', Prisma.Keys<T>>,
-      Prisma.Extends<'take', Prisma.Keys<T>>
-    >,
+    HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>,
     OrderByArg extends Prisma.True extends HasSelectOrTake
       ? { orderBy: StockGroupByArgs['orderBy'] }
       : { orderBy?: StockGroupByArgs['orderBy'] },
-    OrderFields extends Prisma.ExcludeUnderscoreKeys<
-      Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
-    >,
+    OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
     HavingFields extends Prisma.GetHavingFields<T['having']>,
@@ -1346,12 +1124,7 @@ export interface StockDelegate<
               ? never
               : P extends string
                 ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [
-                    Error,
-                    'Field ',
-                    P,
-                    ` in "having" needs to be provided in "by"`,
-                  ];
+                : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`];
           }[HavingFields]
         : 'take' extends Prisma.Keys<T>
           ? 'orderBy' extends Prisma.Keys<T>
@@ -1381,11 +1154,8 @@ export interface StockDelegate<
                     : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, StockGroupByArgs, OrderByArg> &
-      InputErrors,
-  ): {} extends InputErrors
-    ? GetStockGroupByPayload<T>
-    : Prisma.PrismaPromise<InputErrors>;
+    args: Prisma.SubsetIntersection<T, StockGroupByArgs, OrderByArg> & InputErrors,
+  ): {} extends InputErrors ? GetStockGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
   /**
    * Fields of the Stock model
    */
@@ -1401,21 +1171,14 @@ export interface StockDelegate<
 export interface Prisma__StockClient<
   T,
   Null = never,
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
   item<T extends Prisma.ItemDefaultArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.ItemDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__ItemClient<
-    | runtime.Types.Result.GetResult<
-        Prisma.$ItemPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        GlobalOmitOptions
-      >
-    | Null,
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions> | Null,
     Null,
     ExtArgs,
     GlobalOmitOptions
@@ -1423,13 +1186,7 @@ export interface Prisma__StockClient<
   movements<T extends Prisma.Stock$movementsArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.Stock$movementsArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    | runtime.Types.Result.GetResult<
-        Prisma.$MovementPayload<ExtArgs>,
-        T,
-        'findMany',
-        GlobalOmitOptions
-      >
-    | Null
+    runtime.Types.Result.GetResult<Prisma.$MovementPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
   >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1438,14 +1195,8 @@ export interface Prisma__StockClient<
    * @returns A Promise for the completion of which ever callback is executed.
    */
   then<TResult1 = T, TResult2 = never>(
-    onfulfilled?:
-      | ((value: T) => TResult1 | PromiseLike<TResult1>)
-      | undefined
-      | null,
-    onrejected?:
-      | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-      | undefined
-      | null,
+    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -1453,10 +1204,7 @@ export interface Prisma__StockClient<
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?:
-      | ((reason: any) => TResult | PromiseLike<TResult>)
-      | undefined
-      | null,
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>;
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -1464,9 +1212,7 @@ export interface Prisma__StockClient<
    * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
    * @returns A Promise for the completion of the callback.
    */
-  finally(
-    onfinally?: (() => void) | undefined | null,
-  ): runtime.Types.Utils.JsPromise<T>;
+  finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
 }
 
 /**
@@ -1485,8 +1231,7 @@ export interface StockFieldRefs {
  * Stock findUnique
  */
 export type StockFindUniqueArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1510,8 +1255,7 @@ export type StockFindUniqueArgs<
  * Stock findUniqueOrThrow
  */
 export type StockFindUniqueOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1535,8 +1279,7 @@ export type StockFindUniqueOrThrowArgs<
  * Stock findFirst
  */
 export type StockFindFirstArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1559,9 +1302,7 @@ export type StockFindFirstArgs<
    *
    * Determine the order of Stocks to fetch.
    */
-  orderBy?:
-    | Prisma.StockOrderByWithRelationInput
-    | Prisma.StockOrderByWithRelationInput[];
+  orderBy?: Prisma.StockOrderByWithRelationInput | Prisma.StockOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -1592,8 +1333,7 @@ export type StockFindFirstArgs<
  * Stock findFirstOrThrow
  */
 export type StockFindFirstOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1616,9 +1356,7 @@ export type StockFindFirstOrThrowArgs<
    *
    * Determine the order of Stocks to fetch.
    */
-  orderBy?:
-    | Prisma.StockOrderByWithRelationInput
-    | Prisma.StockOrderByWithRelationInput[];
+  orderBy?: Prisma.StockOrderByWithRelationInput | Prisma.StockOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -1649,8 +1387,7 @@ export type StockFindFirstOrThrowArgs<
  * Stock findMany
  */
 export type StockFindManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1673,9 +1410,7 @@ export type StockFindManyArgs<
    *
    * Determine the order of Stocks to fetch.
    */
-  orderBy?:
-    | Prisma.StockOrderByWithRelationInput
-    | Prisma.StockOrderByWithRelationInput[];
+  orderBy?: Prisma.StockOrderByWithRelationInput | Prisma.StockOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -1701,8 +1436,7 @@ export type StockFindManyArgs<
  * Stock create
  */
 export type StockCreateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1726,8 +1460,7 @@ export type StockCreateArgs<
  * Stock createMany
  */
 export type StockCreateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to create many Stocks.
@@ -1740,8 +1473,7 @@ export type StockCreateManyArgs<
  * Stock createManyAndReturn
  */
 export type StockCreateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1766,8 +1498,7 @@ export type StockCreateManyAndReturnArgs<
  * Stock update
  */
 export type StockUpdateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1795,16 +1526,12 @@ export type StockUpdateArgs<
  * Stock updateMany
  */
 export type StockUpdateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to update Stocks.
    */
-  data: Prisma.XOR<
-    Prisma.StockUpdateManyMutationInput,
-    Prisma.StockUncheckedUpdateManyInput
-  >;
+  data: Prisma.XOR<Prisma.StockUpdateManyMutationInput, Prisma.StockUncheckedUpdateManyInput>;
   /**
    * Filter which Stocks to update
    */
@@ -1819,8 +1546,7 @@ export type StockUpdateManyArgs<
  * Stock updateManyAndReturn
  */
 export type StockUpdateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1833,10 +1559,7 @@ export type StockUpdateManyAndReturnArgs<
   /**
    * The data used to update Stocks.
    */
-  data: Prisma.XOR<
-    Prisma.StockUpdateManyMutationInput,
-    Prisma.StockUncheckedUpdateManyInput
-  >;
+  data: Prisma.XOR<Prisma.StockUpdateManyMutationInput, Prisma.StockUncheckedUpdateManyInput>;
   /**
    * Filter which Stocks to update
    */
@@ -1855,8 +1578,7 @@ export type StockUpdateManyAndReturnArgs<
  * Stock upsert
  */
 export type StockUpsertArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1888,8 +1610,7 @@ export type StockUpsertArgs<
  * Stock delete
  */
 export type StockDeleteArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -1913,8 +1634,7 @@ export type StockDeleteArgs<
  * Stock deleteMany
  */
 export type StockDeleteManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which Stocks to delete
@@ -1930,8 +1650,7 @@ export type StockDeleteManyArgs<
  * Stock.movements
  */
 export type Stock$movementsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Movement
@@ -1946,9 +1665,7 @@ export type Stock$movementsArgs<
    */
   include?: Prisma.MovementInclude<ExtArgs> | null;
   where?: Prisma.MovementWhereInput;
-  orderBy?:
-    | Prisma.MovementOrderByWithRelationInput
-    | Prisma.MovementOrderByWithRelationInput[];
+  orderBy?: Prisma.MovementOrderByWithRelationInput | Prisma.MovementOrderByWithRelationInput[];
   cursor?: Prisma.MovementWhereUniqueInput;
   take?: number;
   skip?: number;
@@ -1959,8 +1676,7 @@ export type Stock$movementsArgs<
  * Stock without action
  */
 export type StockDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock

@@ -16,8 +16,7 @@ import type * as Prisma from '../internal/prismaNamespace';
  * Model Unit
  *
  */
-export type UnitModel =
-  runtime.Types.Result.DefaultSelection<Prisma.$UnitPayload>;
+export type UnitModel = runtime.Types.Result.DefaultSelection<Prisma.$UnitPayload>;
 
 export type AggregateUnit = {
   _count: UnitCountAggregateOutputType | null;
@@ -76,8 +75,7 @@ export type UnitCountAggregateInputType = {
 };
 
 export type UnitAggregateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which Unit to aggregate.
@@ -88,9 +86,7 @@ export type UnitAggregateArgs<
    *
    * Determine the order of Units to fetch.
    */
-  orderBy?:
-    | Prisma.UnitOrderByWithRelationInput
-    | Prisma.UnitOrderByWithRelationInput[];
+  orderBy?: Prisma.UnitOrderByWithRelationInput | Prisma.UnitOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -138,13 +134,10 @@ export type GetUnitAggregateType<T extends UnitAggregateArgs> = {
 };
 
 export type UnitGroupByArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.UnitWhereInput;
-  orderBy?:
-    | Prisma.UnitOrderByWithAggregationInput
-    | Prisma.UnitOrderByWithAggregationInput[];
+  orderBy?: Prisma.UnitOrderByWithAggregationInput | Prisma.UnitOrderByWithAggregationInput[];
   by: Prisma.UnitScalarFieldEnum[] | Prisma.UnitScalarFieldEnum;
   having?: Prisma.UnitScalarWhereWithAggregatesInput;
   take?: number;
@@ -159,7 +152,7 @@ export type UnitGroupByOutputType = {
   name: string;
   code: string;
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt: Date | null;
   _count: UnitCountAggregateOutputType | null;
   _min: UnitMinAggregateOutputType | null;
   _max: UnitMaxAggregateOutputType | null;
@@ -185,7 +178,7 @@ export type UnitWhereInput = {
   name?: Prisma.StringFilter<'Unit'> | string;
   code?: Prisma.StringFilter<'Unit'> | string;
   createdAt?: Prisma.DateTimeFilter<'Unit'> | Date | string;
-  updatedAt?: Prisma.DateTimeFilter<'Unit'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableFilter<'Unit'> | Date | string | null;
   items?: Prisma.ItemListRelationFilter;
 };
 
@@ -194,7 +187,7 @@ export type UnitOrderByWithRelationInput = {
   name?: Prisma.SortOrder;
   code?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
-  updatedAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   items?: Prisma.ItemOrderByRelationAggregateInput;
 };
 
@@ -207,7 +200,7 @@ export type UnitWhereUniqueInput = Prisma.AtLeast<
     OR?: Prisma.UnitWhereInput[];
     NOT?: Prisma.UnitWhereInput | Prisma.UnitWhereInput[];
     createdAt?: Prisma.DateTimeFilter<'Unit'> | Date | string;
-    updatedAt?: Prisma.DateTimeFilter<'Unit'> | Date | string;
+    updatedAt?: Prisma.DateTimeNullableFilter<'Unit'> | Date | string | null;
     items?: Prisma.ItemListRelationFilter;
   },
   'id' | 'name' | 'code'
@@ -218,25 +211,21 @@ export type UnitOrderByWithAggregationInput = {
   name?: Prisma.SortOrder;
   code?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
-  updatedAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.UnitCountOrderByAggregateInput;
   _max?: Prisma.UnitMaxOrderByAggregateInput;
   _min?: Prisma.UnitMinOrderByAggregateInput;
 };
 
 export type UnitScalarWhereWithAggregatesInput = {
-  AND?:
-    | Prisma.UnitScalarWhereWithAggregatesInput
-    | Prisma.UnitScalarWhereWithAggregatesInput[];
+  AND?: Prisma.UnitScalarWhereWithAggregatesInput | Prisma.UnitScalarWhereWithAggregatesInput[];
   OR?: Prisma.UnitScalarWhereWithAggregatesInput[];
-  NOT?:
-    | Prisma.UnitScalarWhereWithAggregatesInput
-    | Prisma.UnitScalarWhereWithAggregatesInput[];
+  NOT?: Prisma.UnitScalarWhereWithAggregatesInput | Prisma.UnitScalarWhereWithAggregatesInput[];
   id?: Prisma.StringWithAggregatesFilter<'Unit'> | string;
   name?: Prisma.StringWithAggregatesFilter<'Unit'> | string;
   code?: Prisma.StringWithAggregatesFilter<'Unit'> | string;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Unit'> | Date | string;
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<'Unit'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'Unit'> | Date | string | null;
 };
 
 export type UnitCreateInput = {
@@ -244,7 +233,7 @@ export type UnitCreateInput = {
   name: string;
   code: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   items?: Prisma.ItemCreateNestedManyWithoutUnitInput;
 };
 
@@ -253,7 +242,7 @@ export type UnitUncheckedCreateInput = {
   name: string;
   code: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   items?: Prisma.ItemUncheckedCreateNestedManyWithoutUnitInput;
 };
 
@@ -262,7 +251,7 @@ export type UnitUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   items?: Prisma.ItemUpdateManyWithoutUnitNestedInput;
 };
 
@@ -271,7 +260,7 @@ export type UnitUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   items?: Prisma.ItemUncheckedUpdateManyWithoutUnitNestedInput;
 };
 
@@ -280,7 +269,7 @@ export type UnitCreateManyInput = {
   name: string;
   code: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type UnitUpdateManyMutationInput = {
@@ -288,7 +277,7 @@ export type UnitUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type UnitUncheckedUpdateManyInput = {
@@ -296,7 +285,7 @@ export type UnitUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type UnitCountOrderByAggregateInput = {
@@ -329,27 +318,18 @@ export type UnitScalarRelationFilter = {
 };
 
 export type UnitCreateNestedOneWithoutItemsInput = {
-  create?: Prisma.XOR<
-    Prisma.UnitCreateWithoutItemsInput,
-    Prisma.UnitUncheckedCreateWithoutItemsInput
-  >;
+  create?: Prisma.XOR<Prisma.UnitCreateWithoutItemsInput, Prisma.UnitUncheckedCreateWithoutItemsInput>;
   connectOrCreate?: Prisma.UnitCreateOrConnectWithoutItemsInput;
   connect?: Prisma.UnitWhereUniqueInput;
 };
 
 export type UnitUpdateOneRequiredWithoutItemsNestedInput = {
-  create?: Prisma.XOR<
-    Prisma.UnitCreateWithoutItemsInput,
-    Prisma.UnitUncheckedCreateWithoutItemsInput
-  >;
+  create?: Prisma.XOR<Prisma.UnitCreateWithoutItemsInput, Prisma.UnitUncheckedCreateWithoutItemsInput>;
   connectOrCreate?: Prisma.UnitCreateOrConnectWithoutItemsInput;
   upsert?: Prisma.UnitUpsertWithoutItemsInput;
   connect?: Prisma.UnitWhereUniqueInput;
   update?: Prisma.XOR<
-    Prisma.XOR<
-      Prisma.UnitUpdateToOneWithWhereWithoutItemsInput,
-      Prisma.UnitUpdateWithoutItemsInput
-    >,
+    Prisma.XOR<Prisma.UnitUpdateToOneWithWhereWithoutItemsInput, Prisma.UnitUpdateWithoutItemsInput>,
     Prisma.UnitUncheckedUpdateWithoutItemsInput
   >;
 };
@@ -359,7 +339,7 @@ export type UnitCreateWithoutItemsInput = {
   name: string;
   code: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type UnitUncheckedCreateWithoutItemsInput = {
@@ -367,35 +347,23 @@ export type UnitUncheckedCreateWithoutItemsInput = {
   name: string;
   code: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type UnitCreateOrConnectWithoutItemsInput = {
   where: Prisma.UnitWhereUniqueInput;
-  create: Prisma.XOR<
-    Prisma.UnitCreateWithoutItemsInput,
-    Prisma.UnitUncheckedCreateWithoutItemsInput
-  >;
+  create: Prisma.XOR<Prisma.UnitCreateWithoutItemsInput, Prisma.UnitUncheckedCreateWithoutItemsInput>;
 };
 
 export type UnitUpsertWithoutItemsInput = {
-  update: Prisma.XOR<
-    Prisma.UnitUpdateWithoutItemsInput,
-    Prisma.UnitUncheckedUpdateWithoutItemsInput
-  >;
-  create: Prisma.XOR<
-    Prisma.UnitCreateWithoutItemsInput,
-    Prisma.UnitUncheckedCreateWithoutItemsInput
-  >;
+  update: Prisma.XOR<Prisma.UnitUpdateWithoutItemsInput, Prisma.UnitUncheckedUpdateWithoutItemsInput>;
+  create: Prisma.XOR<Prisma.UnitCreateWithoutItemsInput, Prisma.UnitUncheckedCreateWithoutItemsInput>;
   where?: Prisma.UnitWhereInput;
 };
 
 export type UnitUpdateToOneWithWhereWithoutItemsInput = {
   where?: Prisma.UnitWhereInput;
-  data: Prisma.XOR<
-    Prisma.UnitUpdateWithoutItemsInput,
-    Prisma.UnitUncheckedUpdateWithoutItemsInput
-  >;
+  data: Prisma.XOR<Prisma.UnitUpdateWithoutItemsInput, Prisma.UnitUncheckedUpdateWithoutItemsInput>;
 };
 
 export type UnitUpdateWithoutItemsInput = {
@@ -403,7 +371,7 @@ export type UnitUpdateWithoutItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type UnitUncheckedUpdateWithoutItemsInput = {
@@ -411,7 +379,7 @@ export type UnitUncheckedUpdateWithoutItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 /**
@@ -423,8 +391,7 @@ export type UnitCountOutputType = {
 };
 
 export type UnitCountOutputTypeSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   items?: boolean | UnitCountOutputTypeCountItemsArgs;
 };
@@ -433,8 +400,7 @@ export type UnitCountOutputTypeSelect<
  * UnitCountOutputType without action
  */
 export type UnitCountOutputTypeDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the UnitCountOutputType
@@ -446,31 +412,27 @@ export type UnitCountOutputTypeDefaultArgs<
  * UnitCountOutputType without action
  */
 export type UnitCountOutputTypeCountItemsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.ItemWhereInput;
 };
 
-export type UnitSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetSelect<
-  {
-    id?: boolean;
-    name?: boolean;
-    code?: boolean;
-    createdAt?: boolean;
-    updatedAt?: boolean;
-    items?: boolean | Prisma.Unit$itemsArgs<ExtArgs>;
-    _count?: boolean | Prisma.UnitCountOutputTypeDefaultArgs<ExtArgs>;
-  },
-  ExtArgs['result']['unit']
->;
+export type UnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  runtime.Types.Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      code?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      items?: boolean | Prisma.Unit$itemsArgs<ExtArgs>;
+      _count?: boolean | Prisma.UnitCountOutputTypeDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['unit']
+  >;
 
 export type UnitSelectCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -483,8 +445,7 @@ export type UnitSelectCreateManyAndReturn<
 >;
 
 export type UnitSelectUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -504,70 +465,55 @@ export type UnitSelectScalar = {
   updatedAt?: boolean;
 };
 
-export type UnitOmit<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetOmit<
-  'id' | 'name' | 'code' | 'createdAt' | 'updatedAt',
-  ExtArgs['result']['unit']
->;
-export type UnitInclude<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = {
-  items?: boolean | Prisma.Unit$itemsArgs<ExtArgs>;
-  _count?: boolean | Prisma.UnitCountOutputTypeDefaultArgs<ExtArgs>;
-};
+export type UnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  runtime.Types.Extensions.GetOmit<'id' | 'name' | 'code' | 'createdAt' | 'updatedAt', ExtArgs['result']['unit']>;
+export type UnitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  {
+    items?: boolean | Prisma.Unit$itemsArgs<ExtArgs>;
+    _count?: boolean | Prisma.UnitCountOutputTypeDefaultArgs<ExtArgs>;
+  };
 export type UnitIncludeCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {};
 export type UnitIncludeUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {};
 
-export type $UnitPayload<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = {
-  name: 'Unit';
-  objects: {
-    items: Prisma.$ItemPayload<ExtArgs>[];
+export type $UnitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  {
+    name: 'Unit';
+    objects: {
+      items: Prisma.$ItemPayload<ExtArgs>[];
+    };
+    scalars: runtime.Types.Extensions.GetPayloadResult<
+      {
+        id: string;
+        name: string;
+        code: string;
+        createdAt: Date;
+        updatedAt: Date | null;
+      },
+      ExtArgs['result']['unit']
+    >;
+    composites: {};
   };
-  scalars: runtime.Types.Extensions.GetPayloadResult<
-    {
-      id: string;
-      name: string;
-      code: string;
-      createdAt: Date;
-      updatedAt: Date;
-    },
-    ExtArgs['result']['unit']
-  >;
-  composites: {};
-};
 
-export type UnitGetPayload<
-  S extends boolean | null | undefined | UnitDefaultArgs,
-> = runtime.Types.Result.GetResult<Prisma.$UnitPayload, S>;
+export type UnitGetPayload<S extends boolean | null | undefined | UnitDefaultArgs> = runtime.Types.Result.GetResult<
+  Prisma.$UnitPayload,
+  S
+>;
 
 export type UnitCountArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = Omit<UnitFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
   select?: UnitCountAggregateInputType | true;
 };
 
 export interface UnitDelegate<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['Unit'];
-    meta: { name: 'Unit' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Unit']; meta: { name: 'Unit' } };
   /**
    * Find zero or one Unit that matches the filter.
    * @param {UnitFindUniqueArgs} args - Arguments to find a Unit
@@ -582,12 +528,7 @@ export interface UnitDelegate<
   findUnique<T extends UnitFindUniqueArgs>(
     args: Prisma.SelectSubset<T, UnitFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__UnitClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'findUnique',
-      GlobalOmitOptions
-    > | null,
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
     null,
     ExtArgs,
     GlobalOmitOptions
@@ -608,12 +549,7 @@ export interface UnitDelegate<
   findUniqueOrThrow<T extends UnitFindUniqueOrThrowArgs>(
     args: Prisma.SelectSubset<T, UnitFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__UnitClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'findUniqueOrThrow',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -635,12 +571,7 @@ export interface UnitDelegate<
   findFirst<T extends UnitFindFirstArgs>(
     args?: Prisma.SelectSubset<T, UnitFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__UnitClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'findFirst',
-      GlobalOmitOptions
-    > | null,
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
     null,
     ExtArgs,
     GlobalOmitOptions
@@ -663,12 +594,7 @@ export interface UnitDelegate<
   findFirstOrThrow<T extends UnitFindFirstOrThrowArgs>(
     args?: Prisma.SelectSubset<T, UnitFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__UnitClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'findFirstOrThrow',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -693,12 +619,7 @@ export interface UnitDelegate<
   findMany<T extends UnitFindManyArgs>(
     args?: Prisma.SelectSubset<T, UnitFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'findMany',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
   >;
 
   /**
@@ -716,12 +637,7 @@ export interface UnitDelegate<
   create<T extends UnitCreateArgs>(
     args: Prisma.SelectSubset<T, UnitCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__UnitClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'create',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -768,12 +684,7 @@ export interface UnitDelegate<
   createManyAndReturn<T extends UnitCreateManyAndReturnArgs>(
     args?: Prisma.SelectSubset<T, UnitCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'createManyAndReturn',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
   >;
 
   /**
@@ -791,12 +702,7 @@ export interface UnitDelegate<
   delete<T extends UnitDeleteArgs>(
     args: Prisma.SelectSubset<T, UnitDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__UnitClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'delete',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -820,12 +726,7 @@ export interface UnitDelegate<
   update<T extends UnitUpdateArgs>(
     args: Prisma.SelectSubset<T, UnitUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__UnitClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'update',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -899,12 +800,7 @@ export interface UnitDelegate<
   updateManyAndReturn<T extends UnitUpdateManyAndReturnArgs>(
     args: Prisma.SelectSubset<T, UnitUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'updateManyAndReturn',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
   >;
 
   /**
@@ -927,12 +823,7 @@ export interface UnitDelegate<
   upsert<T extends UnitUpsertArgs>(
     args: Prisma.SelectSubset<T, UnitUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__UnitClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$UnitPayload<ExtArgs>,
-      T,
-      'upsert',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -1009,16 +900,11 @@ export interface UnitDelegate<
    **/
   groupBy<
     T extends UnitGroupByArgs,
-    HasSelectOrTake extends Prisma.Or<
-      Prisma.Extends<'skip', Prisma.Keys<T>>,
-      Prisma.Extends<'take', Prisma.Keys<T>>
-    >,
+    HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>,
     OrderByArg extends Prisma.True extends HasSelectOrTake
       ? { orderBy: UnitGroupByArgs['orderBy'] }
       : { orderBy?: UnitGroupByArgs['orderBy'] },
-    OrderFields extends Prisma.ExcludeUnderscoreKeys<
-      Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
-    >,
+    OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
     HavingFields extends Prisma.GetHavingFields<T['having']>,
@@ -1032,12 +918,7 @@ export interface UnitDelegate<
               ? never
               : P extends string
                 ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [
-                    Error,
-                    'Field ',
-                    P,
-                    ` in "having" needs to be provided in "by"`,
-                  ];
+                : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`];
           }[HavingFields]
         : 'take' extends Prisma.Keys<T>
           ? 'orderBy' extends Prisma.Keys<T>
@@ -1067,11 +948,8 @@ export interface UnitDelegate<
                     : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, UnitGroupByArgs, OrderByArg> &
-      InputErrors,
-  ): {} extends InputErrors
-    ? GetUnitGroupByPayload<T>
-    : Prisma.PrismaPromise<InputErrors>;
+    args: Prisma.SubsetIntersection<T, UnitGroupByArgs, OrderByArg> & InputErrors,
+  ): {} extends InputErrors ? GetUnitGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
   /**
    * Fields of the Unit model
    */
@@ -1087,21 +965,14 @@ export interface UnitDelegate<
 export interface Prisma__UnitClient<
   T,
   Null = never,
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
   items<T extends Prisma.Unit$itemsArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.Unit$itemsArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    | runtime.Types.Result.GetResult<
-        Prisma.$ItemPayload<ExtArgs>,
-        T,
-        'findMany',
-        GlobalOmitOptions
-      >
-    | Null
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
   >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1110,14 +981,8 @@ export interface Prisma__UnitClient<
    * @returns A Promise for the completion of which ever callback is executed.
    */
   then<TResult1 = T, TResult2 = never>(
-    onfulfilled?:
-      | ((value: T) => TResult1 | PromiseLike<TResult1>)
-      | undefined
-      | null,
-    onrejected?:
-      | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-      | undefined
-      | null,
+    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -1125,10 +990,7 @@ export interface Prisma__UnitClient<
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?:
-      | ((reason: any) => TResult | PromiseLike<TResult>)
-      | undefined
-      | null,
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>;
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -1136,9 +998,7 @@ export interface Prisma__UnitClient<
    * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
    * @returns A Promise for the completion of the callback.
    */
-  finally(
-    onfinally?: (() => void) | undefined | null,
-  ): runtime.Types.Utils.JsPromise<T>;
+  finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
 }
 
 /**
@@ -1157,8 +1017,7 @@ export interface UnitFieldRefs {
  * Unit findUnique
  */
 export type UnitFindUniqueArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1182,8 +1041,7 @@ export type UnitFindUniqueArgs<
  * Unit findUniqueOrThrow
  */
 export type UnitFindUniqueOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1207,8 +1065,7 @@ export type UnitFindUniqueOrThrowArgs<
  * Unit findFirst
  */
 export type UnitFindFirstArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1231,9 +1088,7 @@ export type UnitFindFirstArgs<
    *
    * Determine the order of Units to fetch.
    */
-  orderBy?:
-    | Prisma.UnitOrderByWithRelationInput
-    | Prisma.UnitOrderByWithRelationInput[];
+  orderBy?: Prisma.UnitOrderByWithRelationInput | Prisma.UnitOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -1264,8 +1119,7 @@ export type UnitFindFirstArgs<
  * Unit findFirstOrThrow
  */
 export type UnitFindFirstOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1288,9 +1142,7 @@ export type UnitFindFirstOrThrowArgs<
    *
    * Determine the order of Units to fetch.
    */
-  orderBy?:
-    | Prisma.UnitOrderByWithRelationInput
-    | Prisma.UnitOrderByWithRelationInput[];
+  orderBy?: Prisma.UnitOrderByWithRelationInput | Prisma.UnitOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -1321,8 +1173,7 @@ export type UnitFindFirstOrThrowArgs<
  * Unit findMany
  */
 export type UnitFindManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1345,9 +1196,7 @@ export type UnitFindManyArgs<
    *
    * Determine the order of Units to fetch.
    */
-  orderBy?:
-    | Prisma.UnitOrderByWithRelationInput
-    | Prisma.UnitOrderByWithRelationInput[];
+  orderBy?: Prisma.UnitOrderByWithRelationInput | Prisma.UnitOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -1373,8 +1222,7 @@ export type UnitFindManyArgs<
  * Unit create
  */
 export type UnitCreateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1398,8 +1246,7 @@ export type UnitCreateArgs<
  * Unit createMany
  */
 export type UnitCreateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to create many Units.
@@ -1412,8 +1259,7 @@ export type UnitCreateManyArgs<
  * Unit createManyAndReturn
  */
 export type UnitCreateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1434,8 +1280,7 @@ export type UnitCreateManyAndReturnArgs<
  * Unit update
  */
 export type UnitUpdateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1463,16 +1308,12 @@ export type UnitUpdateArgs<
  * Unit updateMany
  */
 export type UnitUpdateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to update Units.
    */
-  data: Prisma.XOR<
-    Prisma.UnitUpdateManyMutationInput,
-    Prisma.UnitUncheckedUpdateManyInput
-  >;
+  data: Prisma.XOR<Prisma.UnitUpdateManyMutationInput, Prisma.UnitUncheckedUpdateManyInput>;
   /**
    * Filter which Units to update
    */
@@ -1487,8 +1328,7 @@ export type UnitUpdateManyArgs<
  * Unit updateManyAndReturn
  */
 export type UnitUpdateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1501,10 +1341,7 @@ export type UnitUpdateManyAndReturnArgs<
   /**
    * The data used to update Units.
    */
-  data: Prisma.XOR<
-    Prisma.UnitUpdateManyMutationInput,
-    Prisma.UnitUncheckedUpdateManyInput
-  >;
+  data: Prisma.XOR<Prisma.UnitUpdateManyMutationInput, Prisma.UnitUncheckedUpdateManyInput>;
   /**
    * Filter which Units to update
    */
@@ -1519,8 +1356,7 @@ export type UnitUpdateManyAndReturnArgs<
  * Unit upsert
  */
 export type UnitUpsertArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1552,8 +1388,7 @@ export type UnitUpsertArgs<
  * Unit delete
  */
 export type UnitDeleteArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit
@@ -1577,8 +1412,7 @@ export type UnitDeleteArgs<
  * Unit deleteMany
  */
 export type UnitDeleteManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which Units to delete
@@ -1594,8 +1428,7 @@ export type UnitDeleteManyArgs<
  * Unit.items
  */
 export type Unit$itemsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -1610,9 +1443,7 @@ export type Unit$itemsArgs<
    */
   include?: Prisma.ItemInclude<ExtArgs> | null;
   where?: Prisma.ItemWhereInput;
-  orderBy?:
-    | Prisma.ItemOrderByWithRelationInput
-    | Prisma.ItemOrderByWithRelationInput[];
+  orderBy?: Prisma.ItemOrderByWithRelationInput | Prisma.ItemOrderByWithRelationInput[];
   cursor?: Prisma.ItemWhereUniqueInput;
   take?: number;
   skip?: number;
@@ -1623,8 +1454,7 @@ export type Unit$itemsArgs<
  * Unit without action
  */
 export type UnitDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Unit

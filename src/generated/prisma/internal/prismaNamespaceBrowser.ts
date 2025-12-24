@@ -22,15 +22,9 @@ export type * from './prismaNamespace';
 export const Decimal = runtime.Decimal;
 
 export const NullTypes = {
-  DbNull: runtime.NullTypes.DbNull as new (
-    secret: never,
-  ) => typeof runtime.DbNull,
-  JsonNull: runtime.NullTypes.JsonNull as new (
-    secret: never,
-  ) => typeof runtime.JsonNull,
-  AnyNull: runtime.NullTypes.AnyNull as new (
-    secret: never,
-  ) => typeof runtime.AnyNull,
+  DbNull: runtime.NullTypes.DbNull as new (secret: never) => typeof runtime.DbNull,
+  JsonNull: runtime.NullTypes.JsonNull as new (secret: never) => typeof runtime.JsonNull,
+  AnyNull: runtime.NullTypes.AnyNull as new (secret: never) => typeof runtime.AnyNull,
 };
 /**
  * Helper for filtering JSON entries that have `null` on the database (empty on the db)
@@ -80,8 +74,7 @@ export const TransactionIsolationLevel = {
   Serializable: 'Serializable',
 } as const;
 
-export type TransactionIsolationLevel =
-  (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
+export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
 export const SupplierScalarFieldEnum = {
   id: 'id',
@@ -90,8 +83,7 @@ export const SupplierScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type SupplierScalarFieldEnum =
-  (typeof SupplierScalarFieldEnum)[keyof typeof SupplierScalarFieldEnum];
+export type SupplierScalarFieldEnum = (typeof SupplierScalarFieldEnum)[keyof typeof SupplierScalarFieldEnum];
 
 export const UnitScalarFieldEnum = {
   id: 'id',
@@ -101,8 +93,7 @@ export const UnitScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type UnitScalarFieldEnum =
-  (typeof UnitScalarFieldEnum)[keyof typeof UnitScalarFieldEnum];
+export type UnitScalarFieldEnum = (typeof UnitScalarFieldEnum)[keyof typeof UnitScalarFieldEnum];
 
 export const MovementTypeScalarFieldEnum = {
   id: 'id',
@@ -119,8 +110,7 @@ export const ItemTypeScalarFieldEnum = {
   name: 'name',
 } as const;
 
-export type ItemTypeScalarFieldEnum =
-  (typeof ItemTypeScalarFieldEnum)[keyof typeof ItemTypeScalarFieldEnum];
+export type ItemTypeScalarFieldEnum = (typeof ItemTypeScalarFieldEnum)[keyof typeof ItemTypeScalarFieldEnum];
 
 export const ItemScalarFieldEnum = {
   id: 'id',
@@ -138,8 +128,7 @@ export const ItemScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type ItemScalarFieldEnum =
-  (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum];
+export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum];
 
 export const StockScalarFieldEnum = {
   id: 'id',
@@ -149,8 +138,7 @@ export const StockScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type StockScalarFieldEnum =
-  (typeof StockScalarFieldEnum)[keyof typeof StockScalarFieldEnum];
+export type StockScalarFieldEnum = (typeof StockScalarFieldEnum)[keyof typeof StockScalarFieldEnum];
 
 export const MovementScalarFieldEnum = {
   id: 'id',
@@ -162,8 +150,7 @@ export const MovementScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type MovementScalarFieldEnum =
-  (typeof MovementScalarFieldEnum)[keyof typeof MovementScalarFieldEnum];
+export type MovementScalarFieldEnum = (typeof MovementScalarFieldEnum)[keyof typeof MovementScalarFieldEnum];
 
 export const UserScalarFieldEnum = {
   id: 'id',
@@ -175,8 +162,7 @@ export const UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type UserScalarFieldEnum =
-  (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 
 export const SessionScalarFieldEnum = {
   id: 'id',
@@ -189,8 +175,7 @@ export const SessionScalarFieldEnum = {
   userId: 'userId',
 } as const;
 
-export type SessionScalarFieldEnum =
-  (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum];
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum];
 
 export const AccountScalarFieldEnum = {
   id: 'id',
@@ -208,8 +193,7 @@ export const AccountScalarFieldEnum = {
   updatedAt: 'updatedAt',
 } as const;
 
-export type AccountScalarFieldEnum =
-  (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum];
+export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum];
 
 export const VerificationScalarFieldEnum = {
   id: 'id',

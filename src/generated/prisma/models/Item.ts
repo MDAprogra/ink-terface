@@ -16,8 +16,7 @@ import type * as Prisma from '../internal/prismaNamespace';
  * Model Item
  *
  */
-export type ItemModel =
-  runtime.Types.Result.DefaultSelection<Prisma.$ItemPayload>;
+export type ItemModel = runtime.Types.Result.DefaultSelection<Prisma.$ItemPayload>;
 
 export type AggregateItem = {
   _count: ItemCountAggregateOutputType | null;
@@ -150,8 +149,7 @@ export type ItemCountAggregateInputType = {
 };
 
 export type ItemAggregateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which Item to aggregate.
@@ -162,9 +160,7 @@ export type ItemAggregateArgs<
    *
    * Determine the order of Items to fetch.
    */
-  orderBy?:
-    | Prisma.ItemOrderByWithRelationInput
-    | Prisma.ItemOrderByWithRelationInput[];
+  orderBy?: Prisma.ItemOrderByWithRelationInput | Prisma.ItemOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -224,13 +220,10 @@ export type GetItemAggregateType<T extends ItemAggregateArgs> = {
 };
 
 export type ItemGroupByArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.ItemWhereInput;
-  orderBy?:
-    | Prisma.ItemOrderByWithAggregationInput
-    | Prisma.ItemOrderByWithAggregationInput[];
+  orderBy?: Prisma.ItemOrderByWithAggregationInput | Prisma.ItemOrderByWithAggregationInput[];
   by: Prisma.ItemScalarFieldEnum[] | Prisma.ItemScalarFieldEnum;
   having?: Prisma.ItemScalarWhereWithAggregatesInput;
   take?: number;
@@ -255,7 +248,7 @@ export type ItemGroupByOutputType = {
   idUnit: string;
   idSupplier: string;
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt: Date | null;
   _count: ItemCountAggregateOutputType | null;
   _avg: ItemAvgAggregateOutputType | null;
   _sum: ItemSumAggregateOutputType | null;
@@ -282,12 +275,7 @@ export type ItemWhereInput = {
   id?: Prisma.StringFilter<'Item'> | string;
   name?: Prisma.StringFilter<'Item'> | string;
   description?: Prisma.StringNullableFilter<'Item'> | string | null;
-  securityStock?:
-    | Prisma.DecimalFilter<'Item'>
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFilter<'Item'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.IntNullableFilter<'Item'> | number | null;
   color?: Prisma.StringNullableFilter<'Item'> | string | null;
   active?: Prisma.BoolFilter<'Item'> | boolean;
@@ -302,16 +290,10 @@ export type ItemWhereInput = {
   idUnit?: Prisma.StringFilter<'Item'> | string;
   idSupplier?: Prisma.StringFilter<'Item'> | string;
   createdAt?: Prisma.DateTimeFilter<'Item'> | Date | string;
-  updatedAt?: Prisma.DateTimeFilter<'Item'> | Date | string;
-  type?: Prisma.XOR<
-    Prisma.ItemTypeScalarRelationFilter,
-    Prisma.ItemTypeWhereInput
-  >;
+  updatedAt?: Prisma.DateTimeNullableFilter<'Item'> | Date | string | null;
+  type?: Prisma.XOR<Prisma.ItemTypeScalarRelationFilter, Prisma.ItemTypeWhereInput>;
   unit?: Prisma.XOR<Prisma.UnitScalarRelationFilter, Prisma.UnitWhereInput>;
-  supplier?: Prisma.XOR<
-    Prisma.SupplierScalarRelationFilter,
-    Prisma.SupplierWhereInput
-  >;
+  supplier?: Prisma.XOR<Prisma.SupplierScalarRelationFilter, Prisma.SupplierWhereInput>;
   stocks?: Prisma.StockListRelationFilter;
 };
 
@@ -328,7 +310,7 @@ export type ItemOrderByWithRelationInput = {
   idUnit?: Prisma.SortOrder;
   idSupplier?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
-  updatedAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   type?: Prisma.ItemTypeOrderByWithRelationInput;
   unit?: Prisma.UnitOrderByWithRelationInput;
   supplier?: Prisma.SupplierOrderByWithRelationInput;
@@ -343,12 +325,7 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<
     NOT?: Prisma.ItemWhereInput | Prisma.ItemWhereInput[];
     name?: Prisma.StringFilter<'Item'> | string;
     description?: Prisma.StringNullableFilter<'Item'> | string | null;
-    securityStock?:
-      | Prisma.DecimalFilter<'Item'>
-      | runtime.Decimal
-      | runtime.DecimalJsLike
-      | number
-      | string;
+    securityStock?: Prisma.DecimalFilter<'Item'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
     shelfLife?: Prisma.IntNullableFilter<'Item'> | number | null;
     color?: Prisma.StringNullableFilter<'Item'> | string | null;
     active?: Prisma.BoolFilter<'Item'> | boolean;
@@ -363,16 +340,10 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<
     idUnit?: Prisma.StringFilter<'Item'> | string;
     idSupplier?: Prisma.StringFilter<'Item'> | string;
     createdAt?: Prisma.DateTimeFilter<'Item'> | Date | string;
-    updatedAt?: Prisma.DateTimeFilter<'Item'> | Date | string;
-    type?: Prisma.XOR<
-      Prisma.ItemTypeScalarRelationFilter,
-      Prisma.ItemTypeWhereInput
-    >;
+    updatedAt?: Prisma.DateTimeNullableFilter<'Item'> | Date | string | null;
+    type?: Prisma.XOR<Prisma.ItemTypeScalarRelationFilter, Prisma.ItemTypeWhereInput>;
     unit?: Prisma.XOR<Prisma.UnitScalarRelationFilter, Prisma.UnitWhereInput>;
-    supplier?: Prisma.XOR<
-      Prisma.SupplierScalarRelationFilter,
-      Prisma.SupplierWhereInput
-    >;
+    supplier?: Prisma.XOR<Prisma.SupplierScalarRelationFilter, Prisma.SupplierWhereInput>;
     stocks?: Prisma.StockListRelationFilter;
   },
   'id'
@@ -391,7 +362,7 @@ export type ItemOrderByWithAggregationInput = {
   idUnit?: Prisma.SortOrder;
   idSupplier?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
-  updatedAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.ItemCountOrderByAggregateInput;
   _avg?: Prisma.ItemAvgOrderByAggregateInput;
   _max?: Prisma.ItemMaxOrderByAggregateInput;
@@ -400,19 +371,12 @@ export type ItemOrderByWithAggregationInput = {
 };
 
 export type ItemScalarWhereWithAggregatesInput = {
-  AND?:
-    | Prisma.ItemScalarWhereWithAggregatesInput
-    | Prisma.ItemScalarWhereWithAggregatesInput[];
+  AND?: Prisma.ItemScalarWhereWithAggregatesInput | Prisma.ItemScalarWhereWithAggregatesInput[];
   OR?: Prisma.ItemScalarWhereWithAggregatesInput[];
-  NOT?:
-    | Prisma.ItemScalarWhereWithAggregatesInput
-    | Prisma.ItemScalarWhereWithAggregatesInput[];
+  NOT?: Prisma.ItemScalarWhereWithAggregatesInput | Prisma.ItemScalarWhereWithAggregatesInput[];
   id?: Prisma.StringWithAggregatesFilter<'Item'> | string;
   name?: Prisma.StringWithAggregatesFilter<'Item'> | string;
-  description?:
-    | Prisma.StringNullableWithAggregatesFilter<'Item'>
-    | string
-    | null;
+  description?: Prisma.StringNullableWithAggregatesFilter<'Item'> | string | null;
   securityStock?:
     | Prisma.DecimalWithAggregatesFilter<'Item'>
     | runtime.Decimal
@@ -433,7 +397,7 @@ export type ItemScalarWhereWithAggregatesInput = {
   idUnit?: Prisma.StringWithAggregatesFilter<'Item'> | string;
   idSupplier?: Prisma.StringWithAggregatesFilter<'Item'> | string;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Item'> | Date | string;
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<'Item'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'Item'> | Date | string | null;
 };
 
 export type ItemCreateInput = {
@@ -444,14 +408,9 @@ export type ItemCreateInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   type: Prisma.ItemTypeCreateNestedOneWithoutItemsInput;
   unit: Prisma.UnitCreateNestedOneWithoutItemsInput;
   supplier: Prisma.SupplierCreateNestedOneWithoutItemsInput;
@@ -466,17 +425,12 @@ export type ItemUncheckedCreateInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idUnit: string;
   idSupplier: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutItemInput;
 };
 
@@ -484,12 +438,7 @@ export type ItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -501,7 +450,7 @@ export type ItemUpdateInput = {
     | string
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   type?: Prisma.ItemTypeUpdateOneRequiredWithoutItemsNestedInput;
   unit?: Prisma.UnitUpdateOneRequiredWithoutItemsNestedInput;
   supplier?: Prisma.SupplierUpdateOneRequiredWithoutItemsNestedInput;
@@ -512,12 +461,7 @@ export type ItemUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -532,7 +476,7 @@ export type ItemUncheckedUpdateInput = {
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   stocks?: Prisma.StockUncheckedUpdateManyWithoutItemNestedInput;
 };
 
@@ -544,29 +488,19 @@ export type ItemCreateManyInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idUnit: string;
   idSupplier: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type ItemUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -578,19 +512,14 @@ export type ItemUpdateManyMutationInput = {
     | string
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type ItemUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -605,7 +534,7 @@ export type ItemUncheckedUpdateManyInput = {
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type ItemListRelationFilter = {
@@ -685,45 +614,30 @@ export type ItemScalarRelationFilter = {
 
 export type ItemCreateNestedManyWithoutSupplierInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutSupplierInput,
-        Prisma.ItemUncheckedCreateWithoutSupplierInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutSupplierInput, Prisma.ItemUncheckedCreateWithoutSupplierInput>
     | Prisma.ItemCreateWithoutSupplierInput[]
     | Prisma.ItemUncheckedCreateWithoutSupplierInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutSupplierInput
-    | Prisma.ItemCreateOrConnectWithoutSupplierInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutSupplierInput | Prisma.ItemCreateOrConnectWithoutSupplierInput[];
   createMany?: Prisma.ItemCreateManySupplierInputEnvelope;
   connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
 };
 
 export type ItemUncheckedCreateNestedManyWithoutSupplierInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutSupplierInput,
-        Prisma.ItemUncheckedCreateWithoutSupplierInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutSupplierInput, Prisma.ItemUncheckedCreateWithoutSupplierInput>
     | Prisma.ItemCreateWithoutSupplierInput[]
     | Prisma.ItemUncheckedCreateWithoutSupplierInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutSupplierInput
-    | Prisma.ItemCreateOrConnectWithoutSupplierInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutSupplierInput | Prisma.ItemCreateOrConnectWithoutSupplierInput[];
   createMany?: Prisma.ItemCreateManySupplierInputEnvelope;
   connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
 };
 
 export type ItemUpdateManyWithoutSupplierNestedInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutSupplierInput,
-        Prisma.ItemUncheckedCreateWithoutSupplierInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutSupplierInput, Prisma.ItemUncheckedCreateWithoutSupplierInput>
     | Prisma.ItemCreateWithoutSupplierInput[]
     | Prisma.ItemUncheckedCreateWithoutSupplierInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutSupplierInput
-    | Prisma.ItemCreateOrConnectWithoutSupplierInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutSupplierInput | Prisma.ItemCreateOrConnectWithoutSupplierInput[];
   upsert?:
     | Prisma.ItemUpsertWithWhereUniqueWithoutSupplierInput
     | Prisma.ItemUpsertWithWhereUniqueWithoutSupplierInput[];
@@ -743,15 +657,10 @@ export type ItemUpdateManyWithoutSupplierNestedInput = {
 
 export type ItemUncheckedUpdateManyWithoutSupplierNestedInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutSupplierInput,
-        Prisma.ItemUncheckedCreateWithoutSupplierInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutSupplierInput, Prisma.ItemUncheckedCreateWithoutSupplierInput>
     | Prisma.ItemCreateWithoutSupplierInput[]
     | Prisma.ItemUncheckedCreateWithoutSupplierInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutSupplierInput
-    | Prisma.ItemCreateOrConnectWithoutSupplierInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutSupplierInput | Prisma.ItemCreateOrConnectWithoutSupplierInput[];
   upsert?:
     | Prisma.ItemUpsertWithWhereUniqueWithoutSupplierInput
     | Prisma.ItemUpsertWithWhereUniqueWithoutSupplierInput[];
@@ -771,173 +680,109 @@ export type ItemUncheckedUpdateManyWithoutSupplierNestedInput = {
 
 export type ItemCreateNestedManyWithoutUnitInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutUnitInput,
-        Prisma.ItemUncheckedCreateWithoutUnitInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutUnitInput, Prisma.ItemUncheckedCreateWithoutUnitInput>
     | Prisma.ItemCreateWithoutUnitInput[]
     | Prisma.ItemUncheckedCreateWithoutUnitInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutUnitInput
-    | Prisma.ItemCreateOrConnectWithoutUnitInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutUnitInput | Prisma.ItemCreateOrConnectWithoutUnitInput[];
   createMany?: Prisma.ItemCreateManyUnitInputEnvelope;
   connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
 };
 
 export type ItemUncheckedCreateNestedManyWithoutUnitInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutUnitInput,
-        Prisma.ItemUncheckedCreateWithoutUnitInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutUnitInput, Prisma.ItemUncheckedCreateWithoutUnitInput>
     | Prisma.ItemCreateWithoutUnitInput[]
     | Prisma.ItemUncheckedCreateWithoutUnitInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutUnitInput
-    | Prisma.ItemCreateOrConnectWithoutUnitInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutUnitInput | Prisma.ItemCreateOrConnectWithoutUnitInput[];
   createMany?: Prisma.ItemCreateManyUnitInputEnvelope;
   connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
 };
 
 export type ItemUpdateManyWithoutUnitNestedInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutUnitInput,
-        Prisma.ItemUncheckedCreateWithoutUnitInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutUnitInput, Prisma.ItemUncheckedCreateWithoutUnitInput>
     | Prisma.ItemCreateWithoutUnitInput[]
     | Prisma.ItemUncheckedCreateWithoutUnitInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutUnitInput
-    | Prisma.ItemCreateOrConnectWithoutUnitInput[];
-  upsert?:
-    | Prisma.ItemUpsertWithWhereUniqueWithoutUnitInput
-    | Prisma.ItemUpsertWithWhereUniqueWithoutUnitInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutUnitInput | Prisma.ItemCreateOrConnectWithoutUnitInput[];
+  upsert?: Prisma.ItemUpsertWithWhereUniqueWithoutUnitInput | Prisma.ItemUpsertWithWhereUniqueWithoutUnitInput[];
   createMany?: Prisma.ItemCreateManyUnitInputEnvelope;
   set?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   disconnect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   delete?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
-  update?:
-    | Prisma.ItemUpdateWithWhereUniqueWithoutUnitInput
-    | Prisma.ItemUpdateWithWhereUniqueWithoutUnitInput[];
-  updateMany?:
-    | Prisma.ItemUpdateManyWithWhereWithoutUnitInput
-    | Prisma.ItemUpdateManyWithWhereWithoutUnitInput[];
+  update?: Prisma.ItemUpdateWithWhereUniqueWithoutUnitInput | Prisma.ItemUpdateWithWhereUniqueWithoutUnitInput[];
+  updateMany?: Prisma.ItemUpdateManyWithWhereWithoutUnitInput | Prisma.ItemUpdateManyWithWhereWithoutUnitInput[];
   deleteMany?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[];
 };
 
 export type ItemUncheckedUpdateManyWithoutUnitNestedInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutUnitInput,
-        Prisma.ItemUncheckedCreateWithoutUnitInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutUnitInput, Prisma.ItemUncheckedCreateWithoutUnitInput>
     | Prisma.ItemCreateWithoutUnitInput[]
     | Prisma.ItemUncheckedCreateWithoutUnitInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutUnitInput
-    | Prisma.ItemCreateOrConnectWithoutUnitInput[];
-  upsert?:
-    | Prisma.ItemUpsertWithWhereUniqueWithoutUnitInput
-    | Prisma.ItemUpsertWithWhereUniqueWithoutUnitInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutUnitInput | Prisma.ItemCreateOrConnectWithoutUnitInput[];
+  upsert?: Prisma.ItemUpsertWithWhereUniqueWithoutUnitInput | Prisma.ItemUpsertWithWhereUniqueWithoutUnitInput[];
   createMany?: Prisma.ItemCreateManyUnitInputEnvelope;
   set?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   disconnect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   delete?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
-  update?:
-    | Prisma.ItemUpdateWithWhereUniqueWithoutUnitInput
-    | Prisma.ItemUpdateWithWhereUniqueWithoutUnitInput[];
-  updateMany?:
-    | Prisma.ItemUpdateManyWithWhereWithoutUnitInput
-    | Prisma.ItemUpdateManyWithWhereWithoutUnitInput[];
+  update?: Prisma.ItemUpdateWithWhereUniqueWithoutUnitInput | Prisma.ItemUpdateWithWhereUniqueWithoutUnitInput[];
+  updateMany?: Prisma.ItemUpdateManyWithWhereWithoutUnitInput | Prisma.ItemUpdateManyWithWhereWithoutUnitInput[];
   deleteMany?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[];
 };
 
 export type ItemCreateNestedManyWithoutTypeInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutTypeInput,
-        Prisma.ItemUncheckedCreateWithoutTypeInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutTypeInput, Prisma.ItemUncheckedCreateWithoutTypeInput>
     | Prisma.ItemCreateWithoutTypeInput[]
     | Prisma.ItemUncheckedCreateWithoutTypeInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutTypeInput
-    | Prisma.ItemCreateOrConnectWithoutTypeInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutTypeInput | Prisma.ItemCreateOrConnectWithoutTypeInput[];
   createMany?: Prisma.ItemCreateManyTypeInputEnvelope;
   connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
 };
 
 export type ItemUncheckedCreateNestedManyWithoutTypeInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutTypeInput,
-        Prisma.ItemUncheckedCreateWithoutTypeInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutTypeInput, Prisma.ItemUncheckedCreateWithoutTypeInput>
     | Prisma.ItemCreateWithoutTypeInput[]
     | Prisma.ItemUncheckedCreateWithoutTypeInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutTypeInput
-    | Prisma.ItemCreateOrConnectWithoutTypeInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutTypeInput | Prisma.ItemCreateOrConnectWithoutTypeInput[];
   createMany?: Prisma.ItemCreateManyTypeInputEnvelope;
   connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
 };
 
 export type ItemUpdateManyWithoutTypeNestedInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutTypeInput,
-        Prisma.ItemUncheckedCreateWithoutTypeInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutTypeInput, Prisma.ItemUncheckedCreateWithoutTypeInput>
     | Prisma.ItemCreateWithoutTypeInput[]
     | Prisma.ItemUncheckedCreateWithoutTypeInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutTypeInput
-    | Prisma.ItemCreateOrConnectWithoutTypeInput[];
-  upsert?:
-    | Prisma.ItemUpsertWithWhereUniqueWithoutTypeInput
-    | Prisma.ItemUpsertWithWhereUniqueWithoutTypeInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutTypeInput | Prisma.ItemCreateOrConnectWithoutTypeInput[];
+  upsert?: Prisma.ItemUpsertWithWhereUniqueWithoutTypeInput | Prisma.ItemUpsertWithWhereUniqueWithoutTypeInput[];
   createMany?: Prisma.ItemCreateManyTypeInputEnvelope;
   set?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   disconnect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   delete?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
-  update?:
-    | Prisma.ItemUpdateWithWhereUniqueWithoutTypeInput
-    | Prisma.ItemUpdateWithWhereUniqueWithoutTypeInput[];
-  updateMany?:
-    | Prisma.ItemUpdateManyWithWhereWithoutTypeInput
-    | Prisma.ItemUpdateManyWithWhereWithoutTypeInput[];
+  update?: Prisma.ItemUpdateWithWhereUniqueWithoutTypeInput | Prisma.ItemUpdateWithWhereUniqueWithoutTypeInput[];
+  updateMany?: Prisma.ItemUpdateManyWithWhereWithoutTypeInput | Prisma.ItemUpdateManyWithWhereWithoutTypeInput[];
   deleteMany?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[];
 };
 
 export type ItemUncheckedUpdateManyWithoutTypeNestedInput = {
   create?:
-    | Prisma.XOR<
-        Prisma.ItemCreateWithoutTypeInput,
-        Prisma.ItemUncheckedCreateWithoutTypeInput
-      >
+    | Prisma.XOR<Prisma.ItemCreateWithoutTypeInput, Prisma.ItemUncheckedCreateWithoutTypeInput>
     | Prisma.ItemCreateWithoutTypeInput[]
     | Prisma.ItemUncheckedCreateWithoutTypeInput[];
-  connectOrCreate?:
-    | Prisma.ItemCreateOrConnectWithoutTypeInput
-    | Prisma.ItemCreateOrConnectWithoutTypeInput[];
-  upsert?:
-    | Prisma.ItemUpsertWithWhereUniqueWithoutTypeInput
-    | Prisma.ItemUpsertWithWhereUniqueWithoutTypeInput[];
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutTypeInput | Prisma.ItemCreateOrConnectWithoutTypeInput[];
+  upsert?: Prisma.ItemUpsertWithWhereUniqueWithoutTypeInput | Prisma.ItemUpsertWithWhereUniqueWithoutTypeInput[];
   createMany?: Prisma.ItemCreateManyTypeInputEnvelope;
   set?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   disconnect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   delete?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
   connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[];
-  update?:
-    | Prisma.ItemUpdateWithWhereUniqueWithoutTypeInput
-    | Prisma.ItemUpdateWithWhereUniqueWithoutTypeInput[];
-  updateMany?:
-    | Prisma.ItemUpdateManyWithWhereWithoutTypeInput
-    | Prisma.ItemUpdateManyWithWhereWithoutTypeInput[];
+  update?: Prisma.ItemUpdateWithWhereUniqueWithoutTypeInput | Prisma.ItemUpdateWithWhereUniqueWithoutTypeInput[];
+  updateMany?: Prisma.ItemUpdateManyWithWhereWithoutTypeInput | Prisma.ItemUpdateManyWithWhereWithoutTypeInput[];
   deleteMany?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[];
 };
 
@@ -974,27 +819,18 @@ export type NullableDecimalFieldUpdateOperationsInput = {
 };
 
 export type ItemCreateNestedOneWithoutStocksInput = {
-  create?: Prisma.XOR<
-    Prisma.ItemCreateWithoutStocksInput,
-    Prisma.ItemUncheckedCreateWithoutStocksInput
-  >;
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutStocksInput, Prisma.ItemUncheckedCreateWithoutStocksInput>;
   connectOrCreate?: Prisma.ItemCreateOrConnectWithoutStocksInput;
   connect?: Prisma.ItemWhereUniqueInput;
 };
 
 export type ItemUpdateOneRequiredWithoutStocksNestedInput = {
-  create?: Prisma.XOR<
-    Prisma.ItemCreateWithoutStocksInput,
-    Prisma.ItemUncheckedCreateWithoutStocksInput
-  >;
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutStocksInput, Prisma.ItemUncheckedCreateWithoutStocksInput>;
   connectOrCreate?: Prisma.ItemCreateOrConnectWithoutStocksInput;
   upsert?: Prisma.ItemUpsertWithoutStocksInput;
   connect?: Prisma.ItemWhereUniqueInput;
   update?: Prisma.XOR<
-    Prisma.XOR<
-      Prisma.ItemUpdateToOneWithWhereWithoutStocksInput,
-      Prisma.ItemUpdateWithoutStocksInput
-    >,
+    Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutStocksInput, Prisma.ItemUpdateWithoutStocksInput>,
     Prisma.ItemUncheckedUpdateWithoutStocksInput
   >;
 };
@@ -1007,14 +843,9 @@ export type ItemCreateWithoutSupplierInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   type: Prisma.ItemTypeCreateNestedOneWithoutItemsInput;
   unit: Prisma.UnitCreateNestedOneWithoutItemsInput;
   stocks?: Prisma.StockCreateNestedManyWithoutItemInput;
@@ -1028,60 +859,38 @@ export type ItemUncheckedCreateWithoutSupplierInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idUnit: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutItemInput;
 };
 
 export type ItemCreateOrConnectWithoutSupplierInput = {
   where: Prisma.ItemWhereUniqueInput;
-  create: Prisma.XOR<
-    Prisma.ItemCreateWithoutSupplierInput,
-    Prisma.ItemUncheckedCreateWithoutSupplierInput
-  >;
+  create: Prisma.XOR<Prisma.ItemCreateWithoutSupplierInput, Prisma.ItemUncheckedCreateWithoutSupplierInput>;
 };
 
 export type ItemCreateManySupplierInputEnvelope = {
-  data:
-    | Prisma.ItemCreateManySupplierInput
-    | Prisma.ItemCreateManySupplierInput[];
+  data: Prisma.ItemCreateManySupplierInput | Prisma.ItemCreateManySupplierInput[];
   skipDuplicates?: boolean;
 };
 
 export type ItemUpsertWithWhereUniqueWithoutSupplierInput = {
   where: Prisma.ItemWhereUniqueInput;
-  update: Prisma.XOR<
-    Prisma.ItemUpdateWithoutSupplierInput,
-    Prisma.ItemUncheckedUpdateWithoutSupplierInput
-  >;
-  create: Prisma.XOR<
-    Prisma.ItemCreateWithoutSupplierInput,
-    Prisma.ItemUncheckedCreateWithoutSupplierInput
-  >;
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutSupplierInput, Prisma.ItemUncheckedUpdateWithoutSupplierInput>;
+  create: Prisma.XOR<Prisma.ItemCreateWithoutSupplierInput, Prisma.ItemUncheckedCreateWithoutSupplierInput>;
 };
 
 export type ItemUpdateWithWhereUniqueWithoutSupplierInput = {
   where: Prisma.ItemWhereUniqueInput;
-  data: Prisma.XOR<
-    Prisma.ItemUpdateWithoutSupplierInput,
-    Prisma.ItemUncheckedUpdateWithoutSupplierInput
-  >;
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutSupplierInput, Prisma.ItemUncheckedUpdateWithoutSupplierInput>;
 };
 
 export type ItemUpdateManyWithWhereWithoutSupplierInput = {
   where: Prisma.ItemScalarWhereInput;
-  data: Prisma.XOR<
-    Prisma.ItemUpdateManyMutationInput,
-    Prisma.ItemUncheckedUpdateManyWithoutSupplierInput
-  >;
+  data: Prisma.XOR<Prisma.ItemUpdateManyMutationInput, Prisma.ItemUncheckedUpdateManyWithoutSupplierInput>;
 };
 
 export type ItemScalarWhereInput = {
@@ -1091,12 +900,7 @@ export type ItemScalarWhereInput = {
   id?: Prisma.StringFilter<'Item'> | string;
   name?: Prisma.StringFilter<'Item'> | string;
   description?: Prisma.StringNullableFilter<'Item'> | string | null;
-  securityStock?:
-    | Prisma.DecimalFilter<'Item'>
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFilter<'Item'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.IntNullableFilter<'Item'> | number | null;
   color?: Prisma.StringNullableFilter<'Item'> | string | null;
   active?: Prisma.BoolFilter<'Item'> | boolean;
@@ -1111,7 +915,7 @@ export type ItemScalarWhereInput = {
   idUnit?: Prisma.StringFilter<'Item'> | string;
   idSupplier?: Prisma.StringFilter<'Item'> | string;
   createdAt?: Prisma.DateTimeFilter<'Item'> | Date | string;
-  updatedAt?: Prisma.DateTimeFilter<'Item'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableFilter<'Item'> | Date | string | null;
 };
 
 export type ItemCreateWithoutUnitInput = {
@@ -1122,14 +926,9 @@ export type ItemCreateWithoutUnitInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   type: Prisma.ItemTypeCreateNestedOneWithoutItemsInput;
   supplier: Prisma.SupplierCreateNestedOneWithoutItemsInput;
   stocks?: Prisma.StockCreateNestedManyWithoutItemInput;
@@ -1143,25 +942,17 @@ export type ItemUncheckedCreateWithoutUnitInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idSupplier: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutItemInput;
 };
 
 export type ItemCreateOrConnectWithoutUnitInput = {
   where: Prisma.ItemWhereUniqueInput;
-  create: Prisma.XOR<
-    Prisma.ItemCreateWithoutUnitInput,
-    Prisma.ItemUncheckedCreateWithoutUnitInput
-  >;
+  create: Prisma.XOR<Prisma.ItemCreateWithoutUnitInput, Prisma.ItemUncheckedCreateWithoutUnitInput>;
 };
 
 export type ItemCreateManyUnitInputEnvelope = {
@@ -1171,30 +962,18 @@ export type ItemCreateManyUnitInputEnvelope = {
 
 export type ItemUpsertWithWhereUniqueWithoutUnitInput = {
   where: Prisma.ItemWhereUniqueInput;
-  update: Prisma.XOR<
-    Prisma.ItemUpdateWithoutUnitInput,
-    Prisma.ItemUncheckedUpdateWithoutUnitInput
-  >;
-  create: Prisma.XOR<
-    Prisma.ItemCreateWithoutUnitInput,
-    Prisma.ItemUncheckedCreateWithoutUnitInput
-  >;
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutUnitInput, Prisma.ItemUncheckedUpdateWithoutUnitInput>;
+  create: Prisma.XOR<Prisma.ItemCreateWithoutUnitInput, Prisma.ItemUncheckedCreateWithoutUnitInput>;
 };
 
 export type ItemUpdateWithWhereUniqueWithoutUnitInput = {
   where: Prisma.ItemWhereUniqueInput;
-  data: Prisma.XOR<
-    Prisma.ItemUpdateWithoutUnitInput,
-    Prisma.ItemUncheckedUpdateWithoutUnitInput
-  >;
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutUnitInput, Prisma.ItemUncheckedUpdateWithoutUnitInput>;
 };
 
 export type ItemUpdateManyWithWhereWithoutUnitInput = {
   where: Prisma.ItemScalarWhereInput;
-  data: Prisma.XOR<
-    Prisma.ItemUpdateManyMutationInput,
-    Prisma.ItemUncheckedUpdateManyWithoutUnitInput
-  >;
+  data: Prisma.XOR<Prisma.ItemUpdateManyMutationInput, Prisma.ItemUncheckedUpdateManyWithoutUnitInput>;
 };
 
 export type ItemCreateWithoutTypeInput = {
@@ -1205,14 +984,9 @@ export type ItemCreateWithoutTypeInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   unit: Prisma.UnitCreateNestedOneWithoutItemsInput;
   supplier: Prisma.SupplierCreateNestedOneWithoutItemsInput;
   stocks?: Prisma.StockCreateNestedManyWithoutItemInput;
@@ -1226,25 +1000,17 @@ export type ItemUncheckedCreateWithoutTypeInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idUnit: string;
   idSupplier: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutItemInput;
 };
 
 export type ItemCreateOrConnectWithoutTypeInput = {
   where: Prisma.ItemWhereUniqueInput;
-  create: Prisma.XOR<
-    Prisma.ItemCreateWithoutTypeInput,
-    Prisma.ItemUncheckedCreateWithoutTypeInput
-  >;
+  create: Prisma.XOR<Prisma.ItemCreateWithoutTypeInput, Prisma.ItemUncheckedCreateWithoutTypeInput>;
 };
 
 export type ItemCreateManyTypeInputEnvelope = {
@@ -1254,30 +1020,18 @@ export type ItemCreateManyTypeInputEnvelope = {
 
 export type ItemUpsertWithWhereUniqueWithoutTypeInput = {
   where: Prisma.ItemWhereUniqueInput;
-  update: Prisma.XOR<
-    Prisma.ItemUpdateWithoutTypeInput,
-    Prisma.ItemUncheckedUpdateWithoutTypeInput
-  >;
-  create: Prisma.XOR<
-    Prisma.ItemCreateWithoutTypeInput,
-    Prisma.ItemUncheckedCreateWithoutTypeInput
-  >;
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutTypeInput, Prisma.ItemUncheckedUpdateWithoutTypeInput>;
+  create: Prisma.XOR<Prisma.ItemCreateWithoutTypeInput, Prisma.ItemUncheckedCreateWithoutTypeInput>;
 };
 
 export type ItemUpdateWithWhereUniqueWithoutTypeInput = {
   where: Prisma.ItemWhereUniqueInput;
-  data: Prisma.XOR<
-    Prisma.ItemUpdateWithoutTypeInput,
-    Prisma.ItemUncheckedUpdateWithoutTypeInput
-  >;
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutTypeInput, Prisma.ItemUncheckedUpdateWithoutTypeInput>;
 };
 
 export type ItemUpdateManyWithWhereWithoutTypeInput = {
   where: Prisma.ItemScalarWhereInput;
-  data: Prisma.XOR<
-    Prisma.ItemUpdateManyMutationInput,
-    Prisma.ItemUncheckedUpdateManyWithoutTypeInput
-  >;
+  data: Prisma.XOR<Prisma.ItemUpdateManyMutationInput, Prisma.ItemUncheckedUpdateManyWithoutTypeInput>;
 };
 
 export type ItemCreateWithoutStocksInput = {
@@ -1288,14 +1042,9 @@ export type ItemCreateWithoutStocksInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   type: Prisma.ItemTypeCreateNestedOneWithoutItemsInput;
   unit: Prisma.UnitCreateNestedOneWithoutItemsInput;
   supplier: Prisma.SupplierCreateNestedOneWithoutItemsInput;
@@ -1309,57 +1058,35 @@ export type ItemUncheckedCreateWithoutStocksInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idUnit: string;
   idSupplier: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type ItemCreateOrConnectWithoutStocksInput = {
   where: Prisma.ItemWhereUniqueInput;
-  create: Prisma.XOR<
-    Prisma.ItemCreateWithoutStocksInput,
-    Prisma.ItemUncheckedCreateWithoutStocksInput
-  >;
+  create: Prisma.XOR<Prisma.ItemCreateWithoutStocksInput, Prisma.ItemUncheckedCreateWithoutStocksInput>;
 };
 
 export type ItemUpsertWithoutStocksInput = {
-  update: Prisma.XOR<
-    Prisma.ItemUpdateWithoutStocksInput,
-    Prisma.ItemUncheckedUpdateWithoutStocksInput
-  >;
-  create: Prisma.XOR<
-    Prisma.ItemCreateWithoutStocksInput,
-    Prisma.ItemUncheckedCreateWithoutStocksInput
-  >;
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutStocksInput, Prisma.ItemUncheckedUpdateWithoutStocksInput>;
+  create: Prisma.XOR<Prisma.ItemCreateWithoutStocksInput, Prisma.ItemUncheckedCreateWithoutStocksInput>;
   where?: Prisma.ItemWhereInput;
 };
 
 export type ItemUpdateToOneWithWhereWithoutStocksInput = {
   where?: Prisma.ItemWhereInput;
-  data: Prisma.XOR<
-    Prisma.ItemUpdateWithoutStocksInput,
-    Prisma.ItemUncheckedUpdateWithoutStocksInput
-  >;
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutStocksInput, Prisma.ItemUncheckedUpdateWithoutStocksInput>;
 };
 
 export type ItemUpdateWithoutStocksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1371,7 +1098,7 @@ export type ItemUpdateWithoutStocksInput = {
     | string
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   type?: Prisma.ItemTypeUpdateOneRequiredWithoutItemsNestedInput;
   unit?: Prisma.UnitUpdateOneRequiredWithoutItemsNestedInput;
   supplier?: Prisma.SupplierUpdateOneRequiredWithoutItemsNestedInput;
@@ -1381,12 +1108,7 @@ export type ItemUncheckedUpdateWithoutStocksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1401,7 +1123,7 @@ export type ItemUncheckedUpdateWithoutStocksInput = {
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type ItemCreateManySupplierInput = {
@@ -1412,28 +1134,18 @@ export type ItemCreateManySupplierInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idUnit: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type ItemUpdateWithoutSupplierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1445,7 +1157,7 @@ export type ItemUpdateWithoutSupplierInput = {
     | string
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   type?: Prisma.ItemTypeUpdateOneRequiredWithoutItemsNestedInput;
   unit?: Prisma.UnitUpdateOneRequiredWithoutItemsNestedInput;
   stocks?: Prisma.StockUpdateManyWithoutItemNestedInput;
@@ -1455,12 +1167,7 @@ export type ItemUncheckedUpdateWithoutSupplierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1474,7 +1181,7 @@ export type ItemUncheckedUpdateWithoutSupplierInput = {
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   stocks?: Prisma.StockUncheckedUpdateManyWithoutItemNestedInput;
 };
 
@@ -1482,12 +1189,7 @@ export type ItemUncheckedUpdateManyWithoutSupplierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1501,7 +1203,7 @@ export type ItemUncheckedUpdateManyWithoutSupplierInput = {
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type ItemCreateManyUnitInput = {
@@ -1512,28 +1214,18 @@ export type ItemCreateManyUnitInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idSupplier: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type ItemUpdateWithoutUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1545,7 +1237,7 @@ export type ItemUpdateWithoutUnitInput = {
     | string
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   type?: Prisma.ItemTypeUpdateOneRequiredWithoutItemsNestedInput;
   supplier?: Prisma.SupplierUpdateOneRequiredWithoutItemsNestedInput;
   stocks?: Prisma.StockUpdateManyWithoutItemNestedInput;
@@ -1555,12 +1247,7 @@ export type ItemUncheckedUpdateWithoutUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1574,7 +1261,7 @@ export type ItemUncheckedUpdateWithoutUnitInput = {
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   stocks?: Prisma.StockUncheckedUpdateManyWithoutItemNestedInput;
 };
 
@@ -1582,12 +1269,7 @@ export type ItemUncheckedUpdateManyWithoutUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1601,7 +1283,7 @@ export type ItemUncheckedUpdateManyWithoutUnitInput = {
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type ItemCreateManyTypeInput = {
@@ -1612,28 +1294,18 @@ export type ItemCreateManyTypeInput = {
   shelfLife?: number | null;
   color?: string | null;
   active?: boolean;
-  purchasePrice?:
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string
-    | null;
+  purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idUnit: string;
   idSupplier: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type ItemUpdateWithoutTypeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1645,7 +1317,7 @@ export type ItemUpdateWithoutTypeInput = {
     | string
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   unit?: Prisma.UnitUpdateOneRequiredWithoutItemsNestedInput;
   supplier?: Prisma.SupplierUpdateOneRequiredWithoutItemsNestedInput;
   stocks?: Prisma.StockUpdateManyWithoutItemNestedInput;
@@ -1655,12 +1327,7 @@ export type ItemUncheckedUpdateWithoutTypeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1674,7 +1341,7 @@ export type ItemUncheckedUpdateWithoutTypeInput = {
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   stocks?: Prisma.StockUncheckedUpdateManyWithoutItemNestedInput;
 };
 
@@ -1682,12 +1349,7 @@ export type ItemUncheckedUpdateManyWithoutTypeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  securityStock?:
-    | Prisma.DecimalFieldUpdateOperationsInput
-    | runtime.Decimal
-    | runtime.DecimalJsLike
-    | number
-    | string;
+  securityStock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   shelfLife?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -1701,7 +1363,7 @@ export type ItemUncheckedUpdateManyWithoutTypeInput = {
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 /**
@@ -1713,8 +1375,7 @@ export type ItemCountOutputType = {
 };
 
 export type ItemCountOutputTypeSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   stocks?: boolean | ItemCountOutputTypeCountStocksArgs;
 };
@@ -1723,8 +1384,7 @@ export type ItemCountOutputTypeSelect<
  * ItemCountOutputType without action
  */
 export type ItemCountOutputTypeDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the ItemCountOutputType
@@ -1736,42 +1396,38 @@ export type ItemCountOutputTypeDefaultArgs<
  * ItemCountOutputType without action
  */
 export type ItemCountOutputTypeCountStocksArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.StockWhereInput;
 };
 
-export type ItemSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetSelect<
-  {
-    id?: boolean;
-    name?: boolean;
-    description?: boolean;
-    securityStock?: boolean;
-    shelfLife?: boolean;
-    color?: boolean;
-    active?: boolean;
-    purchasePrice?: boolean;
-    idTypeItem?: boolean;
-    idUnit?: boolean;
-    idSupplier?: boolean;
-    createdAt?: boolean;
-    updatedAt?: boolean;
-    type?: boolean | Prisma.ItemTypeDefaultArgs<ExtArgs>;
-    unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>;
-    supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>;
-    stocks?: boolean | Prisma.Item$stocksArgs<ExtArgs>;
-    _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>;
-  },
-  ExtArgs['result']['item']
->;
+export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  runtime.Types.Extensions.GetSelect<
+    {
+      id?: boolean;
+      name?: boolean;
+      description?: boolean;
+      securityStock?: boolean;
+      shelfLife?: boolean;
+      color?: boolean;
+      active?: boolean;
+      purchasePrice?: boolean;
+      idTypeItem?: boolean;
+      idUnit?: boolean;
+      idSupplier?: boolean;
+      createdAt?: boolean;
+      updatedAt?: boolean;
+      type?: boolean | Prisma.ItemTypeDefaultArgs<ExtArgs>;
+      unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>;
+      supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>;
+      stocks?: boolean | Prisma.Item$stocksArgs<ExtArgs>;
+      _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>;
+    },
+    ExtArgs['result']['item']
+  >;
 
 export type ItemSelectCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -1795,8 +1451,7 @@ export type ItemSelectCreateManyAndReturn<
 >;
 
 export type ItemSelectUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -1835,104 +1490,92 @@ export type ItemSelectScalar = {
   updatedAt?: boolean;
 };
 
-export type ItemOmit<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetOmit<
-  | 'id'
-  | 'name'
-  | 'description'
-  | 'securityStock'
-  | 'shelfLife'
-  | 'color'
-  | 'active'
-  | 'purchasePrice'
-  | 'idTypeItem'
-  | 'idUnit'
-  | 'idSupplier'
-  | 'createdAt'
-  | 'updatedAt',
-  ExtArgs['result']['item']
->;
-export type ItemInclude<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = {
-  type?: boolean | Prisma.ItemTypeDefaultArgs<ExtArgs>;
-  unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>;
-  supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>;
-  stocks?: boolean | Prisma.Item$stocksArgs<ExtArgs>;
-  _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>;
-};
+export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  runtime.Types.Extensions.GetOmit<
+    | 'id'
+    | 'name'
+    | 'description'
+    | 'securityStock'
+    | 'shelfLife'
+    | 'color'
+    | 'active'
+    | 'purchasePrice'
+    | 'idTypeItem'
+    | 'idUnit'
+    | 'idSupplier'
+    | 'createdAt'
+    | 'updatedAt',
+    ExtArgs['result']['item']
+  >;
+export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  {
+    type?: boolean | Prisma.ItemTypeDefaultArgs<ExtArgs>;
+    unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>;
+    supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>;
+    stocks?: boolean | Prisma.Item$stocksArgs<ExtArgs>;
+    _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>;
+  };
 export type ItemIncludeCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   type?: boolean | Prisma.ItemTypeDefaultArgs<ExtArgs>;
   unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>;
   supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>;
 };
 export type ItemIncludeUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   type?: boolean | Prisma.ItemTypeDefaultArgs<ExtArgs>;
   unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>;
   supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>;
 };
 
-export type $ItemPayload<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = {
-  name: 'Item';
-  objects: {
-    type: Prisma.$ItemTypePayload<ExtArgs>;
-    unit: Prisma.$UnitPayload<ExtArgs>;
-    supplier: Prisma.$SupplierPayload<ExtArgs>;
-    stocks: Prisma.$StockPayload<ExtArgs>[];
+export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  {
+    name: 'Item';
+    objects: {
+      type: Prisma.$ItemTypePayload<ExtArgs>;
+      unit: Prisma.$UnitPayload<ExtArgs>;
+      supplier: Prisma.$SupplierPayload<ExtArgs>;
+      stocks: Prisma.$StockPayload<ExtArgs>[];
+    };
+    scalars: runtime.Types.Extensions.GetPayloadResult<
+      {
+        id: string;
+        name: string;
+        description: string | null;
+        securityStock: runtime.Decimal;
+        shelfLife: number | null;
+        color: string | null;
+        active: boolean;
+        purchasePrice: runtime.Decimal | null;
+        idTypeItem: string;
+        idUnit: string;
+        idSupplier: string;
+        createdAt: Date;
+        updatedAt: Date | null;
+      },
+      ExtArgs['result']['item']
+    >;
+    composites: {};
   };
-  scalars: runtime.Types.Extensions.GetPayloadResult<
-    {
-      id: string;
-      name: string;
-      description: string | null;
-      securityStock: runtime.Decimal;
-      shelfLife: number | null;
-      color: string | null;
-      active: boolean;
-      purchasePrice: runtime.Decimal | null;
-      idTypeItem: string;
-      idUnit: string;
-      idSupplier: string;
-      createdAt: Date;
-      updatedAt: Date;
-    },
-    ExtArgs['result']['item']
-  >;
-  composites: {};
-};
 
-export type ItemGetPayload<
-  S extends boolean | null | undefined | ItemDefaultArgs,
-> = runtime.Types.Result.GetResult<Prisma.$ItemPayload, S>;
+export type ItemGetPayload<S extends boolean | null | undefined | ItemDefaultArgs> = runtime.Types.Result.GetResult<
+  Prisma.$ItemPayload,
+  S
+>;
 
 export type ItemCountArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = Omit<ItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
   select?: ItemCountAggregateInputType | true;
 };
 
 export interface ItemDelegate<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['Item'];
-    meta: { name: 'Item' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Item']; meta: { name: 'Item' } };
   /**
    * Find zero or one Item that matches the filter.
    * @param {ItemFindUniqueArgs} args - Arguments to find a Item
@@ -1947,12 +1590,7 @@ export interface ItemDelegate<
   findUnique<T extends ItemFindUniqueArgs>(
     args: Prisma.SelectSubset<T, ItemFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__ItemClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'findUnique',
-      GlobalOmitOptions
-    > | null,
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
     null,
     ExtArgs,
     GlobalOmitOptions
@@ -1973,12 +1611,7 @@ export interface ItemDelegate<
   findUniqueOrThrow<T extends ItemFindUniqueOrThrowArgs>(
     args: Prisma.SelectSubset<T, ItemFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__ItemClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'findUniqueOrThrow',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -2000,12 +1633,7 @@ export interface ItemDelegate<
   findFirst<T extends ItemFindFirstArgs>(
     args?: Prisma.SelectSubset<T, ItemFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__ItemClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'findFirst',
-      GlobalOmitOptions
-    > | null,
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
     null,
     ExtArgs,
     GlobalOmitOptions
@@ -2028,12 +1656,7 @@ export interface ItemDelegate<
   findFirstOrThrow<T extends ItemFindFirstOrThrowArgs>(
     args?: Prisma.SelectSubset<T, ItemFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__ItemClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'findFirstOrThrow',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -2058,12 +1681,7 @@ export interface ItemDelegate<
   findMany<T extends ItemFindManyArgs>(
     args?: Prisma.SelectSubset<T, ItemFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'findMany',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
   >;
 
   /**
@@ -2081,12 +1699,7 @@ export interface ItemDelegate<
   create<T extends ItemCreateArgs>(
     args: Prisma.SelectSubset<T, ItemCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__ItemClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'create',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -2133,12 +1746,7 @@ export interface ItemDelegate<
   createManyAndReturn<T extends ItemCreateManyAndReturnArgs>(
     args?: Prisma.SelectSubset<T, ItemCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'createManyAndReturn',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
   >;
 
   /**
@@ -2156,12 +1764,7 @@ export interface ItemDelegate<
   delete<T extends ItemDeleteArgs>(
     args: Prisma.SelectSubset<T, ItemDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__ItemClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'delete',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -2185,12 +1788,7 @@ export interface ItemDelegate<
   update<T extends ItemUpdateArgs>(
     args: Prisma.SelectSubset<T, ItemUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__ItemClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'update',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -2264,12 +1862,7 @@ export interface ItemDelegate<
   updateManyAndReturn<T extends ItemUpdateManyAndReturnArgs>(
     args: Prisma.SelectSubset<T, ItemUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'updateManyAndReturn',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
   >;
 
   /**
@@ -2292,12 +1885,7 @@ export interface ItemDelegate<
   upsert<T extends ItemUpsertArgs>(
     args: Prisma.SelectSubset<T, ItemUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__ItemClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$ItemPayload<ExtArgs>,
-      T,
-      'upsert',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -2374,16 +1962,11 @@ export interface ItemDelegate<
    **/
   groupBy<
     T extends ItemGroupByArgs,
-    HasSelectOrTake extends Prisma.Or<
-      Prisma.Extends<'skip', Prisma.Keys<T>>,
-      Prisma.Extends<'take', Prisma.Keys<T>>
-    >,
+    HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>,
     OrderByArg extends Prisma.True extends HasSelectOrTake
       ? { orderBy: ItemGroupByArgs['orderBy'] }
       : { orderBy?: ItemGroupByArgs['orderBy'] },
-    OrderFields extends Prisma.ExcludeUnderscoreKeys<
-      Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
-    >,
+    OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
     HavingFields extends Prisma.GetHavingFields<T['having']>,
@@ -2397,12 +1980,7 @@ export interface ItemDelegate<
               ? never
               : P extends string
                 ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [
-                    Error,
-                    'Field ',
-                    P,
-                    ` in "having" needs to be provided in "by"`,
-                  ];
+                : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`];
           }[HavingFields]
         : 'take' extends Prisma.Keys<T>
           ? 'orderBy' extends Prisma.Keys<T>
@@ -2432,11 +2010,8 @@ export interface ItemDelegate<
                     : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, ItemGroupByArgs, OrderByArg> &
-      InputErrors,
-  ): {} extends InputErrors
-    ? GetItemGroupByPayload<T>
-    : Prisma.PrismaPromise<InputErrors>;
+    args: Prisma.SubsetIntersection<T, ItemGroupByArgs, OrderByArg> & InputErrors,
+  ): {} extends InputErrors ? GetItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
   /**
    * Fields of the Item model
    */
@@ -2452,21 +2027,14 @@ export interface ItemDelegate<
 export interface Prisma__ItemClient<
   T,
   Null = never,
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
   type<T extends Prisma.ItemTypeDefaultArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.ItemTypeDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__ItemTypeClient<
-    | runtime.Types.Result.GetResult<
-        Prisma.$ItemTypePayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        GlobalOmitOptions
-      >
-    | Null,
+    runtime.Types.Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions> | Null,
     Null,
     ExtArgs,
     GlobalOmitOptions
@@ -2474,13 +2042,7 @@ export interface Prisma__ItemClient<
   unit<T extends Prisma.UnitDefaultArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.UnitDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__UnitClient<
-    | runtime.Types.Result.GetResult<
-        Prisma.$UnitPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        GlobalOmitOptions
-      >
-    | Null,
+    runtime.Types.Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions> | Null,
     Null,
     ExtArgs,
     GlobalOmitOptions
@@ -2488,13 +2050,7 @@ export interface Prisma__ItemClient<
   supplier<T extends Prisma.SupplierDefaultArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.SupplierDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__SupplierClient<
-    | runtime.Types.Result.GetResult<
-        Prisma.$SupplierPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        GlobalOmitOptions
-      >
-    | Null,
+    runtime.Types.Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions> | Null,
     Null,
     ExtArgs,
     GlobalOmitOptions
@@ -2502,13 +2058,7 @@ export interface Prisma__ItemClient<
   stocks<T extends Prisma.Item$stocksArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.Item$stocksArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    | runtime.Types.Result.GetResult<
-        Prisma.$StockPayload<ExtArgs>,
-        T,
-        'findMany',
-        GlobalOmitOptions
-      >
-    | Null
+    runtime.Types.Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
   >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2517,14 +2067,8 @@ export interface Prisma__ItemClient<
    * @returns A Promise for the completion of which ever callback is executed.
    */
   then<TResult1 = T, TResult2 = never>(
-    onfulfilled?:
-      | ((value: T) => TResult1 | PromiseLike<TResult1>)
-      | undefined
-      | null,
-    onrejected?:
-      | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-      | undefined
-      | null,
+    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -2532,10 +2076,7 @@ export interface Prisma__ItemClient<
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?:
-      | ((reason: any) => TResult | PromiseLike<TResult>)
-      | undefined
-      | null,
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>;
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -2543,9 +2084,7 @@ export interface Prisma__ItemClient<
    * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
    * @returns A Promise for the completion of the callback.
    */
-  finally(
-    onfinally?: (() => void) | undefined | null,
-  ): runtime.Types.Utils.JsPromise<T>;
+  finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
 }
 
 /**
@@ -2572,8 +2111,7 @@ export interface ItemFieldRefs {
  * Item findUnique
  */
 export type ItemFindUniqueArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -2597,8 +2135,7 @@ export type ItemFindUniqueArgs<
  * Item findUniqueOrThrow
  */
 export type ItemFindUniqueOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -2622,8 +2159,7 @@ export type ItemFindUniqueOrThrowArgs<
  * Item findFirst
  */
 export type ItemFindFirstArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -2646,9 +2182,7 @@ export type ItemFindFirstArgs<
    *
    * Determine the order of Items to fetch.
    */
-  orderBy?:
-    | Prisma.ItemOrderByWithRelationInput
-    | Prisma.ItemOrderByWithRelationInput[];
+  orderBy?: Prisma.ItemOrderByWithRelationInput | Prisma.ItemOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -2679,8 +2213,7 @@ export type ItemFindFirstArgs<
  * Item findFirstOrThrow
  */
 export type ItemFindFirstOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -2703,9 +2236,7 @@ export type ItemFindFirstOrThrowArgs<
    *
    * Determine the order of Items to fetch.
    */
-  orderBy?:
-    | Prisma.ItemOrderByWithRelationInput
-    | Prisma.ItemOrderByWithRelationInput[];
+  orderBy?: Prisma.ItemOrderByWithRelationInput | Prisma.ItemOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -2736,8 +2267,7 @@ export type ItemFindFirstOrThrowArgs<
  * Item findMany
  */
 export type ItemFindManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -2760,9 +2290,7 @@ export type ItemFindManyArgs<
    *
    * Determine the order of Items to fetch.
    */
-  orderBy?:
-    | Prisma.ItemOrderByWithRelationInput
-    | Prisma.ItemOrderByWithRelationInput[];
+  orderBy?: Prisma.ItemOrderByWithRelationInput | Prisma.ItemOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -2788,8 +2316,7 @@ export type ItemFindManyArgs<
  * Item create
  */
 export type ItemCreateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -2813,8 +2340,7 @@ export type ItemCreateArgs<
  * Item createMany
  */
 export type ItemCreateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to create many Items.
@@ -2827,8 +2353,7 @@ export type ItemCreateManyArgs<
  * Item createManyAndReturn
  */
 export type ItemCreateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -2853,8 +2378,7 @@ export type ItemCreateManyAndReturnArgs<
  * Item update
  */
 export type ItemUpdateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -2882,16 +2406,12 @@ export type ItemUpdateArgs<
  * Item updateMany
  */
 export type ItemUpdateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to update Items.
    */
-  data: Prisma.XOR<
-    Prisma.ItemUpdateManyMutationInput,
-    Prisma.ItemUncheckedUpdateManyInput
-  >;
+  data: Prisma.XOR<Prisma.ItemUpdateManyMutationInput, Prisma.ItemUncheckedUpdateManyInput>;
   /**
    * Filter which Items to update
    */
@@ -2906,8 +2426,7 @@ export type ItemUpdateManyArgs<
  * Item updateManyAndReturn
  */
 export type ItemUpdateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -2920,10 +2439,7 @@ export type ItemUpdateManyAndReturnArgs<
   /**
    * The data used to update Items.
    */
-  data: Prisma.XOR<
-    Prisma.ItemUpdateManyMutationInput,
-    Prisma.ItemUncheckedUpdateManyInput
-  >;
+  data: Prisma.XOR<Prisma.ItemUpdateManyMutationInput, Prisma.ItemUncheckedUpdateManyInput>;
   /**
    * Filter which Items to update
    */
@@ -2942,8 +2458,7 @@ export type ItemUpdateManyAndReturnArgs<
  * Item upsert
  */
 export type ItemUpsertArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -2975,8 +2490,7 @@ export type ItemUpsertArgs<
  * Item delete
  */
 export type ItemDeleteArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item
@@ -3000,8 +2514,7 @@ export type ItemDeleteArgs<
  * Item deleteMany
  */
 export type ItemDeleteManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which Items to delete
@@ -3017,8 +2530,7 @@ export type ItemDeleteManyArgs<
  * Item.stocks
  */
 export type Item$stocksArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Stock
@@ -3033,9 +2545,7 @@ export type Item$stocksArgs<
    */
   include?: Prisma.StockInclude<ExtArgs> | null;
   where?: Prisma.StockWhereInput;
-  orderBy?:
-    | Prisma.StockOrderByWithRelationInput
-    | Prisma.StockOrderByWithRelationInput[];
+  orderBy?: Prisma.StockOrderByWithRelationInput | Prisma.StockOrderByWithRelationInput[];
   cursor?: Prisma.StockWhereUniqueInput;
   take?: number;
   skip?: number;
@@ -3046,8 +2556,7 @@ export type Item$stocksArgs<
  * Item without action
  */
 export type ItemDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Item

@@ -16,8 +16,7 @@ import type * as Prisma from '../internal/prismaNamespace';
  * Model MovementType
  *
  */
-export type MovementTypeModel =
-  runtime.Types.Result.DefaultSelection<Prisma.$MovementTypePayload>;
+export type MovementTypeModel = runtime.Types.Result.DefaultSelection<Prisma.$MovementTypePayload>;
 
 export type AggregateMovementType = {
   _count: MovementTypeCountAggregateOutputType | null;
@@ -70,8 +69,7 @@ export type MovementTypeCountAggregateInputType = {
 };
 
 export type MovementTypeAggregateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which MovementType to aggregate.
@@ -82,9 +80,7 @@ export type MovementTypeAggregateArgs<
    *
    * Determine the order of MovementTypes to fetch.
    */
-  orderBy?:
-    | Prisma.MovementTypeOrderByWithRelationInput
-    | Prisma.MovementTypeOrderByWithRelationInput[];
+  orderBy?: Prisma.MovementTypeOrderByWithRelationInput | Prisma.MovementTypeOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -123,23 +119,19 @@ export type MovementTypeAggregateArgs<
   _max?: MovementTypeMaxAggregateInputType;
 };
 
-export type GetMovementTypeAggregateType<T extends MovementTypeAggregateArgs> =
-  {
-    [P in keyof T & keyof AggregateMovementType]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : Prisma.GetScalarType<T[P], AggregateMovementType[P]>
-      : Prisma.GetScalarType<T[P], AggregateMovementType[P]>;
-  };
+export type GetMovementTypeAggregateType<T extends MovementTypeAggregateArgs> = {
+  [P in keyof T & keyof AggregateMovementType]: P extends '_count' | 'count'
+    ? T[P] extends true
+      ? number
+      : Prisma.GetScalarType<T[P], AggregateMovementType[P]>
+    : Prisma.GetScalarType<T[P], AggregateMovementType[P]>;
+};
 
 export type MovementTypeGroupByArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.MovementTypeWhereInput;
-  orderBy?:
-    | Prisma.MovementTypeOrderByWithAggregationInput
-    | Prisma.MovementTypeOrderByWithAggregationInput[];
+  orderBy?: Prisma.MovementTypeOrderByWithAggregationInput | Prisma.MovementTypeOrderByWithAggregationInput[];
   by: Prisma.MovementTypeScalarFieldEnum[] | Prisma.MovementTypeScalarFieldEnum;
   having?: Prisma.MovementTypeScalarWhereWithAggregatesInput;
   take?: number;
@@ -153,24 +145,23 @@ export type MovementTypeGroupByOutputType = {
   id: string;
   name: string;
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt: Date | null;
   _count: MovementTypeCountAggregateOutputType | null;
   _min: MovementTypeMinAggregateOutputType | null;
   _max: MovementTypeMaxAggregateOutputType | null;
 };
 
-type GetMovementTypeGroupByPayload<T extends MovementTypeGroupByArgs> =
-  Prisma.PrismaPromise<
-    Array<
-      Prisma.PickEnumerable<MovementTypeGroupByOutputType, T['by']> & {
-        [P in keyof T & keyof MovementTypeGroupByOutputType]: P extends '_count'
-          ? T[P] extends boolean
-            ? number
-            : Prisma.GetScalarType<T[P], MovementTypeGroupByOutputType[P]>
-          : Prisma.GetScalarType<T[P], MovementTypeGroupByOutputType[P]>;
-      }
-    >
-  >;
+type GetMovementTypeGroupByPayload<T extends MovementTypeGroupByArgs> = Prisma.PrismaPromise<
+  Array<
+    Prisma.PickEnumerable<MovementTypeGroupByOutputType, T['by']> & {
+      [P in keyof T & keyof MovementTypeGroupByOutputType]: P extends '_count'
+        ? T[P] extends boolean
+          ? number
+          : Prisma.GetScalarType<T[P], MovementTypeGroupByOutputType[P]>
+        : Prisma.GetScalarType<T[P], MovementTypeGroupByOutputType[P]>;
+    }
+  >
+>;
 
 export type MovementTypeWhereInput = {
   AND?: Prisma.MovementTypeWhereInput | Prisma.MovementTypeWhereInput[];
@@ -179,7 +170,7 @@ export type MovementTypeWhereInput = {
   id?: Prisma.StringFilter<'MovementType'> | string;
   name?: Prisma.StringFilter<'MovementType'> | string;
   createdAt?: Prisma.DateTimeFilter<'MovementType'> | Date | string;
-  updatedAt?: Prisma.DateTimeFilter<'MovementType'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableFilter<'MovementType'> | Date | string | null;
   movements?: Prisma.MovementListRelationFilter;
 };
 
@@ -187,59 +178,49 @@ export type MovementTypeOrderByWithRelationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
-  updatedAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   movements?: Prisma.MovementOrderByRelationAggregateInput;
 };
 
 export type MovementTypeWhereUniqueInput = Prisma.AtLeast<
   {
     id?: string;
+    name?: string;
     AND?: Prisma.MovementTypeWhereInput | Prisma.MovementTypeWhereInput[];
     OR?: Prisma.MovementTypeWhereInput[];
     NOT?: Prisma.MovementTypeWhereInput | Prisma.MovementTypeWhereInput[];
-    name?: Prisma.StringFilter<'MovementType'> | string;
     createdAt?: Prisma.DateTimeFilter<'MovementType'> | Date | string;
-    updatedAt?: Prisma.DateTimeFilter<'MovementType'> | Date | string;
+    updatedAt?: Prisma.DateTimeNullableFilter<'MovementType'> | Date | string | null;
     movements?: Prisma.MovementListRelationFilter;
   },
-  'id'
+  'id' | 'name'
 >;
 
 export type MovementTypeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
-  updatedAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.MovementTypeCountOrderByAggregateInput;
   _max?: Prisma.MovementTypeMaxOrderByAggregateInput;
   _min?: Prisma.MovementTypeMinOrderByAggregateInput;
 };
 
 export type MovementTypeScalarWhereWithAggregatesInput = {
-  AND?:
-    | Prisma.MovementTypeScalarWhereWithAggregatesInput
-    | Prisma.MovementTypeScalarWhereWithAggregatesInput[];
+  AND?: Prisma.MovementTypeScalarWhereWithAggregatesInput | Prisma.MovementTypeScalarWhereWithAggregatesInput[];
   OR?: Prisma.MovementTypeScalarWhereWithAggregatesInput[];
-  NOT?:
-    | Prisma.MovementTypeScalarWhereWithAggregatesInput
-    | Prisma.MovementTypeScalarWhereWithAggregatesInput[];
+  NOT?: Prisma.MovementTypeScalarWhereWithAggregatesInput | Prisma.MovementTypeScalarWhereWithAggregatesInput[];
   id?: Prisma.StringWithAggregatesFilter<'MovementType'> | string;
   name?: Prisma.StringWithAggregatesFilter<'MovementType'> | string;
-  createdAt?:
-    | Prisma.DateTimeWithAggregatesFilter<'MovementType'>
-    | Date
-    | string;
-  updatedAt?:
-    | Prisma.DateTimeWithAggregatesFilter<'MovementType'>
-    | Date
-    | string;
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<'MovementType'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'MovementType'> | Date | string | null;
 };
 
 export type MovementTypeCreateInput = {
   id?: string;
   name: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   movements?: Prisma.MovementCreateNestedManyWithoutMovementTypeInput;
 };
 
@@ -247,7 +228,7 @@ export type MovementTypeUncheckedCreateInput = {
   id?: string;
   name: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
   movements?: Prisma.MovementUncheckedCreateNestedManyWithoutMovementTypeInput;
 };
 
@@ -255,7 +236,7 @@ export type MovementTypeUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   movements?: Prisma.MovementUpdateManyWithoutMovementTypeNestedInput;
 };
 
@@ -263,7 +244,7 @@ export type MovementTypeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   movements?: Prisma.MovementUncheckedUpdateManyWithoutMovementTypeNestedInput;
 };
 
@@ -271,21 +252,21 @@ export type MovementTypeCreateManyInput = {
   id?: string;
   name: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type MovementTypeUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type MovementTypeUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type MovementTypeCountOrderByAggregateInput = {
@@ -344,14 +325,14 @@ export type MovementTypeCreateWithoutMovementsInput = {
   id?: string;
   name: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type MovementTypeUncheckedCreateWithoutMovementsInput = {
   id?: string;
   name: string;
   createdAt?: Date | string;
-  updatedAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type MovementTypeCreateOrConnectWithoutMovementsInput = {
@@ -386,14 +367,14 @@ export type MovementTypeUpdateWithoutMovementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type MovementTypeUncheckedUpdateWithoutMovementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 /**
@@ -405,8 +386,7 @@ export type MovementTypeCountOutputType = {
 };
 
 export type MovementTypeCountOutputTypeSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   movements?: boolean | MovementTypeCountOutputTypeCountMovementsArgs;
 };
@@ -415,8 +395,7 @@ export type MovementTypeCountOutputTypeSelect<
  * MovementTypeCountOutputType without action
  */
 export type MovementTypeCountOutputTypeDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementTypeCountOutputType
@@ -428,15 +407,13 @@ export type MovementTypeCountOutputTypeDefaultArgs<
  * MovementTypeCountOutputType without action
  */
 export type MovementTypeCountOutputTypeCountMovementsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.MovementWhereInput;
 };
 
 export type MovementTypeSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -450,8 +427,7 @@ export type MovementTypeSelect<
 >;
 
 export type MovementTypeSelectCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -463,8 +439,7 @@ export type MovementTypeSelectCreateManyAndReturn<
 >;
 
 export type MovementTypeSelectUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -483,31 +458,23 @@ export type MovementTypeSelectScalar = {
 };
 
 export type MovementTypeOmit<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetOmit<
-  'id' | 'name' | 'createdAt' | 'updatedAt',
-  ExtArgs['result']['movementType']
->;
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = runtime.Types.Extensions.GetOmit<'id' | 'name' | 'createdAt' | 'updatedAt', ExtArgs['result']['movementType']>;
 export type MovementTypeInclude<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   movements?: boolean | Prisma.MovementType$movementsArgs<ExtArgs>;
   _count?: boolean | Prisma.MovementTypeCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type MovementTypeIncludeCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {};
 export type MovementTypeIncludeUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {};
 
 export type $MovementTypePayload<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   name: 'MovementType';
   objects: {
@@ -518,36 +485,27 @@ export type $MovementTypePayload<
       id: string;
       name: string;
       createdAt: Date;
-      updatedAt: Date;
+      updatedAt: Date | null;
     },
     ExtArgs['result']['movementType']
   >;
   composites: {};
 };
 
-export type MovementTypeGetPayload<
-  S extends boolean | null | undefined | MovementTypeDefaultArgs,
-> = runtime.Types.Result.GetResult<Prisma.$MovementTypePayload, S>;
+export type MovementTypeGetPayload<S extends boolean | null | undefined | MovementTypeDefaultArgs> =
+  runtime.Types.Result.GetResult<Prisma.$MovementTypePayload, S>;
 
 export type MovementTypeCountArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
-> = Omit<
-  MovementTypeFindManyArgs,
-  'select' | 'include' | 'distinct' | 'omit'
-> & {
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = Omit<MovementTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
   select?: MovementTypeCountAggregateInputType | true;
 };
 
 export interface MovementTypeDelegate<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>['model']['MovementType'];
-    meta: { name: 'MovementType' };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MovementType']; meta: { name: 'MovementType' } };
   /**
    * Find zero or one MovementType that matches the filter.
    * @param {MovementTypeFindUniqueArgs} args - Arguments to find a MovementType
@@ -562,12 +520,7 @@ export interface MovementTypeDelegate<
   findUnique<T extends MovementTypeFindUniqueArgs>(
     args: Prisma.SelectSubset<T, MovementTypeFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__MovementTypeClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'findUnique',
-      GlobalOmitOptions
-    > | null,
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
     null,
     ExtArgs,
     GlobalOmitOptions
@@ -588,12 +541,7 @@ export interface MovementTypeDelegate<
   findUniqueOrThrow<T extends MovementTypeFindUniqueOrThrowArgs>(
     args: Prisma.SelectSubset<T, MovementTypeFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__MovementTypeClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'findUniqueOrThrow',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -615,12 +563,7 @@ export interface MovementTypeDelegate<
   findFirst<T extends MovementTypeFindFirstArgs>(
     args?: Prisma.SelectSubset<T, MovementTypeFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__MovementTypeClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'findFirst',
-      GlobalOmitOptions
-    > | null,
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
     null,
     ExtArgs,
     GlobalOmitOptions
@@ -643,12 +586,7 @@ export interface MovementTypeDelegate<
   findFirstOrThrow<T extends MovementTypeFindFirstOrThrowArgs>(
     args?: Prisma.SelectSubset<T, MovementTypeFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__MovementTypeClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'findFirstOrThrow',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -673,12 +611,7 @@ export interface MovementTypeDelegate<
   findMany<T extends MovementTypeFindManyArgs>(
     args?: Prisma.SelectSubset<T, MovementTypeFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'findMany',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
   >;
 
   /**
@@ -696,12 +629,7 @@ export interface MovementTypeDelegate<
   create<T extends MovementTypeCreateArgs>(
     args: Prisma.SelectSubset<T, MovementTypeCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__MovementTypeClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'create',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -748,12 +676,7 @@ export interface MovementTypeDelegate<
   createManyAndReturn<T extends MovementTypeCreateManyAndReturnArgs>(
     args?: Prisma.SelectSubset<T, MovementTypeCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'createManyAndReturn',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
   >;
 
   /**
@@ -771,12 +694,7 @@ export interface MovementTypeDelegate<
   delete<T extends MovementTypeDeleteArgs>(
     args: Prisma.SelectSubset<T, MovementTypeDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__MovementTypeClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'delete',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -800,12 +718,7 @@ export interface MovementTypeDelegate<
   update<T extends MovementTypeUpdateArgs>(
     args: Prisma.SelectSubset<T, MovementTypeUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__MovementTypeClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'update',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -879,12 +792,7 @@ export interface MovementTypeDelegate<
   updateManyAndReturn<T extends MovementTypeUpdateManyAndReturnArgs>(
     args: Prisma.SelectSubset<T, MovementTypeUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'updateManyAndReturn',
-      GlobalOmitOptions
-    >
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
   >;
 
   /**
@@ -907,12 +815,7 @@ export interface MovementTypeDelegate<
   upsert<T extends MovementTypeUpsertArgs>(
     args: Prisma.SelectSubset<T, MovementTypeUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__MovementTypeClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$MovementTypePayload<ExtArgs>,
-      T,
-      'upsert',
-      GlobalOmitOptions
-    >,
+    runtime.Types.Result.GetResult<Prisma.$MovementTypePayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
     never,
     ExtArgs,
     GlobalOmitOptions
@@ -937,10 +840,7 @@ export interface MovementTypeDelegate<
     T extends runtime.Types.Utils.Record<'select', any>
       ? T['select'] extends true
         ? number
-        : Prisma.GetScalarType<
-            T['select'],
-            MovementTypeCountAggregateOutputType
-          >
+        : Prisma.GetScalarType<T['select'], MovementTypeCountAggregateOutputType>
       : number
   >;
 
@@ -992,16 +892,11 @@ export interface MovementTypeDelegate<
    **/
   groupBy<
     T extends MovementTypeGroupByArgs,
-    HasSelectOrTake extends Prisma.Or<
-      Prisma.Extends<'skip', Prisma.Keys<T>>,
-      Prisma.Extends<'take', Prisma.Keys<T>>
-    >,
+    HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>,
     OrderByArg extends Prisma.True extends HasSelectOrTake
       ? { orderBy: MovementTypeGroupByArgs['orderBy'] }
       : { orderBy?: MovementTypeGroupByArgs['orderBy'] },
-    OrderFields extends Prisma.ExcludeUnderscoreKeys<
-      Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
-    >,
+    OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
     HavingFields extends Prisma.GetHavingFields<T['having']>,
@@ -1015,12 +910,7 @@ export interface MovementTypeDelegate<
               ? never
               : P extends string
                 ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [
-                    Error,
-                    'Field ',
-                    P,
-                    ` in "having" needs to be provided in "by"`,
-                  ];
+                : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`];
           }[HavingFields]
         : 'take' extends Prisma.Keys<T>
           ? 'orderBy' extends Prisma.Keys<T>
@@ -1050,11 +940,8 @@ export interface MovementTypeDelegate<
                     : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, MovementTypeGroupByArgs, OrderByArg> &
-      InputErrors,
-  ): {} extends InputErrors
-    ? GetMovementTypeGroupByPayload<T>
-    : Prisma.PrismaPromise<InputErrors>;
+    args: Prisma.SubsetIntersection<T, MovementTypeGroupByArgs, OrderByArg> & InputErrors,
+  ): {} extends InputErrors ? GetMovementTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
   /**
    * Fields of the MovementType model
    */
@@ -1070,21 +957,14 @@ export interface MovementTypeDelegate<
 export interface Prisma__MovementTypeClient<
   T,
   Null = never,
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
   movements<T extends Prisma.MovementType$movementsArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.MovementType$movementsArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
-    | runtime.Types.Result.GetResult<
-        Prisma.$MovementPayload<ExtArgs>,
-        T,
-        'findMany',
-        GlobalOmitOptions
-      >
-    | Null
+    runtime.Types.Result.GetResult<Prisma.$MovementPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
   >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1093,14 +973,8 @@ export interface Prisma__MovementTypeClient<
    * @returns A Promise for the completion of which ever callback is executed.
    */
   then<TResult1 = T, TResult2 = never>(
-    onfulfilled?:
-      | ((value: T) => TResult1 | PromiseLike<TResult1>)
-      | undefined
-      | null,
-    onrejected?:
-      | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-      | undefined
-      | null,
+    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -1108,10 +982,7 @@ export interface Prisma__MovementTypeClient<
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?:
-      | ((reason: any) => TResult | PromiseLike<TResult>)
-      | undefined
-      | null,
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>;
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -1119,9 +990,7 @@ export interface Prisma__MovementTypeClient<
    * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
    * @returns A Promise for the completion of the callback.
    */
-  finally(
-    onfinally?: (() => void) | undefined | null,
-  ): runtime.Types.Utils.JsPromise<T>;
+  finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
 }
 
 /**
@@ -1139,8 +1008,7 @@ export interface MovementTypeFieldRefs {
  * MovementType findUnique
  */
 export type MovementTypeFindUniqueArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1164,8 +1032,7 @@ export type MovementTypeFindUniqueArgs<
  * MovementType findUniqueOrThrow
  */
 export type MovementTypeFindUniqueOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1189,8 +1056,7 @@ export type MovementTypeFindUniqueOrThrowArgs<
  * MovementType findFirst
  */
 export type MovementTypeFindFirstArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1213,9 +1079,7 @@ export type MovementTypeFindFirstArgs<
    *
    * Determine the order of MovementTypes to fetch.
    */
-  orderBy?:
-    | Prisma.MovementTypeOrderByWithRelationInput
-    | Prisma.MovementTypeOrderByWithRelationInput[];
+  orderBy?: Prisma.MovementTypeOrderByWithRelationInput | Prisma.MovementTypeOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -1239,17 +1103,14 @@ export type MovementTypeFindFirstArgs<
    *
    * Filter by unique combinations of MovementTypes.
    */
-  distinct?:
-    | Prisma.MovementTypeScalarFieldEnum
-    | Prisma.MovementTypeScalarFieldEnum[];
+  distinct?: Prisma.MovementTypeScalarFieldEnum | Prisma.MovementTypeScalarFieldEnum[];
 };
 
 /**
  * MovementType findFirstOrThrow
  */
 export type MovementTypeFindFirstOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1272,9 +1133,7 @@ export type MovementTypeFindFirstOrThrowArgs<
    *
    * Determine the order of MovementTypes to fetch.
    */
-  orderBy?:
-    | Prisma.MovementTypeOrderByWithRelationInput
-    | Prisma.MovementTypeOrderByWithRelationInput[];
+  orderBy?: Prisma.MovementTypeOrderByWithRelationInput | Prisma.MovementTypeOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -1298,17 +1157,14 @@ export type MovementTypeFindFirstOrThrowArgs<
    *
    * Filter by unique combinations of MovementTypes.
    */
-  distinct?:
-    | Prisma.MovementTypeScalarFieldEnum
-    | Prisma.MovementTypeScalarFieldEnum[];
+  distinct?: Prisma.MovementTypeScalarFieldEnum | Prisma.MovementTypeScalarFieldEnum[];
 };
 
 /**
  * MovementType findMany
  */
 export type MovementTypeFindManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1331,9 +1187,7 @@ export type MovementTypeFindManyArgs<
    *
    * Determine the order of MovementTypes to fetch.
    */
-  orderBy?:
-    | Prisma.MovementTypeOrderByWithRelationInput
-    | Prisma.MovementTypeOrderByWithRelationInput[];
+  orderBy?: Prisma.MovementTypeOrderByWithRelationInput | Prisma.MovementTypeOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
@@ -1352,17 +1206,14 @@ export type MovementTypeFindManyArgs<
    * Skip the first `n` MovementTypes.
    */
   skip?: number;
-  distinct?:
-    | Prisma.MovementTypeScalarFieldEnum
-    | Prisma.MovementTypeScalarFieldEnum[];
+  distinct?: Prisma.MovementTypeScalarFieldEnum | Prisma.MovementTypeScalarFieldEnum[];
 };
 
 /**
  * MovementType create
  */
 export type MovementTypeCreateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1379,25 +1230,19 @@ export type MovementTypeCreateArgs<
   /**
    * The data needed to create a MovementType.
    */
-  data: Prisma.XOR<
-    Prisma.MovementTypeCreateInput,
-    Prisma.MovementTypeUncheckedCreateInput
-  >;
+  data: Prisma.XOR<Prisma.MovementTypeCreateInput, Prisma.MovementTypeUncheckedCreateInput>;
 };
 
 /**
  * MovementType createMany
  */
 export type MovementTypeCreateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to create many MovementTypes.
    */
-  data:
-    | Prisma.MovementTypeCreateManyInput
-    | Prisma.MovementTypeCreateManyInput[];
+  data: Prisma.MovementTypeCreateManyInput | Prisma.MovementTypeCreateManyInput[];
   skipDuplicates?: boolean;
 };
 
@@ -1405,8 +1250,7 @@ export type MovementTypeCreateManyArgs<
  * MovementType createManyAndReturn
  */
 export type MovementTypeCreateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1419,9 +1263,7 @@ export type MovementTypeCreateManyAndReturnArgs<
   /**
    * The data used to create many MovementTypes.
    */
-  data:
-    | Prisma.MovementTypeCreateManyInput
-    | Prisma.MovementTypeCreateManyInput[];
+  data: Prisma.MovementTypeCreateManyInput | Prisma.MovementTypeCreateManyInput[];
   skipDuplicates?: boolean;
 };
 
@@ -1429,8 +1271,7 @@ export type MovementTypeCreateManyAndReturnArgs<
  * MovementType update
  */
 export type MovementTypeUpdateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1447,10 +1288,7 @@ export type MovementTypeUpdateArgs<
   /**
    * The data needed to update a MovementType.
    */
-  data: Prisma.XOR<
-    Prisma.MovementTypeUpdateInput,
-    Prisma.MovementTypeUncheckedUpdateInput
-  >;
+  data: Prisma.XOR<Prisma.MovementTypeUpdateInput, Prisma.MovementTypeUncheckedUpdateInput>;
   /**
    * Choose, which MovementType to update.
    */
@@ -1461,16 +1299,12 @@ export type MovementTypeUpdateArgs<
  * MovementType updateMany
  */
 export type MovementTypeUpdateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to update MovementTypes.
    */
-  data: Prisma.XOR<
-    Prisma.MovementTypeUpdateManyMutationInput,
-    Prisma.MovementTypeUncheckedUpdateManyInput
-  >;
+  data: Prisma.XOR<Prisma.MovementTypeUpdateManyMutationInput, Prisma.MovementTypeUncheckedUpdateManyInput>;
   /**
    * Filter which MovementTypes to update
    */
@@ -1485,8 +1319,7 @@ export type MovementTypeUpdateManyArgs<
  * MovementType updateManyAndReturn
  */
 export type MovementTypeUpdateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1499,10 +1332,7 @@ export type MovementTypeUpdateManyAndReturnArgs<
   /**
    * The data used to update MovementTypes.
    */
-  data: Prisma.XOR<
-    Prisma.MovementTypeUpdateManyMutationInput,
-    Prisma.MovementTypeUncheckedUpdateManyInput
-  >;
+  data: Prisma.XOR<Prisma.MovementTypeUpdateManyMutationInput, Prisma.MovementTypeUncheckedUpdateManyInput>;
   /**
    * Filter which MovementTypes to update
    */
@@ -1517,8 +1347,7 @@ export type MovementTypeUpdateManyAndReturnArgs<
  * MovementType upsert
  */
 export type MovementTypeUpsertArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1539,25 +1368,18 @@ export type MovementTypeUpsertArgs<
   /**
    * In case the MovementType found by the `where` argument doesn't exist, create a new MovementType with this data.
    */
-  create: Prisma.XOR<
-    Prisma.MovementTypeCreateInput,
-    Prisma.MovementTypeUncheckedCreateInput
-  >;
+  create: Prisma.XOR<Prisma.MovementTypeCreateInput, Prisma.MovementTypeUncheckedCreateInput>;
   /**
    * In case the MovementType was found with the provided `where` argument, update it with this data.
    */
-  update: Prisma.XOR<
-    Prisma.MovementTypeUpdateInput,
-    Prisma.MovementTypeUncheckedUpdateInput
-  >;
+  update: Prisma.XOR<Prisma.MovementTypeUpdateInput, Prisma.MovementTypeUncheckedUpdateInput>;
 };
 
 /**
  * MovementType delete
  */
 export type MovementTypeDeleteArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType
@@ -1581,8 +1403,7 @@ export type MovementTypeDeleteArgs<
  * MovementType deleteMany
  */
 export type MovementTypeDeleteManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which MovementTypes to delete
@@ -1598,8 +1419,7 @@ export type MovementTypeDeleteManyArgs<
  * MovementType.movements
  */
 export type MovementType$movementsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Movement
@@ -1614,9 +1434,7 @@ export type MovementType$movementsArgs<
    */
   include?: Prisma.MovementInclude<ExtArgs> | null;
   where?: Prisma.MovementWhereInput;
-  orderBy?:
-    | Prisma.MovementOrderByWithRelationInput
-    | Prisma.MovementOrderByWithRelationInput[];
+  orderBy?: Prisma.MovementOrderByWithRelationInput | Prisma.MovementOrderByWithRelationInput[];
   cursor?: Prisma.MovementWhereUniqueInput;
   take?: number;
   skip?: number;
@@ -1627,8 +1445,7 @@ export type MovementType$movementsArgs<
  * MovementType without action
  */
 export type MovementTypeDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the MovementType

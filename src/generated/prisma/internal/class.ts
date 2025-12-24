@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   engineVersion: 'ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba',
   activeProvider: 'postgresql',
   inlineSchema:
-    '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "../src/generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel Supplier {\n  id   String @id @default(cuid())\n  name String @unique\n\n  items     Item[]\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Unit {\n  id   String @id @default(cuid())\n  name String @unique\n  code String @unique\n\n  items     Item[]\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel MovementType {\n  id   String @id @default(cuid())\n  name String\n\n  movements Movement[]\n  createdAt DateTime   @default(now())\n  updatedAt DateTime   @updatedAt\n}\n\nmodel ItemType {\n  id    String @id @default(cuid())\n  name  String\n  items Item[]\n}\n\nmodel Item {\n  id            String   @id @default(cuid())\n  name          String\n  description   String?\n  securityStock Decimal  @default(0)\n  shelfLife     Int?\n  color         String?\n  active        Boolean  @default(true)\n  purchasePrice Decimal? @db.Decimal(10, 3)\n\n  idTypeItem String\n  idUnit     String\n  idSupplier String\n\n  type     ItemType @relation(fields: [idTypeItem], references: [id])\n  unit     Unit     @relation(fields: [idUnit], references: [id])\n  supplier Supplier @relation(fields: [idSupplier], references: [id])\n\n  stocks    Stock[]\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Stock {\n  id       String  @id @default(cuid())\n  quantity Decimal @db.Decimal(10, 3)\n\n  idItem String @unique\n\n  item Item @relation(fields: [idItem], references: [id])\n\n  movements Movement[]\n  createdAt DateTime   @default(now())\n  updatedAt DateTime   @updatedAt\n}\n\nmodel Movement {\n  id       String  @id @default(cuid())\n  quantity Decimal @db.Decimal(10, 3)\n\n  idStock        String\n  idMovementType String\n  idUser         String\n\n  user         User         @relation(fields: [idUser], references: [id])\n  stock        Stock        @relation(fields: [idStock], references: [id])\n  movementType MovementType @relation(fields: [idMovementType], references: [id])\n  createdAt    DateTime     @default(now())\n  updatedAt    DateTime     @updatedAt\n}\n\nmodel User {\n  id            String     @id\n  name          String\n  email         String\n  emailVerified Boolean    @default(false)\n  image         String?\n  createdAt     DateTime   @default(now())\n  updatedAt     DateTime   @updatedAt\n  sessions      Session[]\n  accounts      Account[]\n  movements     Movement[]\n\n  @@unique([email])\n  @@map("user")\n}\n\nmodel Session {\n  id        String   @id\n  expiresAt DateTime\n  token     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  ipAddress String?\n  userAgent String?\n  userId    String\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([token])\n  @@index([userId])\n  @@map("session")\n}\n\nmodel Account {\n  id                    String    @id\n  accountId             String\n  providerId            String\n  userId                String\n  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n  accessToken           String?\n  refreshToken          String?\n  idToken               String?\n  accessTokenExpiresAt  DateTime?\n  refreshTokenExpiresAt DateTime?\n  scope                 String?\n  password              String?\n  createdAt             DateTime  @default(now())\n  updatedAt             DateTime  @updatedAt\n\n  @@index([userId])\n  @@map("account")\n}\n\nmodel Verification {\n  id         String   @id\n  identifier String\n  value      String\n  expiresAt  DateTime\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n\n  @@index([identifier])\n  @@map("verification")\n}\n',
+    '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "../src/generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel Supplier {\n  id   String @id @default(cuid())\n  name String @unique\n\n  items     Item[]\n  createdAt DateTime  @default(now())\n  updatedAt DateTime? @updatedAt\n}\n\nmodel Unit {\n  id   String @id @default(cuid())\n  name String @unique\n  code String @unique\n\n  items     Item[]\n  createdAt DateTime  @default(now())\n  updatedAt DateTime? @updatedAt\n}\n\nmodel MovementType {\n  id   String @id @default(cuid())\n  name String @unique\n\n  movements Movement[]\n  createdAt DateTime   @default(now())\n  updatedAt DateTime?  @updatedAt\n}\n\nmodel ItemType {\n  id    String @id @default(cuid())\n  name  String @unique\n  items Item[]\n}\n\nmodel Item {\n  id            String   @id @default(cuid())\n  name          String\n  description   String?\n  securityStock Decimal  @default(0)\n  shelfLife     Int?\n  color         String?\n  active        Boolean  @default(true)\n  purchasePrice Decimal? @db.Decimal(10, 3)\n\n  idTypeItem String\n  idUnit     String\n  idSupplier String\n\n  type     ItemType @relation(fields: [idTypeItem], references: [id])\n  unit     Unit     @relation(fields: [idUnit], references: [id])\n  supplier Supplier @relation(fields: [idSupplier], references: [id])\n\n  stocks    Stock[]\n  createdAt DateTime  @default(now())\n  updatedAt DateTime? @updatedAt\n}\n\nmodel Stock {\n  id       String  @id @default(cuid())\n  quantity Decimal @db.Decimal(10, 3)\n\n  idItem String @unique\n\n  item Item @relation(fields: [idItem], references: [id])\n\n  movements Movement[]\n  createdAt DateTime   @default(now())\n  updatedAt DateTime?  @updatedAt\n}\n\nmodel Movement {\n  id       String  @id @default(cuid())\n  quantity Decimal @db.Decimal(10, 3)\n\n  idStock        String\n  idMovementType String\n  idUser         String\n\n  user         User         @relation(fields: [idUser], references: [id])\n  stock        Stock        @relation(fields: [idStock], references: [id])\n  movementType MovementType @relation(fields: [idMovementType], references: [id])\n  createdAt    DateTime     @default(now())\n  updatedAt    DateTime?    @updatedAt\n}\n\nmodel User {\n  id            String     @id\n  name          String\n  email         String\n  emailVerified Boolean    @default(false)\n  image         String?\n  createdAt     DateTime   @default(now())\n  updatedAt     DateTime?  @updatedAt\n  sessions      Session[]\n  accounts      Account[]\n  movements     Movement[]\n\n  @@unique([email])\n  @@map("user")\n}\n\nmodel Session {\n  id        String    @id\n  expiresAt DateTime\n  token     String\n  createdAt DateTime  @default(now())\n  updatedAt DateTime? @updatedAt\n  ipAddress String?\n  userAgent String?\n  userId    String\n  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([token])\n  @@index([userId])\n  @@map("session")\n}\n\nmodel Account {\n  id                    String    @id\n  accountId             String\n  providerId            String\n  userId                String\n  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n  accessToken           String?\n  refreshToken          String?\n  idToken               String?\n  accessTokenExpiresAt  DateTime?\n  refreshTokenExpiresAt DateTime?\n  scope                 String?\n  password              String?\n  createdAt             DateTime  @default(now())\n  updatedAt             DateTime? @updatedAt\n\n  @@index([userId])\n  @@map("account")\n}\n\nmodel Verification {\n  id         String    @id\n  identifier String\n  value      String\n  expiresAt  DateTime\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime? @updatedAt\n\n  @@index([identifier])\n  @@map("verification")\n}\n',
   runtimeDataModel: {
     models: {},
     enums: {},
@@ -32,32 +32,26 @@ config.runtimeDataModel = JSON.parse(
   '{"models":{"Supplier":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"items","kind":"object","type":"Item","relationName":"ItemToSupplier"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"Unit":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"code","kind":"scalar","type":"String"},{"name":"items","kind":"object","type":"Item","relationName":"ItemToUnit"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"MovementType":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"movements","kind":"object","type":"Movement","relationName":"MovementToMovementType"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"ItemType":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"items","kind":"object","type":"Item","relationName":"ItemToItemType"}],"dbName":null},"Item":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"securityStock","kind":"scalar","type":"Decimal"},{"name":"shelfLife","kind":"scalar","type":"Int"},{"name":"color","kind":"scalar","type":"String"},{"name":"active","kind":"scalar","type":"Boolean"},{"name":"purchasePrice","kind":"scalar","type":"Decimal"},{"name":"idTypeItem","kind":"scalar","type":"String"},{"name":"idUnit","kind":"scalar","type":"String"},{"name":"idSupplier","kind":"scalar","type":"String"},{"name":"type","kind":"object","type":"ItemType","relationName":"ItemToItemType"},{"name":"unit","kind":"object","type":"Unit","relationName":"ItemToUnit"},{"name":"supplier","kind":"object","type":"Supplier","relationName":"ItemToSupplier"},{"name":"stocks","kind":"object","type":"Stock","relationName":"ItemToStock"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"Stock":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"quantity","kind":"scalar","type":"Decimal"},{"name":"idItem","kind":"scalar","type":"String"},{"name":"item","kind":"object","type":"Item","relationName":"ItemToStock"},{"name":"movements","kind":"object","type":"Movement","relationName":"MovementToStock"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"Movement":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"quantity","kind":"scalar","type":"Decimal"},{"name":"idStock","kind":"scalar","type":"String"},{"name":"idMovementType","kind":"scalar","type":"String"},{"name":"idUser","kind":"scalar","type":"String"},{"name":"user","kind":"object","type":"User","relationName":"MovementToUser"},{"name":"stock","kind":"object","type":"Stock","relationName":"MovementToStock"},{"name":"movementType","kind":"object","type":"MovementType","relationName":"MovementToMovementType"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"User":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"email","kind":"scalar","type":"String"},{"name":"emailVerified","kind":"scalar","type":"Boolean"},{"name":"image","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"sessions","kind":"object","type":"Session","relationName":"SessionToUser"},{"name":"accounts","kind":"object","type":"Account","relationName":"AccountToUser"},{"name":"movements","kind":"object","type":"Movement","relationName":"MovementToUser"}],"dbName":"user"},"Session":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"expiresAt","kind":"scalar","type":"DateTime"},{"name":"token","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"ipAddress","kind":"scalar","type":"String"},{"name":"userAgent","kind":"scalar","type":"String"},{"name":"userId","kind":"scalar","type":"String"},{"name":"user","kind":"object","type":"User","relationName":"SessionToUser"}],"dbName":"session"},"Account":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"accountId","kind":"scalar","type":"String"},{"name":"providerId","kind":"scalar","type":"String"},{"name":"userId","kind":"scalar","type":"String"},{"name":"user","kind":"object","type":"User","relationName":"AccountToUser"},{"name":"accessToken","kind":"scalar","type":"String"},{"name":"refreshToken","kind":"scalar","type":"String"},{"name":"idToken","kind":"scalar","type":"String"},{"name":"accessTokenExpiresAt","kind":"scalar","type":"DateTime"},{"name":"refreshTokenExpiresAt","kind":"scalar","type":"DateTime"},{"name":"scope","kind":"scalar","type":"String"},{"name":"password","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":"account"},"Verification":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"identifier","kind":"scalar","type":"String"},{"name":"value","kind":"scalar","type":"String"},{"name":"expiresAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":"verification"}},"enums":{},"types":{}}',
 );
 
-async function decodeBase64AsWasm(
-  wasmBase64: string,
-): Promise<WebAssembly.Module> {
+async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer');
   const wasmArray = Buffer.from(wasmBase64, 'base64');
   return new WebAssembly.Module(wasmArray);
 }
 
 config.compilerWasm = {
-  getRuntime: async () =>
-    await import('@prisma/client/runtime/query_compiler_bg.postgresql.mjs'),
+  getRuntime: async () => await import('@prisma/client/runtime/query_compiler_bg.postgresql.mjs'),
 
   getQueryCompilerWasmModule: async () => {
-    const { wasm } = await import(
-      '@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.mjs'
-    );
+    const { wasm } = await import('@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.mjs');
     return await decodeBase64AsWasm(wasm);
   },
 };
 
-export type LogOptions<ClientOptions extends Prisma.PrismaClientOptions> =
-  'log' extends keyof ClientOptions
-    ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition>
-      ? Prisma.GetEvents<ClientOptions['log']>
-      : never
-    : never;
+export type LogOptions<ClientOptions extends Prisma.PrismaClientOptions> = 'log' extends keyof ClientOptions
+  ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition>
+    ? Prisma.GetEvents<ClientOptions['log']>
+    : never
+  : never;
 
 export interface PrismaClientConstructor {
   /**
@@ -77,13 +71,10 @@ export interface PrismaClientConstructor {
   new <
     Options extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
     LogOpts extends LogOptions<Options> = LogOptions<Options>,
-    OmitOpts extends Prisma.PrismaClientOptions['omit'] = Options extends {
-      omit: infer U;
-    }
+    OmitOpts extends Prisma.PrismaClientOptions['omit'] = Options extends { omit: infer U }
       ? U
       : Prisma.PrismaClientOptions['omit'],
-    ExtArgs extends
-      runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+    ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   >(
     options: Prisma.Subset<Options, Prisma.PrismaClientOptions>,
   ): PrismaClient<LogOpts, OmitOpts, ExtArgs>;
@@ -106,16 +97,13 @@ export interface PrismaClientConstructor {
 export interface PrismaClient<
   in LogOpts extends Prisma.LogLevel = never,
   in out OmitOpts extends Prisma.PrismaClientOptions['omit'] = undefined,
-  in out ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  in out ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] };
 
   $on<V extends LogOpts>(
     eventType: V,
-    callback: (
-      event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent,
-    ) => void,
+    callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void,
   ): PrismaClient;
 
   /**
@@ -137,10 +125,7 @@ export interface PrismaClient<
    *
    * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
-  $executeRaw<T = unknown>(
-    query: TemplateStringsArray | Prisma.Sql,
-    ...values: any[]
-  ): Prisma.PrismaPromise<number>;
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
 
   /**
    * Executes a raw query and returns the number of affected rows.
@@ -152,10 +137,7 @@ export interface PrismaClient<
    *
    * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
-  $executeRawUnsafe<T = unknown>(
-    query: string,
-    ...values: any[]
-  ): Prisma.PrismaPromise<number>;
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
 
   /**
    * Performs a prepared raw query and returns the `SELECT` data.
@@ -166,10 +148,7 @@ export interface PrismaClient<
    *
    * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
-  $queryRaw<T = unknown>(
-    query: TemplateStringsArray | Prisma.Sql,
-    ...values: any[]
-  ): Prisma.PrismaPromise<T>;
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
 
   /**
    * Performs a raw query and returns the `SELECT` data.
@@ -181,10 +160,7 @@ export interface PrismaClient<
    *
    * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
-  $queryRawUnsafe<T = unknown>(
-    query: string,
-    ...values: any[]
-  ): Prisma.PrismaPromise<T>;
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
 
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
@@ -205,14 +181,8 @@ export interface PrismaClient<
   ): runtime.Types.Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>;
 
   $transaction<R>(
-    fn: (
-      prisma: Omit<PrismaClient, runtime.ITXClientDenyList>,
-    ) => runtime.Types.Utils.JsPromise<R>,
-    options?: {
-      maxWait?: number;
-      timeout?: number;
-      isolationLevel?: Prisma.TransactionIsolationLevel;
-    },
+    fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => runtime.Types.Utils.JsPromise<R>,
+    options?: { maxWait?: number; timeout?: number; isolationLevel?: Prisma.TransactionIsolationLevel },
   ): runtime.Types.Utils.JsPromise<R>;
 
   $extends: runtime.Types.Extensions.ExtendsHook<
