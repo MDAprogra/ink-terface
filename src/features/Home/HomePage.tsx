@@ -1,3 +1,5 @@
-export default async function HomePage() {
-  return <h1>Hello user</h1>;
+import { ListItems } from './components/ListItems';
+
+export default function HomePage() {
+  return <ListItems />;
 }
