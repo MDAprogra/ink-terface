@@ -3,10 +3,9 @@ import { Pool } from 'pg';
 
 import { PrismaClient } from '@/generated/prisma/client';
 
+import { seedItem } from './seeds/item';
 import { seedItemType } from './seeds/item_type';
 import { seedMovementType } from './seeds/movement_type';
-// Attention au chemin relatif : on remonte de "prisma/" vers "src/"
-//import { PrismaClient } from '../src/generated/prisma';
 import { seedSuppliers } from './seeds/supplier';
 import { seedUnits } from './seeds/unit';
 
@@ -26,6 +25,7 @@ async function main() {
   await seedUnits(prisma);
   await seedMovementType(prisma);
   await seedItemType(prisma);
+  await seedItem(prisma);
 
   console.log('✅ Seeds terminés avec succès.');
 }

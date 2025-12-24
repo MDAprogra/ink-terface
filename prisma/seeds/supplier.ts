@@ -1,4 +1,4 @@
-import type { PrismaClient } from '@/generated/prisma';
+import type { PrismaClient } from '@/generated/prisma/client';
 
 export const seedSuppliers = async (prisma: PrismaClient) => {
   console.log('🌱 Seeding Suppliers...');
@@ -9,6 +9,12 @@ export const seedSuppliers = async (prisma: PrismaClient) => {
     },
     {
       name: 'RADIOR',
+    },
+    {
+      name: 'SUNCHEMICAL',
+    },
+    {
+      name: 'LAGUERRE',
     },
   ];
 

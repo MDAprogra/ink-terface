@@ -320,10 +320,10 @@ export type ItemOrderByWithRelationInput = {
 export type ItemWhereUniqueInput = Prisma.AtLeast<
   {
     id?: string;
+    name?: string;
     AND?: Prisma.ItemWhereInput | Prisma.ItemWhereInput[];
     OR?: Prisma.ItemWhereInput[];
     NOT?: Prisma.ItemWhereInput | Prisma.ItemWhereInput[];
-    name?: Prisma.StringFilter<'Item'> | string;
     description?: Prisma.StringNullableFilter<'Item'> | string | null;
     securityStock?: Prisma.DecimalFilter<'Item'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
     shelfLife?: Prisma.IntNullableFilter<'Item'> | number | null;
@@ -346,7 +346,7 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<
     supplier?: Prisma.XOR<Prisma.SupplierScalarRelationFilter, Prisma.SupplierWhereInput>;
     stocks?: Prisma.StockListRelationFilter;
   },
-  'id'
+  'id' | 'name'
 >;
 
 export type ItemOrderByWithAggregationInput = {
