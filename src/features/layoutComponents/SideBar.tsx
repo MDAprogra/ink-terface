@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowLeftRight, BookOpenText, Home, LogIn, LogOut, Package } from 'lucide-react';
+import { ArrowLeftRight, BookOpenText, Home, LogIn, LogOut, Package, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -13,7 +13,7 @@ const menuItems = [
   { label: 'Catalogue', icon: BookOpenText, href: '/app/catalogue' },
   { label: 'Stock', icon: Package, href: '/app/profile' },
   { label: 'Mouvements', icon: ArrowLeftRight, href: '/app/notifications' },
-  //{ label: 'Paramètres', icon: Settings, href: '/app/settings' },
+  { label: 'Paramètres', icon: Settings, href: '/app/settings' },
 ];
 
 export function UserMenu() {
