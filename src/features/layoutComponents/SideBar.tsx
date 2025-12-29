@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowLeftRight, Home, LogIn, LogOut, Package } from 'lucide-react';
+import { ArrowLeftRight, BookOpenText, Home, LogIn, LogOut, Package } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -10,6 +10,7 @@ import { authClient } from '@/lib/auth-client';
 
 const menuItems = [
   { label: 'Accueil', icon: Home, href: '/app' },
+  { label: 'Catalogue', icon: BookOpenText, href: '/app/catalogue' },
   { label: 'Stock', icon: Package, href: '/app/profile' },
   { label: 'Mouvements', icon: ArrowLeftRight, href: '/app/notifications' },
   //{ label: 'Paramètres', icon: Settings, href: '/app/settings' },
