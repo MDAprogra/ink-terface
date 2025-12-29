@@ -57,7 +57,7 @@ export const SignInPage = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <div className="mx-auto flex w-full max-w-md flex-col gap-6 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:outline-white/10">
         <div className="text-center">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">Sign-In</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">Se Connecter</h1>
           <p className="text-sm text-muted-foreground mt-2">Entrez vos identifiants pour accéder à votre compte.</p>
         </div>
 
@@ -65,7 +65,7 @@ export const SignInPage = () => {
         <div className="space-y-2">
           <Label htmlFor="emailInput" className="flex items-center gap-2">
             Email
-            <span className="text-xs font-normal text-muted-foreground">(email@example.com)</span>
+            <span className="text-xs font-normal text-muted-foreground">(email@exemple.fr)</span>
           </Label>
           <Input
             type="email"
@@ -80,7 +80,7 @@ export const SignInPage = () => {
 
         {/* Groupe Password */}
         <div className="space-y-2">
-          <Label htmlFor="passwordInput">Password</Label>
+          <Label htmlFor="passwordInput">Mot de passe</Label>
           <Input
             type="password"
             placeholder="••••••••"
@@ -96,7 +96,7 @@ export const SignInPage = () => {
         <div className="flex flex-col gap-4 pt-2">
           <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading && <Spinner className="size-4 mr-2" />}
-            {isLoading ? 'Connexion...' : 'Sign In'}
+            {isLoading ? 'Connexion...' : 'Se connecter'}
           </Button>
 
           {errors.root && (
@@ -107,9 +107,9 @@ export const SignInPage = () => {
 
           {/* 👇 AJOUT DU LIEN ICI */}
           <div className="text-center text-sm text-muted-foreground">
-            Don't have an account yet?{' '}
+            Vous n'avez pas encore de compte?{' '}
             <Link href="/sign-up" className="font-semibold text-primary hover:underline">
-              Register
+              S'enregistrer
             </Link>
           </div>
         </div>

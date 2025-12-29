@@ -60,16 +60,16 @@ export const SignUpPage = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <div className="mx-auto flex w-full max-w-md flex-col gap-6 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:outline-white/10">
         <div className="text-center">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">Sign-Up</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">S'enregistrer</h1>
           <p className="text-sm text-muted-foreground mt-2">Créez votre compte pour commencer.</p>
         </div>
 
         {/* Champ Name */}
         <div className="space-y-2">
-          <Label htmlFor="nameInput">Name</Label>
+          <Label htmlFor="nameInput">Nom & Prénom</Label>
           <Input
             type="text"
-            placeholder="Votre Nom"
+            placeholder="Votre Nom & Prénom"
             id="nameInput"
             {...register('name', { required: 'Le nom est requis' })}
             disabled={isLoading}
@@ -82,7 +82,7 @@ export const SignUpPage = () => {
         <div className="space-y-2">
           <Label htmlFor="emailInput" className="flex items-center gap-2">
             Email
-            <span className="text-xs font-normal text-muted-foreground">(email@example.com)</span>
+            <span className="text-xs font-normal text-muted-foreground">(email@exemple.com)</span>
           </Label>
           <Input
             type="email"
@@ -97,7 +97,7 @@ export const SignUpPage = () => {
 
         {/* Champ Password */}
         <div className="space-y-2">
-          <Label htmlFor="passwordInput">Password</Label>
+          <Label htmlFor="passwordInput">Mot de passe</Label>
           <Input
             type="password"
             placeholder="••••••••"
@@ -116,7 +116,7 @@ export const SignUpPage = () => {
         <div className="flex flex-col gap-4 pt-2">
           <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading && <Spinner className="size-4 mr-2" />}
-            {isLoading ? 'Création en cours...' : 'Sign Up'}
+            {isLoading ? 'Création en cours...' : `S'enregistrer`}
           </Button>
 
           {errors.root && (
@@ -127,9 +127,9 @@ export const SignUpPage = () => {
 
           {/* Lien vers Sign In */}
           <div className="text-center text-sm text-muted-foreground">
-            Already have an account?{' '}
+            Déjà un compte ?{' '}
             <a href="/sign-in" className="font-semibold text-primary hover:underline">
-              Sign in
+              Se connecter
             </a>
           </div>
         </div>
