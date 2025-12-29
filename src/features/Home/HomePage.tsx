@@ -1,5 +1,3 @@
-import { ListItems } from './components/ListItems';
-
 export default function HomePage() {
-  return <ListItems />;
+  return <h1>Home page : Coming soon</h1>;
 }
