@@ -3,7 +3,7 @@
 import { MoreHorizontalIcon, Pencil, Trash2Icon } from 'lucide-react';
 import { useState } from 'react';
 
-import { deleteTypeItem } from '@/actions/type-item/delete-type-item';
+import { deleteMovementType } from '@/actions/movement-type/delete-movement-type';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -16,24 +16,24 @@ import {
 import { TableCell, TableRow } from '@/components/ui/table';
 
 import { DialogConfirmDelete } from '../../global/ConfirmDeleting';
-import { TypeItemEdit } from '../Components/TypeItemEdit';
+import { MovementTypeEdit } from './MovementTypeEdit';
 
 // On définit les props attendues
-interface ItemTypeRowProps {
-  item: {
+interface MovementTypeRowProps {
+  movement: {
     id: string;
     name: string;
   };
 }
 
-export const ItemTypeRow = ({ item }: ItemTypeRowProps) => {
-  // ✅ Chaque ligne a maintenant son PROPRE état d'ouverture
+export const MovementTypeRow = ({ movement }: MovementTypeRowProps) => {
+  // TODO : delete underscore (x2)
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeletingOpen, setIsDeletingOpen] = useState(false);
 
   return (
     <TableRow>
-      <TableCell className="font-medium">{item.name}</TableCell>
+      <TableCell className="font-medium">{movement.name}</TableCell>
       <TableCell className="text-right">
         {/* Le Dropdown */}
         <DropdownMenu>
@@ -59,14 +59,15 @@ export const ItemTypeRow = ({ item }: ItemTypeRowProps) => {
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
-
-        <TypeItemEdit item={item} open={isEditOpen} onOpenChange={setIsEditOpen} />
+        {/* Le Sheet d'édition, lié à l'état local */}
+        {/* //TODO: Edit and Delete */}
+        <MovementTypeEdit movement={movement} open={isEditOpen} onOpenChange={setIsEditOpen} />
         <DialogConfirmDelete
-          item={item}
+          item={movement}
           open={isDeletingOpen}
           onOpenChange={setIsDeletingOpen}
-          action={deleteTypeItem}
-          queryKey={['setting_itemType']}
+          action={deleteMovementType}
+          queryKey={['setting_movementType']}
         />
       </TableCell>
     </TableRow>

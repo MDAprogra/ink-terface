@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
-import { deleteTypeItem } from '@/actions/type-item/delete-type-item';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,25 +17,27 @@ interface TypeItemEditProps {
   item: { id: string; name?: string };
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  queryKey: string[];
+  action: (name: string) => Promise<unknown>;
 }
 
-export function DialogConfirmDelete({ item, open, onOpenChange }: TypeItemEditProps) {
+export function DialogConfirmDelete({ item, open, onOpenChange, queryKey, action }: TypeItemEditProps) {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: async () => {
-      await deleteTypeItem(item.id);
+      await action(item.id);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['setting_itemType'] });
+      queryClient.invalidateQueries({ queryKey: queryKey });
       onOpenChange(false);
+      toast.warning(`L'élément suivant à été supprimé : ${item.name}`);
     },
     onError: (err) => {
-      console.error(err);
+      toast.error(err.message);
     },
   });
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('You are into handleSubmit !');
     e.preventDefault();
     mutate();
   };
