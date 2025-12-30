@@ -10,7 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { ErrorAlert } from '../../global/ErrorAlert';
 import { Loading } from '../../global/Loading';
 import { MT_AddSheet } from '../Components/MovementType/MT_AddSheet';
-import { MovementTypeRow } from '../Components/MovementTypeRow';
+import { MovementTypeRow } from '../Components/MovementType/MT_Row';
 
 export const MovementTypeComponent = () => {
   const { data, isLoading } = useQuery({

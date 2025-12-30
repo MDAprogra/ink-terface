@@ -1,9 +1,10 @@
 'use client';
 
 import { MoreHorizontalIcon, Pencil, Trash2Icon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { deleteTypeItem } from '@/actions/type-item/delete-type-item';
+import { deleteMovementType } from '@/actions/movement-type/delete-movement-type';
+import { editMovementType } from '@/actions/movement-type/edit-movement-type';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -13,27 +14,36 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { TableCell, TableRow } from '@/components/ui/table';
+import { EditSheet } from '@/features/global/EditSheet';
 
-import { DialogConfirmDelete } from '../../global/ConfirmDeleting';
-import { TypeItemEdit } from '../Components/TypeItemEdit';
+import { DialogConfirmDelete } from '../../../global/ConfirmDeleting';
+import { MovementTypeEdit } from '../MovementTypeEdit';
 
 // On définit les props attendues
-interface ItemTypeRowProps {
-  item: {
+interface MovementTypeRowProps {
+  movement: {
     id: string;
     name: string;
   };
 }
 
-export const ItemTypeRow = ({ item }: ItemTypeRowProps) => {
-  // ✅ Chaque ligne a maintenant son PROPRE état d'ouverture
+export const MovementTypeRow = ({ movement }: MovementTypeRowProps) => {
+  // TODO : delete underscore (x2)
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeletingOpen, setIsDeletingOpen] = useState(false);
+  const [name, setName] = useState(movement.name);
+  useEffect(() => {
+    if (isEditOpen) {
+      setName(movement.name);
+    }
+  }, [isEditOpen, movement.name]);
 
   return (
     <TableRow>
-      <TableCell className="font-medium">{item.name}</TableCell>
+      <TableCell className="font-medium">{movement.name}</TableCell>
       <TableCell className="text-right">
         {/* Le Dropdown */}
         <DropdownMenu>
@@ -59,14 +69,29 @@ export const ItemTypeRow = ({ item }: ItemTypeRowProps) => {
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
+        {/* Le Sheet d'édition, lié à l'état local */}
+        {/* //TODO: Edit and Delete */}
+        <MovementTypeEdit movement={movement} open={isEditOpen} onOpenChange={setIsEditOpen} />
 
-        <TypeItemEdit item={item} open={isEditOpen} onOpenChange={setIsEditOpen} />
+        <EditSheet
+          open={isEditOpen}
+          onOpenChange={setIsEditOpen}
+          title={`Modifier "${movement.name}"`}
+          queryKey={['setting_movementType']}
+          mutationFn={() => editMovementType(name, movement.id)}
+          isSubmitDisabled={name === movement.name || name.length < 2}
+        >
+          <div className="grid gap-2">
+            <Label htmlFor={`edit-name-${movement.id}`}>Nom</Label>
+            <Input id={`edit-name-${movement.id}`} value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+        </EditSheet>
         <DialogConfirmDelete
-          item={item}
+          item={movement}
           open={isDeletingOpen}
           onOpenChange={setIsDeletingOpen}
-          action={deleteTypeItem}
-          queryKey={['setting_itemType']}
+          action={deleteMovementType}
+          queryKey={['setting_movementType']}
         />
       </TableCell>
     </TableRow>

@@ -1,9 +1,10 @@
 'use client';
 
 import { MoreHorizontalIcon, Pencil, Trash2Icon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { deleteMovementType } from '@/actions/movement-type/delete-movement-type';
+import { deleteTypeItem } from '@/actions/type-item/delete-type-item';
+import { editTypeItem } from '@/actions/type-item/edit-type-item';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -13,29 +14,35 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { TableCell, TableRow } from '@/components/ui/table';
+import { EditSheet } from '@/features/global/EditSheet';
 
-import { DialogConfirmDelete } from '../../global/ConfirmDeleting';
-import { MovementTypeEdit } from './MovementTypeEdit';
+import { DialogConfirmDelete } from '../../../global/ConfirmDeleting';
 
 // On définit les props attendues
-interface MovementTypeRowProps {
-  movement: {
+interface ItemTypeRowProps {
+  item: {
     id: string;
     name: string;
   };
 }
 
-export const MovementTypeRow = ({ movement }: MovementTypeRowProps) => {
-  // TODO : delete underscore (x2)
+export const ItemTypeRow = ({ item }: ItemTypeRowProps) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeletingOpen, setIsDeletingOpen] = useState(false);
+  const [name, setName] = useState(item.name);
+  useEffect(() => {
+    if (isEditOpen) {
+      setName(item.name);
+    }
+  }, [isEditOpen, item.name]);
 
   return (
     <TableRow>
-      <TableCell className="font-medium">{movement.name}</TableCell>
+      <TableCell className="font-medium">{item.name}</TableCell>
       <TableCell className="text-right">
-        {/* Le Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon" aria-label="More Options">
@@ -44,7 +51,6 @@ export const MovementTypeRow = ({ movement }: MovementTypeRowProps) => {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-52">
             <DropdownMenuGroup>
-              {/* Le clic active le state LOCAL de cette ligne uniquement */}
               <DropdownMenuItem onClick={() => setIsEditOpen(true)}>
                 <Pencil className="mr-2 h-4 w-4" />
                 Modifier
@@ -59,15 +65,27 @@ export const MovementTypeRow = ({ movement }: MovementTypeRowProps) => {
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
-        {/* Le Sheet d'édition, lié à l'état local */}
-        {/* //TODO: Edit and Delete */}
-        <MovementTypeEdit movement={movement} open={isEditOpen} onOpenChange={setIsEditOpen} />
+
+        <EditSheet
+          open={isEditOpen}
+          onOpenChange={setIsEditOpen}
+          title={`Modifier "${item.name}"`}
+          queryKey={['setting_itemType']}
+          mutationFn={() => editTypeItem(name, item.id)}
+          isSubmitDisabled={name === item.name || name.length < 2}
+        >
+          <div className="grid gap-2">
+            <Label htmlFor={`edit-name-${item.id}`}>Nom</Label>
+            <Input id={`edit-name-${item.id}`} value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+        </EditSheet>
+
         <DialogConfirmDelete
-          item={movement}
+          item={item}
           open={isDeletingOpen}
           onOpenChange={setIsDeletingOpen}
-          action={deleteMovementType}
-          queryKey={['setting_movementType']}
+          action={deleteTypeItem}
+          queryKey={['setting_itemType']}
         />
       </TableCell>
     </TableRow>

@@ -10,7 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { ErrorAlert } from '../../global/ErrorAlert';
 import { Loading } from '../../global/Loading';
 import { TI_AddSheet } from '../Components/TypeItem/TI_AddSheet';
-import { ItemTypeRow } from '../Components/TypeItemRow';
+import { ItemTypeRow } from '../Components/TypeItem/TI_Row';
 
 export const ItemTypeComponent = () => {
   const { data, isLoading } = useQuery({
