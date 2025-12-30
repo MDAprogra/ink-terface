@@ -20,7 +20,6 @@ import { TableCell, TableRow } from '@/components/ui/table';
 import { EditSheet } from '@/features/global/EditSheet';
 
 import { DialogConfirmDelete } from '../../../global/ConfirmDeleting';
-import { MovementTypeEdit } from '../MovementTypeEdit';
 
 // On définit les props attendues
 interface MovementTypeRowProps {
@@ -69,10 +68,6 @@ export const MovementTypeRow = ({ movement }: MovementTypeRowProps) => {
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
-        {/* Le Sheet d'édition, lié à l'état local */}
-        {/* //TODO: Edit and Delete */}
-        <MovementTypeEdit movement={movement} open={isEditOpen} onOpenChange={setIsEditOpen} />
-
         <EditSheet
           open={isEditOpen}
           onOpenChange={setIsEditOpen}
