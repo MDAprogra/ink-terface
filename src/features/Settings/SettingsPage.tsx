@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { ItemTypeComponent } from './Contents/ItemTypeComponent';
 import { MovementTypeComponent } from './Contents/MovementTypeComponent';
+import { UnitComponent } from './Contents/UnitComponent';
 
 export default function SettingsPage() {
   // const contentAnimation =
@@ -23,7 +24,7 @@ export default function SettingsPage() {
         <MovementTypeComponent />
       </TabsContent>
       <TabsContent value="Unit" className={contentAnimation}>
-        Make changes to your account here.
+        <UnitComponent />
       </TabsContent>
       <TabsContent value="Supplier" className={contentAnimation}>
         Change your password here.
