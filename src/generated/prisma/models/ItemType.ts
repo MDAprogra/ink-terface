@@ -27,32 +27,50 @@ export type AggregateItemType = {
 export type ItemTypeMinAggregateOutputType = {
   id: string | null;
   name: string | null;
+  isDeleted: boolean | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
 };
 
 export type ItemTypeMaxAggregateOutputType = {
   id: string | null;
   name: string | null;
+  isDeleted: boolean | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
 };
 
 export type ItemTypeCountAggregateOutputType = {
   id: number;
   name: number;
+  isDeleted: number;
+  createdAt: number;
+  updatedAt: number;
   _all: number;
 };
 
 export type ItemTypeMinAggregateInputType = {
   id?: true;
   name?: true;
+  isDeleted?: true;
+  createdAt?: true;
+  updatedAt?: true;
 };
 
 export type ItemTypeMaxAggregateInputType = {
   id?: true;
   name?: true;
+  isDeleted?: true;
+  createdAt?: true;
+  updatedAt?: true;
 };
 
 export type ItemTypeCountAggregateInputType = {
   id?: true;
   name?: true;
+  isDeleted?: true;
+  createdAt?: true;
+  updatedAt?: true;
   _all?: true;
 };
 
@@ -132,6 +150,9 @@ export type ItemTypeGroupByArgs<
 export type ItemTypeGroupByOutputType = {
   id: string;
   name: string;
+  isDeleted: boolean;
+  createdAt: Date;
+  updatedAt: Date | null;
   _count: ItemTypeCountAggregateOutputType | null;
   _min: ItemTypeMinAggregateOutputType | null;
   _max: ItemTypeMaxAggregateOutputType | null;
@@ -155,12 +176,18 @@ export type ItemTypeWhereInput = {
   NOT?: Prisma.ItemTypeWhereInput | Prisma.ItemTypeWhereInput[];
   id?: Prisma.StringFilter<'ItemType'> | string;
   name?: Prisma.StringFilter<'ItemType'> | string;
+  isDeleted?: Prisma.BoolFilter<'ItemType'> | boolean;
+  createdAt?: Prisma.DateTimeFilter<'ItemType'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableFilter<'ItemType'> | Date | string | null;
   items?: Prisma.ItemListRelationFilter;
 };
 
 export type ItemTypeOrderByWithRelationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
+  createdAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   items?: Prisma.ItemOrderByRelationAggregateInput;
 };
 
@@ -171,6 +198,9 @@ export type ItemTypeWhereUniqueInput = Prisma.AtLeast<
     AND?: Prisma.ItemTypeWhereInput | Prisma.ItemTypeWhereInput[];
     OR?: Prisma.ItemTypeWhereInput[];
     NOT?: Prisma.ItemTypeWhereInput | Prisma.ItemTypeWhereInput[];
+    isDeleted?: Prisma.BoolFilter<'ItemType'> | boolean;
+    createdAt?: Prisma.DateTimeFilter<'ItemType'> | Date | string;
+    updatedAt?: Prisma.DateTimeNullableFilter<'ItemType'> | Date | string | null;
     items?: Prisma.ItemListRelationFilter;
   },
   'id' | 'name'
@@ -179,6 +209,9 @@ export type ItemTypeWhereUniqueInput = Prisma.AtLeast<
 export type ItemTypeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
+  createdAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.ItemTypeCountOrderByAggregateInput;
   _max?: Prisma.ItemTypeMaxOrderByAggregateInput;
   _min?: Prisma.ItemTypeMinOrderByAggregateInput;
@@ -190,60 +223,93 @@ export type ItemTypeScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ItemTypeScalarWhereWithAggregatesInput | Prisma.ItemTypeScalarWhereWithAggregatesInput[];
   id?: Prisma.StringWithAggregatesFilter<'ItemType'> | string;
   name?: Prisma.StringWithAggregatesFilter<'ItemType'> | string;
+  isDeleted?: Prisma.BoolWithAggregatesFilter<'ItemType'> | boolean;
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<'ItemType'> | Date | string;
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'ItemType'> | Date | string | null;
 };
 
 export type ItemTypeCreateInput = {
   id?: string;
   name: string;
+  isDeleted?: boolean;
+  createdAt?: Date | string;
+  updatedAt?: Date | string | null;
   items?: Prisma.ItemCreateNestedManyWithoutTypeInput;
 };
 
 export type ItemTypeUncheckedCreateInput = {
   id?: string;
   name: string;
+  isDeleted?: boolean;
+  createdAt?: Date | string;
+  updatedAt?: Date | string | null;
   items?: Prisma.ItemUncheckedCreateNestedManyWithoutTypeInput;
 };
 
 export type ItemTypeUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   items?: Prisma.ItemUpdateManyWithoutTypeNestedInput;
 };
 
 export type ItemTypeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   items?: Prisma.ItemUncheckedUpdateManyWithoutTypeNestedInput;
 };
 
 export type ItemTypeCreateManyInput = {
   id?: string;
   name: string;
+  isDeleted?: boolean;
+  createdAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type ItemTypeUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type ItemTypeUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type ItemTypeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
+  createdAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrder;
 };
 
 export type ItemTypeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
+  createdAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrder;
 };
 
 export type ItemTypeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
+  createdAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrder;
 };
 
 export type ItemTypeScalarRelationFilter = {
@@ -271,11 +337,17 @@ export type ItemTypeUpdateOneRequiredWithoutItemsNestedInput = {
 export type ItemTypeCreateWithoutItemsInput = {
   id?: string;
   name: string;
+  isDeleted?: boolean;
+  createdAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type ItemTypeUncheckedCreateWithoutItemsInput = {
   id?: string;
   name: string;
+  isDeleted?: boolean;
+  createdAt?: Date | string;
+  updatedAt?: Date | string | null;
 };
 
 export type ItemTypeCreateOrConnectWithoutItemsInput = {
@@ -297,11 +369,17 @@ export type ItemTypeUpdateToOneWithWhereWithoutItemsInput = {
 export type ItemTypeUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 export type ItemTypeUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 
 /**
@@ -345,6 +423,9 @@ export type ItemTypeSelect<
   {
     id?: boolean;
     name?: boolean;
+    isDeleted?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
     items?: boolean | Prisma.ItemType$itemsArgs<ExtArgs>;
     _count?: boolean | Prisma.ItemTypeCountOutputTypeDefaultArgs<ExtArgs>;
   },
@@ -357,6 +438,9 @@ export type ItemTypeSelectCreateManyAndReturn<
   {
     id?: boolean;
     name?: boolean;
+    isDeleted?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
   },
   ExtArgs['result']['itemType']
 >;
@@ -367,6 +451,9 @@ export type ItemTypeSelectUpdateManyAndReturn<
   {
     id?: boolean;
     name?: boolean;
+    isDeleted?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
   },
   ExtArgs['result']['itemType']
 >;
@@ -374,10 +461,16 @@ export type ItemTypeSelectUpdateManyAndReturn<
 export type ItemTypeSelectScalar = {
   id?: boolean;
   name?: boolean;
+  isDeleted?: boolean;
+  createdAt?: boolean;
+  updatedAt?: boolean;
 };
 
 export type ItemTypeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  runtime.Types.Extensions.GetOmit<'id' | 'name', ExtArgs['result']['itemType']>;
+  runtime.Types.Extensions.GetOmit<
+    'id' | 'name' | 'isDeleted' | 'createdAt' | 'updatedAt',
+    ExtArgs['result']['itemType']
+  >;
 export type ItemTypeInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
@@ -402,6 +495,9 @@ export type $ItemTypePayload<
     {
       id: string;
       name: string;
+      isDeleted: boolean;
+      createdAt: Date;
+      updatedAt: Date | null;
     },
     ExtArgs['result']['itemType']
   >;
@@ -915,6 +1011,9 @@ export interface Prisma__ItemTypeClient<
 export interface ItemTypeFieldRefs {
   readonly id: Prisma.FieldRef<'ItemType', 'String'>;
   readonly name: Prisma.FieldRef<'ItemType', 'String'>;
+  readonly isDeleted: Prisma.FieldRef<'ItemType', 'Boolean'>;
+  readonly createdAt: Prisma.FieldRef<'ItemType', 'DateTime'>;
+  readonly updatedAt: Prisma.FieldRef<'ItemType', 'DateTime'>;
 }
 
 // Custom InputTypes

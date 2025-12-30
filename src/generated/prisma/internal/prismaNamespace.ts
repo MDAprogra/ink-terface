@@ -1262,6 +1262,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const SupplierScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
 } as const;
@@ -1272,6 +1273,7 @@ export const UnitScalarFieldEnum = {
   id: 'id',
   name: 'name',
   code: 'code',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
 } as const;
@@ -1281,6 +1283,7 @@ export type UnitScalarFieldEnum = (typeof UnitScalarFieldEnum)[keyof typeof Unit
 export const MovementTypeScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
 } as const;
@@ -1291,6 +1294,9 @@ export type MovementTypeScalarFieldEnum =
 export const ItemTypeScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
 } as const;
 
 export type ItemTypeScalarFieldEnum = (typeof ItemTypeScalarFieldEnum)[keyof typeof ItemTypeScalarFieldEnum];
@@ -1307,6 +1313,7 @@ export const ItemScalarFieldEnum = {
   idTypeItem: 'idTypeItem',
   idUnit: 'idUnit',
   idSupplier: 'idSupplier',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
 } as const;
@@ -1317,6 +1324,7 @@ export const StockScalarFieldEnum = {
   id: 'id',
   quantity: 'quantity',
   idItem: 'idItem',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
 } as const;
@@ -1329,6 +1337,7 @@ export const MovementScalarFieldEnum = {
   idStock: 'idStock',
   idMovementType: 'idMovementType',
   idUser: 'idUser',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
 } as const;
@@ -1426,6 +1435,11 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>;
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>;
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>;
@@ -1454,11 +1468,6 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>;
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>;
 
 /**
  * Reference to a field of type 'Float'

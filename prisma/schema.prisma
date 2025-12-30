@@ -16,7 +16,8 @@ datasource db {
 model Supplier {
   id   String @id @default(cuid())
   name String @unique
-
+  
+  isDeleted Boolean @default(false)
   items     Item[]
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
@@ -26,6 +27,8 @@ model Unit {
   id   String @id @default(cuid())
   name String @unique
   code String @unique
+  
+  isDeleted Boolean @default(false)
 
   items     Item[]
   createdAt DateTime @default(now())
@@ -35,6 +38,8 @@ model Unit {
 model MovementType {
   id   String @id @default(cuid())
   name String @unique
+  
+  isDeleted Boolean @default(false)
 
   movements Movement[]
   createdAt DateTime   @default(now())
@@ -44,6 +49,9 @@ model MovementType {
 model ItemType {
   id    String @id @default(cuid())
   name  String @unique
+  isDeleted Boolean @default(false)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime?   @updatedAt
   items Item[]
 }
 
@@ -66,6 +74,8 @@ model Item {
   supplier Supplier @relation(fields: [idSupplier], references: [id])
 
   stocks    Stock[]
+  
+  isDeleted Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
 }
@@ -79,6 +89,8 @@ model Stock {
   item Item @relation(fields: [idItem], references: [id])
 
   movements Movement[]
+
+  isDeleted Boolean @default(false)
   createdAt DateTime   @default(now())
   updatedAt DateTime?   @updatedAt
 }
@@ -94,6 +106,8 @@ model Movement {
   user         User         @relation(fields: [idUser], references: [id])
   stock        Stock        @relation(fields: [idStock], references: [id])
   movementType MovementType @relation(fields: [idMovementType], references: [id])
+  
+  isDeleted Boolean @default(false)
   createdAt    DateTime     @default(now())
   updatedAt    DateTime?     @updatedAt
 }

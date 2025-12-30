@@ -50,6 +50,7 @@ export type ItemMinAggregateOutputType = {
   idTypeItem: string | null;
   idUnit: string | null;
   idSupplier: string | null;
+  isDeleted: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -66,6 +67,7 @@ export type ItemMaxAggregateOutputType = {
   idTypeItem: string | null;
   idUnit: string | null;
   idSupplier: string | null;
+  isDeleted: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -82,6 +84,7 @@ export type ItemCountAggregateOutputType = {
   idTypeItem: number;
   idUnit: number;
   idSupplier: number;
+  isDeleted: number;
   createdAt: number;
   updatedAt: number;
   _all: number;
@@ -111,6 +114,7 @@ export type ItemMinAggregateInputType = {
   idTypeItem?: true;
   idUnit?: true;
   idSupplier?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -127,6 +131,7 @@ export type ItemMaxAggregateInputType = {
   idTypeItem?: true;
   idUnit?: true;
   idSupplier?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -143,6 +148,7 @@ export type ItemCountAggregateInputType = {
   idTypeItem?: true;
   idUnit?: true;
   idSupplier?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
   _all?: true;
@@ -247,6 +253,7 @@ export type ItemGroupByOutputType = {
   idTypeItem: string;
   idUnit: string;
   idSupplier: string;
+  isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date | null;
   _count: ItemCountAggregateOutputType | null;
@@ -289,6 +296,7 @@ export type ItemWhereInput = {
   idTypeItem?: Prisma.StringFilter<'Item'> | string;
   idUnit?: Prisma.StringFilter<'Item'> | string;
   idSupplier?: Prisma.StringFilter<'Item'> | string;
+  isDeleted?: Prisma.BoolFilter<'Item'> | boolean;
   createdAt?: Prisma.DateTimeFilter<'Item'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableFilter<'Item'> | Date | string | null;
   type?: Prisma.XOR<Prisma.ItemTypeScalarRelationFilter, Prisma.ItemTypeWhereInput>;
@@ -309,6 +317,7 @@ export type ItemOrderByWithRelationInput = {
   idTypeItem?: Prisma.SortOrder;
   idUnit?: Prisma.SortOrder;
   idSupplier?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   type?: Prisma.ItemTypeOrderByWithRelationInput;
@@ -339,6 +348,7 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<
     idTypeItem?: Prisma.StringFilter<'Item'> | string;
     idUnit?: Prisma.StringFilter<'Item'> | string;
     idSupplier?: Prisma.StringFilter<'Item'> | string;
+    isDeleted?: Prisma.BoolFilter<'Item'> | boolean;
     createdAt?: Prisma.DateTimeFilter<'Item'> | Date | string;
     updatedAt?: Prisma.DateTimeNullableFilter<'Item'> | Date | string | null;
     type?: Prisma.XOR<Prisma.ItemTypeScalarRelationFilter, Prisma.ItemTypeWhereInput>;
@@ -361,6 +371,7 @@ export type ItemOrderByWithAggregationInput = {
   idTypeItem?: Prisma.SortOrder;
   idUnit?: Prisma.SortOrder;
   idSupplier?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.ItemCountOrderByAggregateInput;
@@ -396,6 +407,7 @@ export type ItemScalarWhereWithAggregatesInput = {
   idTypeItem?: Prisma.StringWithAggregatesFilter<'Item'> | string;
   idUnit?: Prisma.StringWithAggregatesFilter<'Item'> | string;
   idSupplier?: Prisma.StringWithAggregatesFilter<'Item'> | string;
+  isDeleted?: Prisma.BoolWithAggregatesFilter<'Item'> | boolean;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Item'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'Item'> | Date | string | null;
 };
@@ -409,6 +421,7 @@ export type ItemCreateInput = {
   color?: string | null;
   active?: boolean;
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   type: Prisma.ItemTypeCreateNestedOneWithoutItemsInput;
@@ -429,6 +442,7 @@ export type ItemUncheckedCreateInput = {
   idTypeItem: string;
   idUnit: string;
   idSupplier: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutItemInput;
@@ -449,6 +463,7 @@ export type ItemUpdateInput = {
     | number
     | string
     | null;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   type?: Prisma.ItemTypeUpdateOneRequiredWithoutItemsNestedInput;
@@ -475,6 +490,7 @@ export type ItemUncheckedUpdateInput = {
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   stocks?: Prisma.StockUncheckedUpdateManyWithoutItemNestedInput;
@@ -492,6 +508,7 @@ export type ItemCreateManyInput = {
   idTypeItem: string;
   idUnit: string;
   idSupplier: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -511,6 +528,7 @@ export type ItemUpdateManyMutationInput = {
     | number
     | string
     | null;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -533,6 +551,7 @@ export type ItemUncheckedUpdateManyInput = {
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -559,6 +578,7 @@ export type ItemCountOrderByAggregateInput = {
   idTypeItem?: Prisma.SortOrder;
   idUnit?: Prisma.SortOrder;
   idSupplier?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -581,6 +601,7 @@ export type ItemMaxOrderByAggregateInput = {
   idTypeItem?: Prisma.SortOrder;
   idUnit?: Prisma.SortOrder;
   idSupplier?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -597,6 +618,7 @@ export type ItemMinOrderByAggregateInput = {
   idTypeItem?: Prisma.SortOrder;
   idUnit?: Prisma.SortOrder;
   idSupplier?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -806,10 +828,6 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number;
 };
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean;
-};
-
 export type NullableDecimalFieldUpdateOperationsInput = {
   set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string;
@@ -844,6 +862,7 @@ export type ItemCreateWithoutSupplierInput = {
   color?: string | null;
   active?: boolean;
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   type: Prisma.ItemTypeCreateNestedOneWithoutItemsInput;
@@ -862,6 +881,7 @@ export type ItemUncheckedCreateWithoutSupplierInput = {
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idUnit: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutItemInput;
@@ -914,6 +934,7 @@ export type ItemScalarWhereInput = {
   idTypeItem?: Prisma.StringFilter<'Item'> | string;
   idUnit?: Prisma.StringFilter<'Item'> | string;
   idSupplier?: Prisma.StringFilter<'Item'> | string;
+  isDeleted?: Prisma.BoolFilter<'Item'> | boolean;
   createdAt?: Prisma.DateTimeFilter<'Item'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableFilter<'Item'> | Date | string | null;
 };
@@ -927,6 +948,7 @@ export type ItemCreateWithoutUnitInput = {
   color?: string | null;
   active?: boolean;
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   type: Prisma.ItemTypeCreateNestedOneWithoutItemsInput;
@@ -945,6 +967,7 @@ export type ItemUncheckedCreateWithoutUnitInput = {
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idSupplier: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutItemInput;
@@ -985,6 +1008,7 @@ export type ItemCreateWithoutTypeInput = {
   color?: string | null;
   active?: boolean;
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   unit: Prisma.UnitCreateNestedOneWithoutItemsInput;
@@ -1003,6 +1027,7 @@ export type ItemUncheckedCreateWithoutTypeInput = {
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idUnit: string;
   idSupplier: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   stocks?: Prisma.StockUncheckedCreateNestedManyWithoutItemInput;
@@ -1043,6 +1068,7 @@ export type ItemCreateWithoutStocksInput = {
   color?: string | null;
   active?: boolean;
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   type: Prisma.ItemTypeCreateNestedOneWithoutItemsInput;
@@ -1062,6 +1088,7 @@ export type ItemUncheckedCreateWithoutStocksInput = {
   idTypeItem: string;
   idUnit: string;
   idSupplier: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -1097,6 +1124,7 @@ export type ItemUpdateWithoutStocksInput = {
     | number
     | string
     | null;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   type?: Prisma.ItemTypeUpdateOneRequiredWithoutItemsNestedInput;
@@ -1122,6 +1150,7 @@ export type ItemUncheckedUpdateWithoutStocksInput = {
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -1137,6 +1166,7 @@ export type ItemCreateManySupplierInput = {
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idUnit: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -1156,6 +1186,7 @@ export type ItemUpdateWithoutSupplierInput = {
     | number
     | string
     | null;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   type?: Prisma.ItemTypeUpdateOneRequiredWithoutItemsNestedInput;
@@ -1180,6 +1211,7 @@ export type ItemUncheckedUpdateWithoutSupplierInput = {
     | null;
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   stocks?: Prisma.StockUncheckedUpdateManyWithoutItemNestedInput;
@@ -1202,6 +1234,7 @@ export type ItemUncheckedUpdateManyWithoutSupplierInput = {
     | null;
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -1217,6 +1250,7 @@ export type ItemCreateManyUnitInput = {
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idTypeItem: string;
   idSupplier: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -1236,6 +1270,7 @@ export type ItemUpdateWithoutUnitInput = {
     | number
     | string
     | null;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   type?: Prisma.ItemTypeUpdateOneRequiredWithoutItemsNestedInput;
@@ -1260,6 +1295,7 @@ export type ItemUncheckedUpdateWithoutUnitInput = {
     | null;
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   stocks?: Prisma.StockUncheckedUpdateManyWithoutItemNestedInput;
@@ -1282,6 +1318,7 @@ export type ItemUncheckedUpdateManyWithoutUnitInput = {
     | null;
   idTypeItem?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -1297,6 +1334,7 @@ export type ItemCreateManyTypeInput = {
   purchasePrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null;
   idUnit: string;
   idSupplier: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -1316,6 +1354,7 @@ export type ItemUpdateWithoutTypeInput = {
     | number
     | string
     | null;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   unit?: Prisma.UnitUpdateOneRequiredWithoutItemsNestedInput;
@@ -1340,6 +1379,7 @@ export type ItemUncheckedUpdateWithoutTypeInput = {
     | null;
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   stocks?: Prisma.StockUncheckedUpdateManyWithoutItemNestedInput;
@@ -1362,6 +1402,7 @@ export type ItemUncheckedUpdateManyWithoutTypeInput = {
     | null;
   idUnit?: Prisma.StringFieldUpdateOperationsInput | string;
   idSupplier?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -1415,6 +1456,7 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
       idTypeItem?: boolean;
       idUnit?: boolean;
       idSupplier?: boolean;
+      isDeleted?: boolean;
       createdAt?: boolean;
       updatedAt?: boolean;
       type?: boolean | Prisma.ItemTypeDefaultArgs<ExtArgs>;
@@ -1441,6 +1483,7 @@ export type ItemSelectCreateManyAndReturn<
     idTypeItem?: boolean;
     idUnit?: boolean;
     idSupplier?: boolean;
+    isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
     type?: boolean | Prisma.ItemTypeDefaultArgs<ExtArgs>;
@@ -1465,6 +1508,7 @@ export type ItemSelectUpdateManyAndReturn<
     idTypeItem?: boolean;
     idUnit?: boolean;
     idSupplier?: boolean;
+    isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
     type?: boolean | Prisma.ItemTypeDefaultArgs<ExtArgs>;
@@ -1486,6 +1530,7 @@ export type ItemSelectScalar = {
   idTypeItem?: boolean;
   idUnit?: boolean;
   idSupplier?: boolean;
+  isDeleted?: boolean;
   createdAt?: boolean;
   updatedAt?: boolean;
 };
@@ -1503,6 +1548,7 @@ export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
     | 'idTypeItem'
     | 'idUnit'
     | 'idSupplier'
+    | 'isDeleted'
     | 'createdAt'
     | 'updatedAt',
     ExtArgs['result']['item']
@@ -1552,6 +1598,7 @@ export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
         idTypeItem: string;
         idUnit: string;
         idSupplier: string;
+        isDeleted: boolean;
         createdAt: Date;
         updatedAt: Date | null;
       },
@@ -2102,6 +2149,7 @@ export interface ItemFieldRefs {
   readonly idTypeItem: Prisma.FieldRef<'Item', 'String'>;
   readonly idUnit: Prisma.FieldRef<'Item', 'String'>;
   readonly idSupplier: Prisma.FieldRef<'Item', 'String'>;
+  readonly isDeleted: Prisma.FieldRef<'Item', 'Boolean'>;
   readonly createdAt: Prisma.FieldRef<'Item', 'DateTime'>;
   readonly updatedAt: Prisma.FieldRef<'Item', 'DateTime'>;
 }

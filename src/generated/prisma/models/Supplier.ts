@@ -27,6 +27,7 @@ export type AggregateSupplier = {
 export type SupplierMinAggregateOutputType = {
   id: string | null;
   name: string | null;
+  isDeleted: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -34,6 +35,7 @@ export type SupplierMinAggregateOutputType = {
 export type SupplierMaxAggregateOutputType = {
   id: string | null;
   name: string | null;
+  isDeleted: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -41,6 +43,7 @@ export type SupplierMaxAggregateOutputType = {
 export type SupplierCountAggregateOutputType = {
   id: number;
   name: number;
+  isDeleted: number;
   createdAt: number;
   updatedAt: number;
   _all: number;
@@ -49,6 +52,7 @@ export type SupplierCountAggregateOutputType = {
 export type SupplierMinAggregateInputType = {
   id?: true;
   name?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -56,6 +60,7 @@ export type SupplierMinAggregateInputType = {
 export type SupplierMaxAggregateInputType = {
   id?: true;
   name?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -63,6 +68,7 @@ export type SupplierMaxAggregateInputType = {
 export type SupplierCountAggregateInputType = {
   id?: true;
   name?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
   _all?: true;
@@ -144,6 +150,7 @@ export type SupplierGroupByArgs<
 export type SupplierGroupByOutputType = {
   id: string;
   name: string;
+  isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date | null;
   _count: SupplierCountAggregateOutputType | null;
@@ -169,6 +176,7 @@ export type SupplierWhereInput = {
   NOT?: Prisma.SupplierWhereInput | Prisma.SupplierWhereInput[];
   id?: Prisma.StringFilter<'Supplier'> | string;
   name?: Prisma.StringFilter<'Supplier'> | string;
+  isDeleted?: Prisma.BoolFilter<'Supplier'> | boolean;
   createdAt?: Prisma.DateTimeFilter<'Supplier'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableFilter<'Supplier'> | Date | string | null;
   items?: Prisma.ItemListRelationFilter;
@@ -177,6 +185,7 @@ export type SupplierWhereInput = {
 export type SupplierOrderByWithRelationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   items?: Prisma.ItemOrderByRelationAggregateInput;
@@ -189,6 +198,7 @@ export type SupplierWhereUniqueInput = Prisma.AtLeast<
     AND?: Prisma.SupplierWhereInput | Prisma.SupplierWhereInput[];
     OR?: Prisma.SupplierWhereInput[];
     NOT?: Prisma.SupplierWhereInput | Prisma.SupplierWhereInput[];
+    isDeleted?: Prisma.BoolFilter<'Supplier'> | boolean;
     createdAt?: Prisma.DateTimeFilter<'Supplier'> | Date | string;
     updatedAt?: Prisma.DateTimeNullableFilter<'Supplier'> | Date | string | null;
     items?: Prisma.ItemListRelationFilter;
@@ -199,6 +209,7 @@ export type SupplierWhereUniqueInput = Prisma.AtLeast<
 export type SupplierOrderByWithAggregationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.SupplierCountOrderByAggregateInput;
@@ -212,6 +223,7 @@ export type SupplierScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SupplierScalarWhereWithAggregatesInput | Prisma.SupplierScalarWhereWithAggregatesInput[];
   id?: Prisma.StringWithAggregatesFilter<'Supplier'> | string;
   name?: Prisma.StringWithAggregatesFilter<'Supplier'> | string;
+  isDeleted?: Prisma.BoolWithAggregatesFilter<'Supplier'> | boolean;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Supplier'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'Supplier'> | Date | string | null;
 };
@@ -219,6 +231,7 @@ export type SupplierScalarWhereWithAggregatesInput = {
 export type SupplierCreateInput = {
   id?: string;
   name: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   items?: Prisma.ItemCreateNestedManyWithoutSupplierInput;
@@ -227,6 +240,7 @@ export type SupplierCreateInput = {
 export type SupplierUncheckedCreateInput = {
   id?: string;
   name: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   items?: Prisma.ItemUncheckedCreateNestedManyWithoutSupplierInput;
@@ -235,6 +249,7 @@ export type SupplierUncheckedCreateInput = {
 export type SupplierUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   items?: Prisma.ItemUpdateManyWithoutSupplierNestedInput;
@@ -243,6 +258,7 @@ export type SupplierUpdateInput = {
 export type SupplierUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   items?: Prisma.ItemUncheckedUpdateManyWithoutSupplierNestedInput;
@@ -251,6 +267,7 @@ export type SupplierUncheckedUpdateInput = {
 export type SupplierCreateManyInput = {
   id?: string;
   name: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -258,6 +275,7 @@ export type SupplierCreateManyInput = {
 export type SupplierUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -265,6 +283,7 @@ export type SupplierUpdateManyMutationInput = {
 export type SupplierUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -272,6 +291,7 @@ export type SupplierUncheckedUpdateManyInput = {
 export type SupplierCountOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -279,6 +299,7 @@ export type SupplierCountOrderByAggregateInput = {
 export type SupplierMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -286,6 +307,7 @@ export type SupplierMaxOrderByAggregateInput = {
 export type SupplierMinOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -297,6 +319,10 @@ export type SupplierScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string;
+};
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean;
 };
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -327,6 +353,7 @@ export type SupplierUpdateOneRequiredWithoutItemsNestedInput = {
 export type SupplierCreateWithoutItemsInput = {
   id?: string;
   name: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -334,6 +361,7 @@ export type SupplierCreateWithoutItemsInput = {
 export type SupplierUncheckedCreateWithoutItemsInput = {
   id?: string;
   name: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -357,6 +385,7 @@ export type SupplierUpdateToOneWithWhereWithoutItemsInput = {
 export type SupplierUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -364,6 +393,7 @@ export type SupplierUpdateWithoutItemsInput = {
 export type SupplierUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -409,6 +439,7 @@ export type SupplierSelect<
   {
     id?: boolean;
     name?: boolean;
+    isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
     items?: boolean | Prisma.Supplier$itemsArgs<ExtArgs>;
@@ -423,6 +454,7 @@ export type SupplierSelectCreateManyAndReturn<
   {
     id?: boolean;
     name?: boolean;
+    isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
   },
@@ -435,6 +467,7 @@ export type SupplierSelectUpdateManyAndReturn<
   {
     id?: boolean;
     name?: boolean;
+    isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
   },
@@ -444,12 +477,16 @@ export type SupplierSelectUpdateManyAndReturn<
 export type SupplierSelectScalar = {
   id?: boolean;
   name?: boolean;
+  isDeleted?: boolean;
   createdAt?: boolean;
   updatedAt?: boolean;
 };
 
 export type SupplierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  runtime.Types.Extensions.GetOmit<'id' | 'name' | 'createdAt' | 'updatedAt', ExtArgs['result']['supplier']>;
+  runtime.Types.Extensions.GetOmit<
+    'id' | 'name' | 'isDeleted' | 'createdAt' | 'updatedAt',
+    ExtArgs['result']['supplier']
+  >;
 export type SupplierInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
@@ -474,6 +511,7 @@ export type $SupplierPayload<
     {
       id: string;
       name: string;
+      isDeleted: boolean;
       createdAt: Date;
       updatedAt: Date | null;
     },
@@ -989,6 +1027,7 @@ export interface Prisma__SupplierClient<
 export interface SupplierFieldRefs {
   readonly id: Prisma.FieldRef<'Supplier', 'String'>;
   readonly name: Prisma.FieldRef<'Supplier', 'String'>;
+  readonly isDeleted: Prisma.FieldRef<'Supplier', 'Boolean'>;
   readonly createdAt: Prisma.FieldRef<'Supplier', 'DateTime'>;
   readonly updatedAt: Prisma.FieldRef<'Supplier', 'DateTime'>;
 }

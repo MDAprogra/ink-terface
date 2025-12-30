@@ -28,6 +28,7 @@ export type UnitMinAggregateOutputType = {
   id: string | null;
   name: string | null;
   code: string | null;
+  isDeleted: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -36,6 +37,7 @@ export type UnitMaxAggregateOutputType = {
   id: string | null;
   name: string | null;
   code: string | null;
+  isDeleted: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -44,6 +46,7 @@ export type UnitCountAggregateOutputType = {
   id: number;
   name: number;
   code: number;
+  isDeleted: number;
   createdAt: number;
   updatedAt: number;
   _all: number;
@@ -53,6 +56,7 @@ export type UnitMinAggregateInputType = {
   id?: true;
   name?: true;
   code?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -61,6 +65,7 @@ export type UnitMaxAggregateInputType = {
   id?: true;
   name?: true;
   code?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -69,6 +74,7 @@ export type UnitCountAggregateInputType = {
   id?: true;
   name?: true;
   code?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
   _all?: true;
@@ -151,6 +157,7 @@ export type UnitGroupByOutputType = {
   id: string;
   name: string;
   code: string;
+  isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date | null;
   _count: UnitCountAggregateOutputType | null;
@@ -177,6 +184,7 @@ export type UnitWhereInput = {
   id?: Prisma.StringFilter<'Unit'> | string;
   name?: Prisma.StringFilter<'Unit'> | string;
   code?: Prisma.StringFilter<'Unit'> | string;
+  isDeleted?: Prisma.BoolFilter<'Unit'> | boolean;
   createdAt?: Prisma.DateTimeFilter<'Unit'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableFilter<'Unit'> | Date | string | null;
   items?: Prisma.ItemListRelationFilter;
@@ -186,6 +194,7 @@ export type UnitOrderByWithRelationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   code?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   items?: Prisma.ItemOrderByRelationAggregateInput;
@@ -199,6 +208,7 @@ export type UnitWhereUniqueInput = Prisma.AtLeast<
     AND?: Prisma.UnitWhereInput | Prisma.UnitWhereInput[];
     OR?: Prisma.UnitWhereInput[];
     NOT?: Prisma.UnitWhereInput | Prisma.UnitWhereInput[];
+    isDeleted?: Prisma.BoolFilter<'Unit'> | boolean;
     createdAt?: Prisma.DateTimeFilter<'Unit'> | Date | string;
     updatedAt?: Prisma.DateTimeNullableFilter<'Unit'> | Date | string | null;
     items?: Prisma.ItemListRelationFilter;
@@ -210,6 +220,7 @@ export type UnitOrderByWithAggregationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   code?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.UnitCountOrderByAggregateInput;
@@ -224,6 +235,7 @@ export type UnitScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<'Unit'> | string;
   name?: Prisma.StringWithAggregatesFilter<'Unit'> | string;
   code?: Prisma.StringWithAggregatesFilter<'Unit'> | string;
+  isDeleted?: Prisma.BoolWithAggregatesFilter<'Unit'> | boolean;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Unit'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'Unit'> | Date | string | null;
 };
@@ -232,6 +244,7 @@ export type UnitCreateInput = {
   id?: string;
   name: string;
   code: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   items?: Prisma.ItemCreateNestedManyWithoutUnitInput;
@@ -241,6 +254,7 @@ export type UnitUncheckedCreateInput = {
   id?: string;
   name: string;
   code: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   items?: Prisma.ItemUncheckedCreateNestedManyWithoutUnitInput;
@@ -250,6 +264,7 @@ export type UnitUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   items?: Prisma.ItemUpdateManyWithoutUnitNestedInput;
@@ -259,6 +274,7 @@ export type UnitUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   items?: Prisma.ItemUncheckedUpdateManyWithoutUnitNestedInput;
@@ -268,6 +284,7 @@ export type UnitCreateManyInput = {
   id?: string;
   name: string;
   code: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -276,6 +293,7 @@ export type UnitUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -284,6 +302,7 @@ export type UnitUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -292,6 +311,7 @@ export type UnitCountOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   code?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -300,6 +320,7 @@ export type UnitMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   code?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -308,6 +329,7 @@ export type UnitMinOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   code?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -338,6 +360,7 @@ export type UnitCreateWithoutItemsInput = {
   id?: string;
   name: string;
   code: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -346,6 +369,7 @@ export type UnitUncheckedCreateWithoutItemsInput = {
   id?: string;
   name: string;
   code: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -370,6 +394,7 @@ export type UnitUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -378,6 +403,7 @@ export type UnitUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   code?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -423,6 +449,7 @@ export type UnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
       id?: boolean;
       name?: boolean;
       code?: boolean;
+      isDeleted?: boolean;
       createdAt?: boolean;
       updatedAt?: boolean;
       items?: boolean | Prisma.Unit$itemsArgs<ExtArgs>;
@@ -438,6 +465,7 @@ export type UnitSelectCreateManyAndReturn<
     id?: boolean;
     name?: boolean;
     code?: boolean;
+    isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
   },
@@ -451,6 +479,7 @@ export type UnitSelectUpdateManyAndReturn<
     id?: boolean;
     name?: boolean;
     code?: boolean;
+    isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
   },
@@ -461,12 +490,16 @@ export type UnitSelectScalar = {
   id?: boolean;
   name?: boolean;
   code?: boolean;
+  isDeleted?: boolean;
   createdAt?: boolean;
   updatedAt?: boolean;
 };
 
 export type UnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  runtime.Types.Extensions.GetOmit<'id' | 'name' | 'code' | 'createdAt' | 'updatedAt', ExtArgs['result']['unit']>;
+  runtime.Types.Extensions.GetOmit<
+    'id' | 'name' | 'code' | 'isDeleted' | 'createdAt' | 'updatedAt',
+    ExtArgs['result']['unit']
+  >;
 export type UnitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
   {
     items?: boolean | Prisma.Unit$itemsArgs<ExtArgs>;
@@ -490,6 +523,7 @@ export type $UnitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
         id: string;
         name: string;
         code: string;
+        isDeleted: boolean;
         createdAt: Date;
         updatedAt: Date | null;
       },
@@ -1008,6 +1042,7 @@ export interface UnitFieldRefs {
   readonly id: Prisma.FieldRef<'Unit', 'String'>;
   readonly name: Prisma.FieldRef<'Unit', 'String'>;
   readonly code: Prisma.FieldRef<'Unit', 'String'>;
+  readonly isDeleted: Prisma.FieldRef<'Unit', 'Boolean'>;
   readonly createdAt: Prisma.FieldRef<'Unit', 'DateTime'>;
   readonly updatedAt: Prisma.FieldRef<'Unit', 'DateTime'>;
 }

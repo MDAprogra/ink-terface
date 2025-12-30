@@ -38,6 +38,7 @@ export type StockMinAggregateOutputType = {
   id: string | null;
   quantity: runtime.Decimal | null;
   idItem: string | null;
+  isDeleted: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -46,6 +47,7 @@ export type StockMaxAggregateOutputType = {
   id: string | null;
   quantity: runtime.Decimal | null;
   idItem: string | null;
+  isDeleted: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -54,6 +56,7 @@ export type StockCountAggregateOutputType = {
   id: number;
   quantity: number;
   idItem: number;
+  isDeleted: number;
   createdAt: number;
   updatedAt: number;
   _all: number;
@@ -71,6 +74,7 @@ export type StockMinAggregateInputType = {
   id?: true;
   quantity?: true;
   idItem?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -79,6 +83,7 @@ export type StockMaxAggregateInputType = {
   id?: true;
   quantity?: true;
   idItem?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -87,6 +92,7 @@ export type StockCountAggregateInputType = {
   id?: true;
   quantity?: true;
   idItem?: true;
+  isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
   _all?: true;
@@ -183,6 +189,7 @@ export type StockGroupByOutputType = {
   id: string;
   quantity: runtime.Decimal;
   idItem: string;
+  isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date | null;
   _count: StockCountAggregateOutputType | null;
@@ -211,6 +218,7 @@ export type StockWhereInput = {
   id?: Prisma.StringFilter<'Stock'> | string;
   quantity?: Prisma.DecimalFilter<'Stock'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringFilter<'Stock'> | string;
+  isDeleted?: Prisma.BoolFilter<'Stock'> | boolean;
   createdAt?: Prisma.DateTimeFilter<'Stock'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableFilter<'Stock'> | Date | string | null;
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>;
@@ -221,6 +229,7 @@ export type StockOrderByWithRelationInput = {
   id?: Prisma.SortOrder;
   quantity?: Prisma.SortOrder;
   idItem?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   item?: Prisma.ItemOrderByWithRelationInput;
@@ -235,6 +244,7 @@ export type StockWhereUniqueInput = Prisma.AtLeast<
     OR?: Prisma.StockWhereInput[];
     NOT?: Prisma.StockWhereInput | Prisma.StockWhereInput[];
     quantity?: Prisma.DecimalFilter<'Stock'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    isDeleted?: Prisma.BoolFilter<'Stock'> | boolean;
     createdAt?: Prisma.DateTimeFilter<'Stock'> | Date | string;
     updatedAt?: Prisma.DateTimeNullableFilter<'Stock'> | Date | string | null;
     item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>;
@@ -247,6 +257,7 @@ export type StockOrderByWithAggregationInput = {
   id?: Prisma.SortOrder;
   quantity?: Prisma.SortOrder;
   idItem?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.StockCountOrderByAggregateInput;
@@ -263,6 +274,7 @@ export type StockScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<'Stock'> | string;
   quantity?: Prisma.DecimalWithAggregatesFilter<'Stock'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringWithAggregatesFilter<'Stock'> | string;
+  isDeleted?: Prisma.BoolWithAggregatesFilter<'Stock'> | boolean;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Stock'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'Stock'> | Date | string | null;
 };
@@ -270,6 +282,7 @@ export type StockScalarWhereWithAggregatesInput = {
 export type StockCreateInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   item: Prisma.ItemCreateNestedOneWithoutStocksInput;
@@ -280,6 +293,7 @@ export type StockUncheckedCreateInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   movements?: Prisma.MovementUncheckedCreateNestedManyWithoutStockInput;
@@ -288,6 +302,7 @@ export type StockUncheckedCreateInput = {
 export type StockUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   item?: Prisma.ItemUpdateOneRequiredWithoutStocksNestedInput;
@@ -298,6 +313,7 @@ export type StockUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   movements?: Prisma.MovementUncheckedUpdateManyWithoutStockNestedInput;
@@ -307,6 +323,7 @@ export type StockCreateManyInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -314,6 +331,7 @@ export type StockCreateManyInput = {
 export type StockUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -322,6 +340,7 @@ export type StockUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -340,6 +359,7 @@ export type StockCountOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   quantity?: Prisma.SortOrder;
   idItem?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -352,6 +372,7 @@ export type StockMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   quantity?: Prisma.SortOrder;
   idItem?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -360,6 +381,7 @@ export type StockMinOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   quantity?: Prisma.SortOrder;
   idItem?: Prisma.SortOrder;
+  isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -447,6 +469,7 @@ export type StockUpdateOneRequiredWithoutMovementsNestedInput = {
 export type StockCreateWithoutItemInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   movements?: Prisma.MovementCreateNestedManyWithoutStockInput;
@@ -455,6 +478,7 @@ export type StockCreateWithoutItemInput = {
 export type StockUncheckedCreateWithoutItemInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   movements?: Prisma.MovementUncheckedCreateNestedManyWithoutStockInput;
@@ -493,6 +517,7 @@ export type StockScalarWhereInput = {
   id?: Prisma.StringFilter<'Stock'> | string;
   quantity?: Prisma.DecimalFilter<'Stock'> | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringFilter<'Stock'> | string;
+  isDeleted?: Prisma.BoolFilter<'Stock'> | boolean;
   createdAt?: Prisma.DateTimeFilter<'Stock'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableFilter<'Stock'> | Date | string | null;
 };
@@ -500,6 +525,7 @@ export type StockScalarWhereInput = {
 export type StockCreateWithoutMovementsInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
   item: Prisma.ItemCreateNestedOneWithoutStocksInput;
@@ -509,6 +535,7 @@ export type StockUncheckedCreateWithoutMovementsInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem: string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -532,6 +559,7 @@ export type StockUpdateToOneWithWhereWithoutMovementsInput = {
 export type StockUpdateWithoutMovementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   item?: Prisma.ItemUpdateOneRequiredWithoutStocksNestedInput;
@@ -541,6 +569,7 @@ export type StockUncheckedUpdateWithoutMovementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
   idItem?: Prisma.StringFieldUpdateOperationsInput | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -548,6 +577,7 @@ export type StockUncheckedUpdateWithoutMovementsInput = {
 export type StockCreateManyItemInput = {
   id?: string;
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
 };
@@ -555,6 +585,7 @@ export type StockCreateManyItemInput = {
 export type StockUpdateWithoutItemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   movements?: Prisma.MovementUpdateManyWithoutStockNestedInput;
@@ -563,6 +594,7 @@ export type StockUpdateWithoutItemInput = {
 export type StockUncheckedUpdateWithoutItemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
   movements?: Prisma.MovementUncheckedUpdateManyWithoutStockNestedInput;
@@ -571,6 +603,7 @@ export type StockUncheckedUpdateWithoutItemInput = {
 export type StockUncheckedUpdateManyWithoutItemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
@@ -616,6 +649,7 @@ export type StockSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
       id?: boolean;
       quantity?: boolean;
       idItem?: boolean;
+      isDeleted?: boolean;
       createdAt?: boolean;
       updatedAt?: boolean;
       item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>;
@@ -632,6 +666,7 @@ export type StockSelectCreateManyAndReturn<
     id?: boolean;
     quantity?: boolean;
     idItem?: boolean;
+    isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
     item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>;
@@ -646,6 +681,7 @@ export type StockSelectUpdateManyAndReturn<
     id?: boolean;
     quantity?: boolean;
     idItem?: boolean;
+    isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
     item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>;
@@ -657,13 +693,14 @@ export type StockSelectScalar = {
   id?: boolean;
   quantity?: boolean;
   idItem?: boolean;
+  isDeleted?: boolean;
   createdAt?: boolean;
   updatedAt?: boolean;
 };
 
 export type StockOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
   runtime.Types.Extensions.GetOmit<
-    'id' | 'quantity' | 'idItem' | 'createdAt' | 'updatedAt',
+    'id' | 'quantity' | 'idItem' | 'isDeleted' | 'createdAt' | 'updatedAt',
     ExtArgs['result']['stock']
   >;
 export type StockInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
@@ -696,6 +733,7 @@ export type $StockPayload<
       id: string;
       quantity: runtime.Decimal;
       idItem: string;
+      isDeleted: boolean;
       createdAt: Date;
       updatedAt: Date | null;
     },
@@ -1222,6 +1260,7 @@ export interface StockFieldRefs {
   readonly id: Prisma.FieldRef<'Stock', 'String'>;
   readonly quantity: Prisma.FieldRef<'Stock', 'Decimal'>;
   readonly idItem: Prisma.FieldRef<'Stock', 'String'>;
+  readonly isDeleted: Prisma.FieldRef<'Stock', 'Boolean'>;
   readonly createdAt: Prisma.FieldRef<'Stock', 'DateTime'>;
   readonly updatedAt: Prisma.FieldRef<'Stock', 'DateTime'>;
 }

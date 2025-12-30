@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-import { getTypeItem } from '@/actions/items/get-items';
+import { getTypeItem } from '@/actions/type-item/get-type-item';
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import { ErrorAlert } from '../Components/ErrorAlert';

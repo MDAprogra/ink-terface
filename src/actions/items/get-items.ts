@@ -14,9 +14,12 @@ export async function getItems() {
   return items;
 }
 
-export async function getTypeItem() {
-  const typeItem = await prisma.itemType.findMany({
-    orderBy: { name: 'asc' },
-  });
-  return typeItem;
-}
+// export async function getTypeItem() {
+//   const typeItem = await prisma.itemType.findMany({
+//     where: {
+//       isDeleted: false,
+//     },
+//     orderBy: { name: 'asc' },
+//   });
+//   return typeItem;
+// }

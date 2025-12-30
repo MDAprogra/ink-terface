@@ -15,6 +15,7 @@ import {
 import { TableCell, TableRow } from '@/components/ui/table';
 
 import { TypeItemEdit } from '../Components/TypeItemEdit';
+import { DialogConfirmDelete } from './ConfirmDeleting';
 
 // On définit les props attendues
 interface ItemTypeRowProps {
@@ -27,6 +28,7 @@ interface ItemTypeRowProps {
 export const ItemTypeRow = ({ item }: ItemTypeRowProps) => {
   // ✅ Chaque ligne a maintenant son PROPRE état d'ouverture
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDeletingOpen, setIsDeletingOpen] = useState(false);
 
   return (
     <TableRow>
@@ -49,7 +51,7 @@ export const ItemTypeRow = ({ item }: ItemTypeRowProps) => {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem variant="destructive">
+              <DropdownMenuItem variant="destructive" onClick={() => setIsDeletingOpen(true)}>
                 <Trash2Icon className="mr-2 h-4 w-4" />
                 Supprimer
               </DropdownMenuItem>
@@ -59,6 +61,7 @@ export const ItemTypeRow = ({ item }: ItemTypeRowProps) => {
 
         {/* Le Sheet d'édition, lié à l'état local */}
         <TypeItemEdit item={item} open={isEditOpen} onOpenChange={setIsEditOpen} />
+        <DialogConfirmDelete item={item} open={isDeletingOpen} onOpenChange={setIsDeletingOpen} />
       </TableCell>
     </TableRow>
   );
