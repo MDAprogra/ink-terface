@@ -72,7 +72,11 @@ pre-commit:
       run: npx tsc --noEmit
 
 pre-push:
+  parallel: true
   commands:
     # 3. BUILD : La sécurité ultime avant d'envoyer
     build:
       run: npm run build
+    
+    knip:
+      run: npx knip
