@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { ItemTypeComponent } from './Contents/ItemTypeComponent';
 import { MovementTypeComponent } from './Contents/MovementTypeComponent';
+import { SupplierComponent } from './Contents/SupplierComponent';
 import { UnitComponent } from './Contents/UnitComponent';
 
 export default function SettingsPage() {
@@ -40,7 +41,7 @@ export default function SettingsPage() {
           <UnitComponent />
         </TabsContent>
         <TabsContent value="Supplier" className={contentAnimation}>
-          Change your password here.
+          <SupplierComponent />
         </TabsContent>
       </div>
     </Tabs>
