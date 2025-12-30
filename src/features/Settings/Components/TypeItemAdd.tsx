@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/sheet';
 
 export const TypeItemAdd = () => {
-  const [_open, setOpen] = useState(false); // Pour contrôler l'ouverture
+  const [open, setOpen] = useState(false); // Pour contrôler l'ouverture
   const [name, setName] = useState('');
 
   const queryClient = useQueryClient();
@@ -51,7 +51,7 @@ export const TypeItemAdd = () => {
   };
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="outline">Ajouter</Button>
       </SheetTrigger>
