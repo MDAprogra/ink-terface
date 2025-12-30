@@ -41,15 +41,38 @@
 #     - script: "hello.go"
 #       runner: go run
 
-pre-push:
-  commands:
-    check:
-      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
-      run: npx @biomejs/biome check --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {push_files}
+#V1 : Debut de projet
+# pre-push:
+#   commands:
+#     check:
+#       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+#       run: npx @biomejs/biome check --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {push_files}
 
+# pre-commit:
+#   commands:
+#     check:
+#       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+#       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+#       stage_fixed: true
+
+#V2 : Projet en avancement (30/12/2025)
 pre-commit:
+  parallel: true # Lance les commandes en parallèle pour gagner du temps
   commands:
-    check:
+    # 1. BIOME : Formatage et Linting (Rapide)
+    biome:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       stage_fixed: true
+    
+    # 2. TYPESCRIPT : Vérification des types (Indispensable)
+    types:
+      glob: "*.{ts,tsx}"
+      # On ne met pas {staged_files} car TSC doit connaître tout le projet pour valider les types
+      run: npx tsc --noEmit
+
+pre-push:
+  commands:
+    # 3. BUILD : La sécurité ultime avant d'envoyer
+    build:
+      run: npm run build
