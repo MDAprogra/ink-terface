@@ -9,6 +9,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Loading } from '@/features/Global/Loading';
 
+import { MVT_AddSheet } from './AddMovement';
+
 export function ListMovement() {
   // 1. La logique de récupération de données
   const { data, isLoading } = useQuery({
@@ -30,6 +32,7 @@ export function ListMovement() {
           {/* <Badge variant="secondary" className="text-sm px-4 py-1">
             {data?.length || 0} Mouvements
           </Badge> */}
+          <MVT_AddSheet />
         </CardHeader>
 
         <CardContent>
