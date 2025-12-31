@@ -1,25 +1,26 @@
 'use server'; // 👈 Très important
 
+import { toast } from 'sonner';
+
 import { prisma } from '@/lib/prisma';
 
 export async function getItems() {
-  // Tu peux ajouter une vérification d'authentification ici
-  const items = await prisma.item.findMany({
-    orderBy: { name: 'asc' },
-    include: {
-      unit: true, // Si tu veux récupérer les relations
-      supplier: true,
-    },
-  });
-  return items;
-}
+  try {
+    const items = await prisma.item.findMany({
+      orderBy: { name: 'asc' },
+      include: {
+        unit: true,
+        supplier: true,
+      },
+    });
 
-// export async function getTypeItem() {
-//   const typeItem = await prisma.itemType.findMany({
-//     where: {
-//       isDeleted: false,
-//     },
-//     orderBy: { name: 'asc' },
-//   });
-//   return typeItem;
-// }
+    const safeItems = items.map((item) => ({
+      ...item,
+      securityStock: item.securityStock ? item.securityStock.toNumber() : null,
+      purchasePrice: item.purchasePrice ? item.purchasePrice.toNumber() : null,
+    }));
+    return safeItems;
+  } catch (error) {
+    toast.error(`Erreur (getItems) : ${(error as Error).message}`);
+  }
+}

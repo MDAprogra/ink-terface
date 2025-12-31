@@ -9,9 +9,6 @@ export async function getSupplier() {
       isDeleted: false,
     },
     orderBy: { name: 'asc' },
-    include: {
-      items: true,
-    },
   });
   return suppliers;
 }
