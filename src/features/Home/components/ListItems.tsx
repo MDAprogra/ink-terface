@@ -105,7 +105,7 @@ export function ListItems() {
 
                     <TableCell className="text-center font-mono">
                       {item.securityStock !== null ? (
-                        <span className={Number(item.securityStock) < 5 ? 'text-red-500 font-bold' : ''}>
+                        <span className={Number(item.securityStock) > 5 ? 'text-red-500 font-bold' : ''}>
                           {Number(item.securityStock).toFixed(2)}
                           {/* Affichage conditionnel de l'unité */}
                           {/* @ts-ignore */}

@@ -6,6 +6,7 @@ import { PrismaClient } from '@/generated/prisma/client';
 import { seedItem } from './seeds/item';
 import { seedItemType } from './seeds/item_type';
 import { seedMovementType } from './seeds/movement_type';
+import { seedStocks } from './seeds/stock';
 import { seedSuppliers } from './seeds/supplier';
 import { seedUnits } from './seeds/unit';
 
@@ -26,6 +27,7 @@ async function main() {
   await seedMovementType(prisma);
   await seedItemType(prisma);
   await seedItem(prisma);
+  await seedStocks(prisma);
 
   console.log('✅ Seeds terminés avec succès.');
 }
