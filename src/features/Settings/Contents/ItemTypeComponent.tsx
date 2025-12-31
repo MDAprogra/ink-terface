@@ -7,8 +7,8 @@ import { getTypeItem } from '@/actions/type-item/get-type-item';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-import { ErrorAlert } from '../../global/ErrorAlert';
-import { Loading } from '../../global/Loading';
+import { ErrorAlert } from '../../Global/ErrorAlert';
+import { Loading } from '../../Global/Loading';
 import { TI_AddSheet } from '../Components/TypeItem/TI_AddSheet';
 import { ItemTypeRow } from '../Components/TypeItem/TI_Row';
 

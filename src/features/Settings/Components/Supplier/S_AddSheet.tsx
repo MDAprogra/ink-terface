@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { createSupplier } from '@/actions/supplier/create-supplier';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { AddSheet } from '@/features/global/AddSheet';
+import { AddSheet } from '@/features/Global/AddSheet';
 
 export const S_AddSheet = () => {
   const [name, setName] = useState('');

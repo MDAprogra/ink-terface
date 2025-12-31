@@ -17,9 +17,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { TableCell, TableRow } from '@/components/ui/table';
-import { EditSheet } from '@/features/global/EditSheet';
+import { EditSheet } from '@/features/Global/EditSheet';
 
-import { DialogConfirmDelete } from '../../../global/ConfirmDeleting';
+import { DialogConfirmDelete } from '../../../Global/ConfirmDeleting';
 
 // On définit les props attendues
 interface ItemTypeRowProps {

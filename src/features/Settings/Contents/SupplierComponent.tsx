@@ -7,8 +7,8 @@ import { getSupplier } from '@/actions/supplier/get-supplier';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-import { ErrorAlert } from '../../global/ErrorAlert';
-import { Loading } from '../../global/Loading';
+import { ErrorAlert } from '../../Global/ErrorAlert';
+import { Loading } from '../../Global/Loading';
 import { S_AddSheet } from '../Components/Supplier/S_AddSheet';
 import { S_Row } from '../Components/Supplier/S_Row';
 

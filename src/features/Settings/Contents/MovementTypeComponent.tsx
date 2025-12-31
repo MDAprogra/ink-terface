@@ -7,8 +7,8 @@ import { getMovementType } from '@/actions/movement-type/get-movement-type';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-import { ErrorAlert } from '../../global/ErrorAlert';
-import { Loading } from '../../global/Loading';
+import { ErrorAlert } from '../../Global/ErrorAlert';
+import { Loading } from '../../Global/Loading';
 import { MT_AddSheet } from '../Components/MovementType/MT_AddSheet';
 import { MovementTypeRow } from '../Components/MovementType/MT_Row';
 

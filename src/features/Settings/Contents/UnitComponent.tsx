@@ -6,8 +6,8 @@ import { ArrowLeftRight } from 'lucide-react';
 import { getUnit } from '@/actions/unit/get-unit';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ErrorAlert } from '@/features/global/ErrorAlert';
-import { Loading } from '@/features/global/Loading';
+import { ErrorAlert } from '@/features/Global/ErrorAlert';
+import { Loading } from '@/features/Global/Loading';
 
 import { U_AddSheet } from '../Components/Unit/U_AddSheet';
 import { UnitRow } from '../Components/Unit/U_Row';

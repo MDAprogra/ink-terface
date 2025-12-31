@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { createMovementType } from '@/actions/movement-type/create-movement-type';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { AddSheet } from '@/features/global/AddSheet';
+import { AddSheet } from '@/features/Global/AddSheet';
 
 export const MT_AddSheet = () => {
   const [name, setName] = useState('');
