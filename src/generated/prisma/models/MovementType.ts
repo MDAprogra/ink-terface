@@ -27,6 +27,7 @@ export type AggregateMovementType = {
 export type MovementTypeMinAggregateOutputType = {
   id: string | null;
   name: string | null;
+  isEntry: boolean | null;
   isDeleted: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;
@@ -35,6 +36,7 @@ export type MovementTypeMinAggregateOutputType = {
 export type MovementTypeMaxAggregateOutputType = {
   id: string | null;
   name: string | null;
+  isEntry: boolean | null;
   isDeleted: boolean | null;
   createdAt: Date | null;
   updatedAt: Date | null;
@@ -43,6 +45,7 @@ export type MovementTypeMaxAggregateOutputType = {
 export type MovementTypeCountAggregateOutputType = {
   id: number;
   name: number;
+  isEntry: number;
   isDeleted: number;
   createdAt: number;
   updatedAt: number;
@@ -52,6 +55,7 @@ export type MovementTypeCountAggregateOutputType = {
 export type MovementTypeMinAggregateInputType = {
   id?: true;
   name?: true;
+  isEntry?: true;
   isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
@@ -60,6 +64,7 @@ export type MovementTypeMinAggregateInputType = {
 export type MovementTypeMaxAggregateInputType = {
   id?: true;
   name?: true;
+  isEntry?: true;
   isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
@@ -68,6 +73,7 @@ export type MovementTypeMaxAggregateInputType = {
 export type MovementTypeCountAggregateInputType = {
   id?: true;
   name?: true;
+  isEntry?: true;
   isDeleted?: true;
   createdAt?: true;
   updatedAt?: true;
@@ -150,6 +156,7 @@ export type MovementTypeGroupByArgs<
 export type MovementTypeGroupByOutputType = {
   id: string;
   name: string;
+  isEntry: boolean | null;
   isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date | null;
@@ -176,6 +183,7 @@ export type MovementTypeWhereInput = {
   NOT?: Prisma.MovementTypeWhereInput | Prisma.MovementTypeWhereInput[];
   id?: Prisma.StringFilter<'MovementType'> | string;
   name?: Prisma.StringFilter<'MovementType'> | string;
+  isEntry?: Prisma.BoolNullableFilter<'MovementType'> | boolean | null;
   isDeleted?: Prisma.BoolFilter<'MovementType'> | boolean;
   createdAt?: Prisma.DateTimeFilter<'MovementType'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableFilter<'MovementType'> | Date | string | null;
@@ -185,6 +193,7 @@ export type MovementTypeWhereInput = {
 export type MovementTypeOrderByWithRelationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isEntry?: Prisma.SortOrderInput | Prisma.SortOrder;
   isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
@@ -198,6 +207,7 @@ export type MovementTypeWhereUniqueInput = Prisma.AtLeast<
     AND?: Prisma.MovementTypeWhereInput | Prisma.MovementTypeWhereInput[];
     OR?: Prisma.MovementTypeWhereInput[];
     NOT?: Prisma.MovementTypeWhereInput | Prisma.MovementTypeWhereInput[];
+    isEntry?: Prisma.BoolNullableFilter<'MovementType'> | boolean | null;
     isDeleted?: Prisma.BoolFilter<'MovementType'> | boolean;
     createdAt?: Prisma.DateTimeFilter<'MovementType'> | Date | string;
     updatedAt?: Prisma.DateTimeNullableFilter<'MovementType'> | Date | string | null;
@@ -209,6 +219,7 @@ export type MovementTypeWhereUniqueInput = Prisma.AtLeast<
 export type MovementTypeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isEntry?: Prisma.SortOrderInput | Prisma.SortOrder;
   isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
@@ -223,6 +234,7 @@ export type MovementTypeScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MovementTypeScalarWhereWithAggregatesInput | Prisma.MovementTypeScalarWhereWithAggregatesInput[];
   id?: Prisma.StringWithAggregatesFilter<'MovementType'> | string;
   name?: Prisma.StringWithAggregatesFilter<'MovementType'> | string;
+  isEntry?: Prisma.BoolNullableWithAggregatesFilter<'MovementType'> | boolean | null;
   isDeleted?: Prisma.BoolWithAggregatesFilter<'MovementType'> | boolean;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'MovementType'> | Date | string;
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'MovementType'> | Date | string | null;
@@ -231,6 +243,7 @@ export type MovementTypeScalarWhereWithAggregatesInput = {
 export type MovementTypeCreateInput = {
   id?: string;
   name: string;
+  isEntry?: boolean | null;
   isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
@@ -240,6 +253,7 @@ export type MovementTypeCreateInput = {
 export type MovementTypeUncheckedCreateInput = {
   id?: string;
   name: string;
+  isEntry?: boolean | null;
   isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
@@ -249,6 +263,7 @@ export type MovementTypeUncheckedCreateInput = {
 export type MovementTypeUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isEntry?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null;
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -258,6 +273,7 @@ export type MovementTypeUpdateInput = {
 export type MovementTypeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isEntry?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null;
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -267,6 +283,7 @@ export type MovementTypeUncheckedUpdateInput = {
 export type MovementTypeCreateManyInput = {
   id?: string;
   name: string;
+  isEntry?: boolean | null;
   isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
@@ -275,6 +292,7 @@ export type MovementTypeCreateManyInput = {
 export type MovementTypeUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isEntry?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null;
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -283,6 +301,7 @@ export type MovementTypeUpdateManyMutationInput = {
 export type MovementTypeUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isEntry?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null;
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -291,6 +310,7 @@ export type MovementTypeUncheckedUpdateManyInput = {
 export type MovementTypeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isEntry?: Prisma.SortOrder;
   isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
@@ -299,6 +319,7 @@ export type MovementTypeCountOrderByAggregateInput = {
 export type MovementTypeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isEntry?: Prisma.SortOrder;
   isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
@@ -307,6 +328,7 @@ export type MovementTypeMaxOrderByAggregateInput = {
 export type MovementTypeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
+  isEntry?: Prisma.SortOrder;
   isDeleted?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
@@ -315,6 +337,10 @@ export type MovementTypeMinOrderByAggregateInput = {
 export type MovementTypeScalarRelationFilter = {
   is?: Prisma.MovementTypeWhereInput;
   isNot?: Prisma.MovementTypeWhereInput;
+};
+
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null;
 };
 
 export type MovementTypeCreateNestedOneWithoutMovementsInput = {
@@ -346,6 +372,7 @@ export type MovementTypeUpdateOneRequiredWithoutMovementsNestedInput = {
 export type MovementTypeCreateWithoutMovementsInput = {
   id?: string;
   name: string;
+  isEntry?: boolean | null;
   isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
@@ -354,6 +381,7 @@ export type MovementTypeCreateWithoutMovementsInput = {
 export type MovementTypeUncheckedCreateWithoutMovementsInput = {
   id?: string;
   name: string;
+  isEntry?: boolean | null;
   isDeleted?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string | null;
@@ -390,6 +418,7 @@ export type MovementTypeUpdateToOneWithWhereWithoutMovementsInput = {
 export type MovementTypeUpdateWithoutMovementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isEntry?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null;
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -398,6 +427,7 @@ export type MovementTypeUpdateWithoutMovementsInput = {
 export type MovementTypeUncheckedUpdateWithoutMovementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
+  isEntry?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null;
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -444,6 +474,7 @@ export type MovementTypeSelect<
   {
     id?: boolean;
     name?: boolean;
+    isEntry?: boolean;
     isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
@@ -459,6 +490,7 @@ export type MovementTypeSelectCreateManyAndReturn<
   {
     id?: boolean;
     name?: boolean;
+    isEntry?: boolean;
     isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
@@ -472,6 +504,7 @@ export type MovementTypeSelectUpdateManyAndReturn<
   {
     id?: boolean;
     name?: boolean;
+    isEntry?: boolean;
     isDeleted?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
@@ -482,6 +515,7 @@ export type MovementTypeSelectUpdateManyAndReturn<
 export type MovementTypeSelectScalar = {
   id?: boolean;
   name?: boolean;
+  isEntry?: boolean;
   isDeleted?: boolean;
   createdAt?: boolean;
   updatedAt?: boolean;
@@ -490,7 +524,7 @@ export type MovementTypeSelectScalar = {
 export type MovementTypeOmit<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  'id' | 'name' | 'isDeleted' | 'createdAt' | 'updatedAt',
+  'id' | 'name' | 'isEntry' | 'isDeleted' | 'createdAt' | 'updatedAt',
   ExtArgs['result']['movementType']
 >;
 export type MovementTypeInclude<
@@ -517,6 +551,7 @@ export type $MovementTypePayload<
     {
       id: string;
       name: string;
+      isEntry: boolean | null;
       isDeleted: boolean;
       createdAt: Date;
       updatedAt: Date | null;
@@ -1033,6 +1068,7 @@ export interface Prisma__MovementTypeClient<
 export interface MovementTypeFieldRefs {
   readonly id: Prisma.FieldRef<'MovementType', 'String'>;
   readonly name: Prisma.FieldRef<'MovementType', 'String'>;
+  readonly isEntry: Prisma.FieldRef<'MovementType', 'Boolean'>;
   readonly isDeleted: Prisma.FieldRef<'MovementType', 'Boolean'>;
   readonly createdAt: Prisma.FieldRef<'MovementType', 'DateTime'>;
   readonly updatedAt: Prisma.FieldRef<'MovementType', 'DateTime'>;

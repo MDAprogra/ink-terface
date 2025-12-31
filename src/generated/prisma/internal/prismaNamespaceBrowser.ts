@@ -100,6 +100,7 @@ export type UnitScalarFieldEnum = (typeof UnitScalarFieldEnum)[keyof typeof Unit
 export const MovementTypeScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  isEntry: 'isEntry',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',

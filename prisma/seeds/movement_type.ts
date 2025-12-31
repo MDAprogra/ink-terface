@@ -8,15 +8,10 @@ export const seedMovementType = async (prisma: PrismaClient) => {
   const movements_types = [
     {
       name: 'Entrée',
+      isEntry: true,
     },
     {
       name: 'Sortie',
-    },
-    {
-      name: 'Ajustement',
-    },
-    {
-      name: 'Inventaire',
     },
   ];
 

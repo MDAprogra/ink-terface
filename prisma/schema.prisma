@@ -38,6 +38,7 @@ model Unit {
 model MovementType {
   id   String @id @default(cuid())
   name String @unique
+  isEntry Boolean? @default(false)
   
   isDeleted Boolean @default(false)
 
