@@ -1,7 +1,6 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { toast } from 'sonner';
 
 import { getStock } from '@/actions/stock/get-stock';
 import { Badge } from '@/components/ui/badge';
@@ -11,16 +10,13 @@ import { Loading } from '@/features/Global/Loading';
 
 export function ListStock() {
   // 1. La logique de récupération de données
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['stocks'],
     queryFn: () => getStock(),
   });
 
   if (isLoading) {
     return <Loading />;
-  }
-  if (error) {
-    toast.error(`Erreur : Le composant n'a pas réussi à récupérer les données ${error}`);
   }
 
   return (

@@ -1,3 +1,5 @@
-export default function MovementPage() {
-  return <h1>Bientôt des mouvements</h1>;
+import MovementPage from '@/features/Movement/MovementPage';
+
+export default async function Movement() {
+  return <MovementPage />;
 }
