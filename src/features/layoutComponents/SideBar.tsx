@@ -11,7 +11,7 @@ import { authClient } from '@/lib/auth-client';
 const menuItems = [
   { label: 'Accueil', icon: Home, href: '/app' },
   { label: 'Catalogue', icon: BookOpenText, href: '/app/catalogue' },
-  { label: 'Stock', icon: Package, href: '/app/profile' },
+  { label: 'Stock', icon: Package, href: '/app/stock' },
   { label: 'Mouvements', icon: ArrowLeftRight, href: '/app/notifications' },
   { label: 'Paramètres', icon: Settings, href: '/app/settings' },
 ];
