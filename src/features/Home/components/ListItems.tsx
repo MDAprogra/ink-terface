@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { AlertCircle, Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { getItems } from '@/actions/items/get-items';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -19,6 +20,7 @@ const formatCurrency = (value: number | string | null) => {
 };
 
 export function ListItems() {
+  const router = useRouter();
   // 1. La logique de récupération de données
   const { data, isLoading, error } = useQuery({
     queryKey: ['items'],
@@ -85,7 +87,11 @@ export function ListItems() {
 
                 {/* La boucle d'affichage */}
                 {data?.map((item) => (
-                  <TableRow key={item.id}>
+                  <TableRow
+                    key={item.id}
+                    className="cursor-pointer hover:bg-muted/50 transition-colors"
+                    onClick={() => router.push(`/app/catalogue/${item.reference}`)}
+                  >
                     <TableCell className="font-medium">
                       <div className="flex flex-col">
                         <span>{item.name}</span>

@@ -66,6 +66,7 @@ export const seedItem = async (prisma: PrismaClient) => {
         color: item.color,
         active: item.active,
         purchasePrice: item.purchasePrice,
+        reference: item.reference,
 
         // 1. Liaison avec ItemType
         type: {

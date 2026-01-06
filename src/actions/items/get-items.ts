@@ -1,7 +1,5 @@
 'use server'; // 👈 Très important
 
-import { toast } from 'sonner';
-
 import { prisma } from '@/lib/prisma';
 
 export async function getItems() {
@@ -21,6 +19,7 @@ export async function getItems() {
     }));
     return safeItems;
   } catch (error) {
-    toast.error(`Erreur (getItems) : ${(error as Error).message}`);
+    console.log('Erreur (getItems) :', error);
+    return [];
   }
 }
