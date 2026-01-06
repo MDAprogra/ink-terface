@@ -19,13 +19,19 @@ import { cn } from '@/lib/utils';
 
 interface MVT_AddSheetProps {
   pIdItem?: string;
+  isOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 type NewMovementForm = Pick<Movement, 'idStock' | 'idMovementType' | 'idUser'> & {
   quantity: number;
 };
 
-export const MVT_AddSheet = ({ pIdItem }: MVT_AddSheetProps) => {
+export const MVT_AddSheet = ({
+  pIdItem,
+  isOpen, // Peut être undefined
+  onOpenChange, // Peut être undefined
+}: MVT_AddSheetProps) => {
   const { data: session } = authClient.useSession();
   const { data } = useQuery({
     queryKey: ['setting_movementType'],
@@ -43,6 +49,31 @@ export const MVT_AddSheet = ({ pIdItem }: MVT_AddSheetProps) => {
     idMovementType: '',
     idUser: session?.user.id ?? '',
   });
+
+  React.useEffect(() => {
+    // On ne fait rien si pas d'ID scanné ou si les données ne sont pas encore chargées
+    if (!pIdItem || !dataStk) return;
+
+    // CAS 1 : On cherche si l'ID scanné correspond directement à un ID de STOCK
+    let foundStock = dataStk.find((s) => s.id === pIdItem);
+
+    // CAS 2 : Si pas trouvé, on cherche si l'ID scanné correspond à un ID d'ARTICLE (Item)
+    // (C'est souvent ce qu'on veut : on scanne le produit, on trouve le stock associé)
+    if (!foundStock) {
+      foundStock = dataStk.find((s) => s.item.id === pIdItem); // ou s.itemId selon ton schéma
+    }
+
+    if (foundStock) {
+      console.log('✅ Stock trouvé pour le scan :', foundStock.item.name);
+      setFormData((prev) => ({
+        ...prev,
+        idStock: foundStock.id, // On stocke bien l'ID du STOCK, pas de l'item
+        quantity: 0,
+      }));
+    } else {
+      console.log('⚠️ ID scanné introuvable dans la liste des stocks :', pIdItem);
+    }
+  }, [pIdItem, dataStk]); // 👈 IMPORTANT : On ré-exécute quand les données arrivent
   const [openMvt, setOpenMvt] = React.useState(false);
   const [openStk, setOpenStk] = React.useState(false);
 
@@ -53,6 +84,8 @@ export const MVT_AddSheet = ({ pIdItem }: MVT_AddSheetProps) => {
   const unitLabel = selectedStock?.item?.unit?.symbol || selectedStock?.item?.unit?.name || '';
   return (
     <AddSheet
+      open={isOpen}
+      onOpenChange={onOpenChange}
       title="Faire un nouveau mouvement"
       queryKey={['movements', 'stocks']} // On invalide aussi les stocks
       mutationFn={() => createMovement(formData)}

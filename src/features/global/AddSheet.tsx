@@ -27,6 +27,10 @@ interface AddSheetProps {
 
   children: ReactNode;
   isSubmitDisabled?: boolean;
+
+  // PROPS POUR LE SCAN (Mode Contrôlé)
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export const AddSheet = ({
@@ -38,20 +42,48 @@ export const AddSheet = ({
   onReset,
   children,
   isSubmitDisabled = false,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
 }: AddSheetProps) => {
-  const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
+
+  // 1. STATE INTERNE (Pour usage classique avec bouton)
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  // 2. LOGIQUE HYBRIDE
+  // On vérifie si la prop 'open' est passée (mode Scan/Contrôlé)
+  const isControlled = controlledOpen !== undefined;
+
+  // La valeur réelle de l'ouverture (soit celle du parent, soit celle interne)
+  const isOpen = isControlled ? controlledOpen : internalOpen;
+
+  // Le wrapper pour gérer la fermeture
+  const handleOpenChange = (newOpen: boolean) => {
+    if (isControlled && controlledOnOpenChange) {
+      // Mode Scan : on prévient le parent
+      controlledOnOpenChange(newOpen);
+    } else {
+      // Mode Bouton : on gère nous-mêmes
+      setInternalOpen(newOpen);
+    }
+
+    // Reset du formulaire à la fermeture (avec petit délai pour l'animation)
+    if (!newOpen && onReset) {
+      setTimeout(() => onReset(), 300);
+    }
+  };
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: mutationFn,
     onSuccess: () => {
-      setOpen(false);
+      // ✅ CORRECTION : On utilise notre wrapper, pas un setOpen local
+      handleOpenChange(false);
       queryClient.invalidateQueries({ queryKey });
       onReset();
       toast.info('Ajout réussi !');
     },
-    onError: (err) => {
-      toast.error(err.message);
+    onError: (err: Error) => {
+      toast.error(err.message || 'Une erreur est survenue');
     },
   });
 
@@ -61,10 +93,17 @@ export const AddSheet = ({
   };
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button variant="outline">{triggerLabel}</Button>
-      </SheetTrigger>
+    // ✅ CORRECTION : On lie les props calculées ici
+    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
+      {/* ✅ CORRECTION TRIGGER : 
+         On n'affiche le bouton que si on n'est PAS en mode contrôlé.
+         Si c'est le scanner qui pilote (isControlled), on ne veut pas de bouton visible.
+      */}
+      {!isControlled && (
+        <SheetTrigger asChild>
+          <Button variant="outline">{triggerLabel}</Button>
+        </SheetTrigger>
+      )}
 
       <SheetContent>
         <form onSubmit={handleSubmit} className="h-full flex flex-col">
@@ -90,10 +129,12 @@ export const AddSheet = ({
           <SheetFooter className="mt-auto">
             <Button type="submit" disabled={isPending || isSubmitDisabled}>
               {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {triggerLabel}
+              Valider
             </Button>
+
             <SheetClose asChild>
-              <Button variant="outline" type="button" onClick={() => setOpen(false)} disabled={isPending}>
+              {/* ✅ CORRECTION : Le bouton Annuler ferme via le wrapper */}
+              <Button variant="outline" type="button" onClick={() => handleOpenChange(false)} disabled={isPending}>
                 Annuler
               </Button>
             </SheetClose>
