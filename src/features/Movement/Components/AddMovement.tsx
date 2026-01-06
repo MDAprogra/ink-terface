@@ -67,7 +67,6 @@ export const MVT_AddSheet = ({ pIdItem }: MVT_AddSheetProps) => {
       isSubmitDisabled={formData.quantity <= 0 || !formData.idMovementType || !formData.idStock || !session?.user}
     >
       <div className="grid gap-4 py-4">
-        {/* --- SELECTEUR TYPE MOUVEMENT --- */}
         <div className="grid gap-2">
           <Label>Type de mouvement</Label>
           <Popover open={openMvt} onOpenChange={setOpenMvt}>
@@ -109,8 +108,6 @@ export const MVT_AddSheet = ({ pIdItem }: MVT_AddSheetProps) => {
             </PopoverContent>
           </Popover>
         </div>
-
-        {/* --- SELECTEUR STOCK (ARTICLE) --- */}
         <div className="grid gap-2">
           <Label>Article concerné</Label>
           <Popover open={openStk} onOpenChange={setOpenStk}>
