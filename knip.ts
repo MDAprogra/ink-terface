@@ -23,6 +23,7 @@ const config: KnipConfig = {
     'tailwindcss',
     '@faker-js/faker', // On l'ignore car utilisé seulement dans le seed (qui est hors src/app)
     'postcss', // On l'ignore pour éviter l'erreur "Unlisted"
+    '@radix-ui/react-select',
   ],
 };
 
