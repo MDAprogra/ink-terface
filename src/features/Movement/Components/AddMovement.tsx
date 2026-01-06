@@ -87,7 +87,10 @@ export const MVT_AddSheet = ({
       open={isOpen}
       onOpenChange={onOpenChange}
       title="Faire un nouveau mouvement"
-      queryKey={['movements', 'stocks']} // On invalide aussi les stocks
+      invalidateKeys={[
+        ['movements'], // Rafraîchit l'historique des mouvements
+        ['stocks'], // Rafraîchit les quantités en stock
+      ]}
       mutationFn={() => createMovement(formData)}
       onReset={() =>
         setFormData({

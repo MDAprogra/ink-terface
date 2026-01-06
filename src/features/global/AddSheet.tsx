@@ -21,7 +21,9 @@ interface AddSheetProps {
   title: string;
   description?: string;
 
-  queryKey: string[];
+  queryKey?: string[];
+  invalidateKeys?: string[][];
+
   mutationFn: () => Promise<unknown>;
   onReset: () => void;
 
@@ -38,6 +40,7 @@ export const AddSheet = ({
   title,
   description = "Veuillez vérifier que l'enregistrement n'existe pas déjà.",
   queryKey,
+  invalidateKeys,
   mutationFn,
   onReset,
   children,
@@ -78,7 +81,16 @@ export const AddSheet = ({
     onSuccess: () => {
       // ✅ CORRECTION : On utilise notre wrapper, pas un setOpen local
       handleOpenChange(false);
-      queryClient.invalidateQueries({ queryKey });
+      if (queryKey) {
+        queryClient.invalidateQueries({ queryKey });
+      }
+
+      // 2. Gestion des multiples clés (Pour ton cas Mouvements + Stocks)
+      if (invalidateKeys) {
+        invalidateKeys.forEach((key) => {
+          queryClient.invalidateQueries({ queryKey: key });
+        });
+      }
       onReset();
       toast.info('Ajout réussi !');
     },

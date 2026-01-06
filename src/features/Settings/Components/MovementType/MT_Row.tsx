@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { deleteMovementType } from '@/actions/movement-type/delete-movement-type';
 import { editMovementType } from '@/actions/movement-type/edit-movement-type';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,6 +27,7 @@ interface MovementTypeRowProps {
   movement: {
     id: string;
     name: string;
+    isEntry: boolean;
   };
 }
 
@@ -34,11 +36,13 @@ export const MovementTypeRow = ({ movement }: MovementTypeRowProps) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeletingOpen, setIsDeletingOpen] = useState(false);
   const [name, setName] = useState(movement.name);
+  const [isEntry, setIsEntry] = useState(movement.isEntry);
   useEffect(() => {
     if (isEditOpen) {
       setName(movement.name);
+      setIsEntry(movement.isEntry);
     }
-  }, [isEditOpen, movement.name]);
+  }, [isEditOpen, movement.name, movement.isEntry]);
 
   return (
     <TableRow>
@@ -73,12 +77,19 @@ export const MovementTypeRow = ({ movement }: MovementTypeRowProps) => {
           onOpenChange={setIsEditOpen}
           title={`Modifier "${movement.name}"`}
           queryKey={['setting_movementType']}
-          mutationFn={() => editMovementType(name, movement.id)}
-          isSubmitDisabled={name === movement.name || name.length < 2}
+          mutationFn={() =>
+            editMovementType({
+              m_name: name,
+              m_id: movement.id,
+              m_isEntry: isEntry,
+            })
+          }
+          isSubmitDisabled={(name === movement.name && isEntry === movement.isEntry) || name.length < 2}
         >
           <div className="grid gap-2">
             <Label htmlFor={`edit-name-${movement.id}`}>Nom</Label>
             <Input id={`edit-name-${movement.id}`} value={name} onChange={(e) => setName(e.target.value)} />
+            <Checkbox id="isEntry" checked={isEntry} onCheckedChange={(checked) => setIsEntry(checked as boolean)} />
           </div>
         </EditSheet>
         <DialogConfirmDelete

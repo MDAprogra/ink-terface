@@ -3,8 +3,14 @@
 import { Prisma } from '@/generated/prisma/client';
 import { prisma } from '@/lib/prisma';
 
-export async function editMovementType(m_name: string, m_id: string) {
-  if (!m_name && !m_id) {
+interface valueParam {
+  m_name: string;
+  m_id: string;
+  m_isEntry: boolean;
+}
+
+export async function editMovementType(value: valueParam) {
+  if (!value.m_name && !value.m_id) {
     throw new Error("Récupération de l'enregistrement impossible : Veuillez réessayer !");
   }
 
@@ -13,10 +19,11 @@ export async function editMovementType(m_name: string, m_id: string) {
     // Vérifie bien le nom de ton modèle dans schema.prisma (ex: ItemType ou TypeItem)
     const editedMovementType = await prisma.movementType.update({
       where: {
-        id: m_id,
+        id: value.m_id,
       },
       data: {
-        name: m_name,
+        name: value.m_name,
+        isEntry: value.m_isEntry,
       },
     });
 
