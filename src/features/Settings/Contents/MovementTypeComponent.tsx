@@ -49,7 +49,7 @@ export const MovementTypeComponent = () => {
                   </TableRow>
                 )}
                 {data?.map((item) => (
-                  <MovementTypeRow key={item.id} movement={item} />
+                  <MovementTypeRow key={item.id} movement={{ ...item, isEntry: item.isEntry ?? false }} />
                 ))}
               </TableBody>
             </Table>

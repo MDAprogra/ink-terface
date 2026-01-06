@@ -27,7 +27,7 @@ interface MovementTypeRowProps {
   movement: {
     id: string;
     name: string;
-    isEntry: boolean;
+    isEntry: boolean | null;
   };
 }
 
@@ -36,11 +36,11 @@ export const MovementTypeRow = ({ movement }: MovementTypeRowProps) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeletingOpen, setIsDeletingOpen] = useState(false);
   const [name, setName] = useState(movement.name);
-  const [isEntry, setIsEntry] = useState(movement.isEntry);
+  const [isEntry, setIsEntry] = useState(movement.isEntry ?? false);
   useEffect(() => {
     if (isEditOpen) {
       setName(movement.name);
-      setIsEntry(movement.isEntry);
+      setIsEntry(movement.isEntry ?? false);
     }
   }, [isEditOpen, movement.name, movement.isEntry]);
 
