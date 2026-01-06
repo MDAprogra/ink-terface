@@ -3,7 +3,11 @@
 import type { Movement } from '@/generated/prisma/client';
 import { prisma } from '@/lib/prisma';
 
-export async function createMovement(movement: Movement) {
+type NewMovementParam = Pick<Movement, 'idStock' | 'idMovementType' | 'idUser'> & {
+  quantity: number;
+};
+
+export async function createMovement(movement: NewMovementParam) {
   // 1. Validation basique des données
   if (!movement || !movement.quantity) {
     throw new Error('Données incorrectes : quantité manquante !');
