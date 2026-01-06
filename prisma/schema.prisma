@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -16,10 +10,10 @@ datasource db {
 model Supplier {
   id   String @id @default(cuid())
   name String @unique
-  
-  isDeleted Boolean @default(false)
+
+  isDeleted Boolean   @default(false)
   items     Item[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
 
@@ -27,38 +21,39 @@ model Unit {
   id   String @id @default(cuid())
   name String @unique
   code String @unique
-  
+
   isDeleted Boolean @default(false)
 
   items     Item[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
 
 model MovementType {
-  id   String @id @default(cuid())
-  name String @unique
+  id      String   @id @default(cuid())
+  name    String   @unique
   isEntry Boolean? @default(false)
-  
+
   isDeleted Boolean @default(false)
 
   movements Movement[]
   createdAt DateTime   @default(now())
-  updatedAt DateTime?   @updatedAt
+  updatedAt DateTime?  @updatedAt
 }
 
 model ItemType {
-  id    String @id @default(cuid())
-  name  String @unique
-  isDeleted Boolean @default(false)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime?   @updatedAt
-  items Item[]
+  id        String    @id @default(cuid())
+  name      String    @unique
+  isDeleted Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  items     Item[]
 }
 
 model Item {
   id            String   @id @default(cuid())
-  name          String @unique
+  reference     String   @unique @db.VarChar(10)
+  name          String   @unique
   description   String?
   securityStock Decimal  @default(0)
   shelfLife     Int?
@@ -74,10 +69,10 @@ model Item {
   unit     Unit     @relation(fields: [idUnit], references: [id])
   supplier Supplier @relation(fields: [idSupplier], references: [id])
 
-  stocks    Stock[]
-  
-  isDeleted Boolean @default(false)
-  createdAt DateTime @default(now())
+  stocks Stock[]
+
+  isDeleted Boolean   @default(false)
+  createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
 
@@ -91,9 +86,9 @@ model Stock {
 
   movements Movement[]
 
-  isDeleted Boolean @default(false)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime?   @updatedAt
+  isDeleted Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model Movement {
@@ -107,10 +102,10 @@ model Movement {
   user         User         @relation(fields: [idUser], references: [id])
   stock        Stock        @relation(fields: [idStock], references: [id])
   movementType MovementType @relation(fields: [idMovementType], references: [id])
-  
-  isDeleted Boolean @default(false)
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime?     @updatedAt
+
+  isDeleted Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model User {
@@ -120,7 +115,7 @@ model User {
   emailVerified Boolean    @default(false)
   image         String?
   createdAt     DateTime   @default(now())
-  updatedAt     DateTime?   @updatedAt
+  updatedAt     DateTime?  @updatedAt
   sessions      Session[]
   accounts      Account[]
   movements     Movement[]
@@ -130,15 +125,15 @@ model User {
 }
 
 model Session {
-  id        String   @id
+  id        String    @id
   expiresAt DateTime
   token     String
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
   ipAddress String?
   userAgent String?
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([token])
   @@index([userId])
@@ -159,18 +154,18 @@ model Account {
   scope                 String?
   password              String?
   createdAt             DateTime  @default(now())
-  updatedAt             DateTime?  @updatedAt
+  updatedAt             DateTime? @updatedAt
 
   @@index([userId])
   @@map("account")
 }
 
 model Verification {
-  id         String   @id
+  id         String    @id
   identifier String
   value      String
   expiresAt  DateTime
-  createdAt  DateTime @default(now())
+  createdAt  DateTime  @default(now())
   updatedAt  DateTime? @updatedAt
 
   @@index([identifier])

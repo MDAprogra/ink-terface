@@ -9,6 +9,7 @@ export const seedItem = async (prisma: PrismaClient) => {
     // FLEXO
     {
       name: 'FLEXOCURE GLOSS TTR VARNISH 5KG',
+      reference: 'FLEXTTRVA5',
       description: null,
       color: '',
       active: true,
@@ -19,6 +20,7 @@ export const seedItem = async (prisma: PrismaClient) => {
     },
     {
       name: 'EKOCURE PROCESS BLUE - 5.5Kg',
+      reference: 'EKOPROBL55',
       description: null,
       color: '',
       active: true,
@@ -29,6 +31,7 @@ export const seedItem = async (prisma: PrismaClient) => {
     },
     {
       name: 'BLANC COUVRANT OPALE - 7 Kg',
+      reference: 'BLCCOUVOP7',
       description: null,
       color: '',
       active: true,
@@ -39,6 +42,7 @@ export const seedItem = async (prisma: PrismaClient) => {
     },
     {
       name: 'TRANSPARENT WHITE HRL - 3Kg',
+      reference: 'TRANSWHRL3',
       description: null,
       color: '',
       active: true,
