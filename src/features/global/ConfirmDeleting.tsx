@@ -19,9 +19,10 @@ interface TypeItemEditProps {
   onOpenChange: (open: boolean) => void;
   queryKey: string[];
   action: (name: string) => Promise<unknown>;
+  onSuccess?: () => void;
 }
 
-export function DialogConfirmDelete({ item, open, onOpenChange, queryKey, action }: TypeItemEditProps) {
+export function DialogConfirmDelete({ item, open, onOpenChange, queryKey, action, onSuccess }: TypeItemEditProps) {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: async () => {
@@ -31,6 +32,9 @@ export function DialogConfirmDelete({ item, open, onOpenChange, queryKey, action
       queryClient.invalidateQueries({ queryKey: queryKey });
       onOpenChange(false);
       toast.warning(`L'élément suivant à été supprimé : ${item.name}`);
+      if (onSuccess) {
+        onSuccess();
+      }
     },
     onError: (err) => {
       toast.error(err.message);

@@ -1,6 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 import { getStock } from '@/actions/stock/get-stock';
 import { Badge } from '@/components/ui/badge';
@@ -9,6 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Loading } from '@/features/Global/Loading';
 
 export function ListStock() {
+  const router = useRouter();
   // 1. La logique de récupération de données
   const { data, isLoading } = useQuery({
     queryKey: ['stocks'],
@@ -54,7 +56,11 @@ export function ListStock() {
 
                 {/* La boucle d'affichage */}
                 {data?.map((stock) => (
-                  <TableRow key={stock.id}>
+                  <TableRow
+                    key={stock.id}
+                    className="cursor-pointer hover:bg-muted/50 transition-colors"
+                    onClick={() => router.push(`/app/catalogue/${stock.item.reference}`)}
+                  >
                     <TableCell className="font-medium">
                       <div className="flex flex-col">
                         <span>{stock.item.name}</span>

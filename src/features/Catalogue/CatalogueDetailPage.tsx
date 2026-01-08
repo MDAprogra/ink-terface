@@ -5,14 +5,16 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { Check, ChevronsUpDown } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
+import { deleteItem } from '@/actions/items/delete-item';
 import { editItem } from '@/actions/items/edit-item';
 import { getItemRef } from '@/actions/items/get-item-ref';
 import { getSupplier } from '@/actions/supplier/get-supplier';
-import { deleteTypeItem } from '@/actions/type-item/delete-type-item';
 import { getTypeItem } from '@/actions/type-item/get-type-item';
 import { getUnit } from '@/actions/unit/get-unit';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ButtonGroup } from '@/components/ui/button-group';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
@@ -32,6 +34,7 @@ interface CatalogueDetailProps {
 }
 
 export default function CatalogueDetailPage({ reference }: CatalogueDetailProps) {
+  const router = useRouter();
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeletingOpen, setIsDeletingOpen] = useState(false);
   const [openTypeItem, setOpenTypeItem] = React.useState(false);
@@ -112,6 +115,13 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
                 {data.unit.name} ({data.unit.code})
               </strong>
             </i>
+            <Badge
+              title={cn(data.isDeleted ? 'Inactif (Supprimé)' : 'Actif')}
+              className={cn(
+                'h-5 min-w-5 rounded-full px-1 font-mono tabular-nums',
+                data.isDeleted ? 'bg-red-600' : 'bg-green-600',
+              )}
+            />
           </div>
           <div className="flex flex-col text-sm justify-end text-right">
             <i>Créé le : {format(new Date(data.createdAt), 'dd MMMM yyyy à HH:mm', { locale: fr })}</i>
@@ -203,8 +213,9 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
         item={data}
         open={isDeletingOpen}
         onOpenChange={setIsDeletingOpen}
-        action={deleteTypeItem}
+        action={deleteItem}
         queryKey={['items', reference]}
+        onSuccess={() => router.push('/app/catalogue')}
       />
       {editedData && (
         <EditSheet

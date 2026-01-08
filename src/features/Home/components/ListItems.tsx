@@ -71,6 +71,7 @@ export function ListItems() {
                 <TableRow>
                   <TableHead className="w-75">Nom du produit</TableHead>
                   <TableHead>Description</TableHead>
+                  <TableHead className="text-center">Quantité en Stock</TableHead>
                   <TableHead className="text-center">Stock Sécurité</TableHead>
                   <TableHead className="text-right">Prix d'achat</TableHead>
                 </TableRow>
@@ -109,6 +110,25 @@ export function ListItems() {
                       {item.description || <span className="italic opacity-50 text-xs">N/A</span>}
                     </TableCell>
 
+                    <TableCell className="text-center font-mono">
+                      {item.stocks !== null ? (
+                        // {data.stocks.reduce((total, stock) => total + stock.quantity, 0)}
+                        <span
+                          className={
+                            Number(item.stocks.reduce((total, stock) => total + stock.quantity, 0)) === 0
+                              ? 'text-red-500'
+                              : ''
+                          }
+                        >
+                          {Number(item.stocks.reduce((total, stock) => total + stock.quantity, 0)).toFixed(2)}
+                          {/* Affichage conditionnel de l'unité */}
+                          {/* @ts-ignore */}
+                          <span className="text-xs text-muted-foreground ml-1">{item.unit?.name}</span>
+                        </span>
+                      ) : (
+                        '-'
+                      )}
+                    </TableCell>
                     <TableCell className="text-center font-mono">
                       {item.securityStock !== null ? (
                         <span className={Number(item.securityStock) > 5 ? 'text-red-500 font-bold' : ''}>

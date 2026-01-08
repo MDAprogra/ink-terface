@@ -5,10 +5,14 @@ import { prisma } from '@/lib/prisma';
 export async function getItems() {
   try {
     const items = await prisma.item.findMany({
+      where: {
+        isDeleted: false,
+      },
       orderBy: { name: 'asc' },
       include: {
         unit: true,
         supplier: true,
+        stocks: true,
       },
     });
 
@@ -16,6 +20,11 @@ export async function getItems() {
       ...item,
       securityStock: item.securityStock ? item.securityStock.toNumber() : null,
       purchasePrice: item.purchasePrice ? item.purchasePrice.toNumber() : null,
+
+      stocks: item.stocks.map((stock) => ({
+        ...stock,
+        quantity: stock.quantity?.toNumber() ?? 0,
+      })),
     }));
     return safeItems;
   } catch (error) {

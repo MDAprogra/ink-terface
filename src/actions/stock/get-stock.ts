@@ -5,6 +5,9 @@ import { prisma } from '@/lib/prisma';
 export async function getStock() {
   try {
     const stocks = await prisma.stock.findMany({
+      where: {
+        quantity: { gt: 0 },
+      },
       orderBy: { createdAt: 'asc' },
       include: {
         item: {
