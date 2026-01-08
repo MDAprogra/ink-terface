@@ -9,7 +9,15 @@ export async function getItemRef(reference: string) {
       include: {
         unit: true,
         supplier: true,
-        stocks: true, // ⚠️ Attention ici
+        stocks: {
+          include: {
+            movements: {
+              include: { movementType: true },
+              orderBy: { createdAt: 'desc' },
+              take: 5,
+            },
+          },
+        }, // ⚠️ Attention ici
         type: true,
       },
     });
@@ -26,6 +34,11 @@ export async function getItemRef(reference: string) {
       stocks: item.stocks.map((stock) => ({
         ...stock,
         quantity: stock.quantity?.toNumber() ?? 0,
+        movements: stock.movements.map((movement) => ({
+          ...movement,
+          // Conversion du Decimal en Number
+          quantity: movement.quantity?.toNumber() ?? 0,
+        })),
       })),
     };
 
