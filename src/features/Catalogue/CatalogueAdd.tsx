@@ -99,7 +99,7 @@ export default function CatalogueAdd() {
         <Button variant="outline">Ajouter un article</Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-106.25 max-h-[90vh] overflow-y-auto">
         {/* Le formulaire enveloppe tout le contenu */}
         <form onSubmit={onSubmit}>
           <DialogHeader>
@@ -157,7 +157,7 @@ export default function CatalogueAdd() {
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[300px] p-0" align="start">
+                <PopoverContent className="w-75 p-0" align="start">
                   <Command>
                     <CommandInput placeholder="Rechercher..." />
                     <CommandList>
@@ -198,7 +198,7 @@ export default function CatalogueAdd() {
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[300px] p-0" align="start">
+                <PopoverContent className="w-75 p-0" align="start">
                   <Command>
                     <CommandInput placeholder="Rechercher..." />
                     <CommandList>
@@ -241,7 +241,7 @@ export default function CatalogueAdd() {
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[300px] p-0" align="start">
+                <PopoverContent className="w-75 p-0" align="start">
                   <Command>
                     <CommandInput placeholder="Rechercher..." />
                     <CommandList>
