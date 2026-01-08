@@ -9,6 +9,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import CatalogueAdd from '@/features/Catalogue/CatalogueAdd';
 
 // Utilitaire de formatage
 const formatCurrency = (value: number | string | null) => {
@@ -55,13 +56,21 @@ export function ListItems() {
     <div className="p-6">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+          {/* Partie Gauche : Titre et Description */}
           <div className="space-y-1">
             <CardTitle className="text-2xl font-bold">Catalogue des produits</CardTitle>
             <CardDescription>Gérez votre inventaire et vos stocks d'encres.</CardDescription>
           </div>
-          <Badge variant="secondary" className="text-sm px-4 py-1">
-            {data?.length || 0} Produits
-          </Badge>
+
+          {/* Partie Droite : Badge et Bouton d'ajout */}
+          <div className="flex items-center gap-4">
+            <Badge variant="secondary" className="text-sm px-4 py-1">
+              {data?.length || 0} Produits
+            </Badge>
+
+            {/* Intégration ici */}
+            <CatalogueAdd />
+          </div>
         </CardHeader>
 
         <CardContent>
