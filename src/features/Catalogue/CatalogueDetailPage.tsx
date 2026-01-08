@@ -27,7 +27,9 @@ import { cn } from '@/lib/utils';
 import { DialogConfirmDelete } from '../Global/ConfirmDeleting';
 import { EditSheet } from '../Global/EditSheet';
 import { ErrorAlert } from '../Global/ErrorAlert';
+import { ItemBarcode } from '../Global/ItemBarcode';
 import { Loading } from '../Global/Loading';
+import { PrintableLabel } from '../Global/PrintableLabel';
 
 interface CatalogueDetailProps {
   reference: string;
@@ -208,6 +210,8 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
           </div>
         </div>
       </div>
+      <ItemBarcode value={reference} />
+      <PrintableLabel reference={reference} name={data.name} />
 
       <DialogConfirmDelete
         item={data}

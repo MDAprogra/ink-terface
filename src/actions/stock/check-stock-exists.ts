@@ -2,12 +2,16 @@
 
 import { prisma } from '@/lib/prisma'; // Adapte selon ton chemin d'import prisma
 
-export const checkStockExists = async (idItem: string) => {
-  if (!idItem) return false;
+export const checkStockExists = async (referenceItem: string) => {
+  if (!referenceItem) return false;
 
   try {
-    const stock = await prisma.stock.findUnique({
-      where: { idItem },
+    const stock = await prisma.stock.findFirst({
+      where: {
+        item: {
+          reference: referenceItem,
+        },
+      },
       select: { idItem: true }, // On sélectionne juste l'ID pour optimiser la perf
     });
 

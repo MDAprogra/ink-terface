@@ -16,6 +16,7 @@ export const useBarcodeScanner = ({ onScan, minChars = 3 }: UseBarcodeScannerPro
       // 1. Si touche ENTREE : on valide le scan
       if (e.key === 'Enter') {
         const currentBuffer = buffer.current;
+        console.log(currentBuffer);
 
         // Si le buffer n'est pas vide (évite les déclenchements fantômes)
         if (currentBuffer.length >= minChars) {
