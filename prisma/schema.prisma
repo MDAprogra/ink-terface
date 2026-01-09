@@ -120,8 +120,34 @@ model User {
   accounts      Account[]
   movements     Movement[]
 
+  role   Role?   @relation(fields: [roleId], references: [id])
+  roleId String?
+
   @@unique([email])
   @@map("user")
+}
+
+model Role {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  description String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  users       User[]
+  permissions Permission[]
+}
+
+model Permission {
+  id          String  @id @default(cuid())
+  action      String  @unique
+  description String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  roles Role[]
 }
 
 model Session {
