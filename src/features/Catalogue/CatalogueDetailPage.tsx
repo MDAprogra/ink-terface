@@ -231,6 +231,7 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
             if (!editedData) throw new Error('Aucune donnée à modifier');
             return editItem({
               e_id: editedData.id,
+              e_reference: editedData.reference,
               e_name: editedData.name,
               e_description: editedData.description ?? '',
               e_color: editedData.color ?? '',
@@ -249,6 +250,14 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
               id={`edit-name-${data.id}`} // J'ai mis data.id car data.name peut changer et faire perdre le focus
               value={editedData.name} // Utilise bien editedData ici aussi !
               onChange={(e) => setEditedData({ ...editedData, name: e.target.value })}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor={`edit-ref-${data.id}`}>Référence</Label>
+            <Input
+              id={`edit-ref-${data.id}`} // J'ai mis data.id car data.name peut changer et faire perdre le focus
+              value={editedData.reference} // Utilise bien editedData ici aussi !
+              onChange={(e) => setEditedData({ ...editedData, reference: e.target.value })}
             />
           </div>
           <div className="grid gap-2">

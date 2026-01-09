@@ -13,6 +13,7 @@ interface valueParams {
   e_idSupplier: string;
   e_idUnit: string;
   e_idTypeItem: string;
+  e_reference: string;
 }
 
 export async function editItem(value: valueParams) {
@@ -34,6 +35,7 @@ export async function editItem(value: valueParams) {
         idSupplier: value.e_idSupplier,
         idUnit: value.e_idUnit,
         idTypeItem: value.e_idTypeItem,
+        reference: value.e_reference,
       },
     });
     return { success: true, data: editedMovement };
