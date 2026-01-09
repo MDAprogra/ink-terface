@@ -14,6 +14,7 @@ export const GlobalScanListener = () => {
 
   // Fonction appelée quand le scan est détecté par le Hook
   const handleScan = async (code: string) => {
+    console.log(code);
     // On lance la vérification serveur avec un feedback visuel
     toast.promise(checkStockExists(code), {
       loading: 'Vérification du code...',
