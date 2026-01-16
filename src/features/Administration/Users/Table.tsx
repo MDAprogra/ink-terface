@@ -28,12 +28,14 @@ export function UsersTable() {
     {
       label: 'Email',
       name: 'email',
+      type: 'email',
       placeholder: 'email@interfas.fr',
       required: true,
     },
     {
       label: 'Mot de passe',
       name: 'password',
+      type: 'password',
       placeholder: '********',
       required: true,
     },
