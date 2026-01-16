@@ -1,6 +1,6 @@
 'use server';
 
-import { createId } from '@paralleldrive/cuid2';
+import { APIError } from 'better-auth';
 import { revalidatePath } from 'next/cache';
 
 import { auth } from '@/lib/auth';
@@ -52,6 +52,7 @@ export async function updateUserRole(userId: string, roleId: string) {
 
 type CreateUserInput = {
   name: string;
+  firstName: string;
   email: string;
   password: string;
   roleId: string;
@@ -60,7 +61,8 @@ type CreateUserInput = {
 export async function createUser(data: CreateUserInput) {
   //await requirePermission("view:admin"); // Idéalement une permission "role:create"
 
-  const { name, email, password, roleId } = data;
+  const { name, firstName, email, password, roleId } = data;
+  const fullName = `${firstName} ${name.toLocaleUpperCase()}`;
   const defaultPassword = password || 'ChangeMoi123!';
 
   try {
@@ -68,7 +70,7 @@ export async function createUser(data: CreateUserInput) {
       body: {
         email,
         password: defaultPassword,
-        name,
+        name: fullName,
       },
       asResponse: false,
     });
@@ -78,12 +80,38 @@ export async function createUser(data: CreateUserInput) {
     });
 
     revalidatePath('/app/admin/users');
-    return { success: true, email: email };
-  } catch (e: any) {
-    console.error('Erreur création user:', e);
+    return { success: true, email: email, user: newUserResponse };
+  } catch (e) {
+    if (e instanceof APIError) {
+      // Better Auth met souvent le message utilisateur dans 'body.message'
+      return { success: false, error: e.body?.message || e.message };
+    }
 
-    const errorMessage = e.body?.message || e.message || "Impossible de créer l'utilisateur.";
+    if (e instanceof Error) {
+      return { success: false, error: e.message };
+    }
 
-    return { success: false, error: errorMessage };
+    return { success: false, error: 'Erreur interne du serveur' };
+  }
+}
+
+export async function setIsInactive(id: string, vIsInactive: boolean) {
+  try {
+    await prisma.user.update({
+      where: { id: id },
+      data: { isInactive: vIsInactive },
+    });
+    return { success: true };
+  } catch (e) {
+    if (e instanceof APIError) {
+      // Better Auth met souvent le message utilisateur dans 'body.message'
+      return { success: false, error: e.body?.message || e.message };
+    }
+
+    if (e instanceof Error) {
+      return { success: false, error: e.message };
+    }
+
+    return { success: false, error: 'Erreur interne du serveur' };
   }
 }

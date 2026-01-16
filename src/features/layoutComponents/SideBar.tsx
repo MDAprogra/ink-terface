@@ -25,7 +25,7 @@ const menuItems = [
   { label: 'Catalogue', icon: BookOpenText, href: '/app/catalogue' },
   { label: 'Stock', icon: Package, href: '/app/stock' },
   { label: 'Mouvements', icon: ArrowLeftRight, href: '/app/movement' },
-  { label: 'Paramètres', icon: Settings, href: '/app/settings' },
+  // { label: 'Paramètres', icon: Settings, href: '/app/settings' },
 ];
 
 export function UserMenu() {
@@ -90,6 +90,17 @@ export function UserMenu() {
         {isAdmin && (
           <>
             <div className="my-2 border-t border-gray-100 dark:border-gray-800" />
+            <Button
+              variant={pathname.startsWith('/app/settings') ? 'secondary' : 'ghost'}
+              asChild
+              className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+            >
+              <Link href="/app/settings">
+                <ShieldCheck className="h-4 w-4" />
+                <span>Paramètres</span>
+              </Link>
+            </Button>
+
             <Button
               variant={pathname.startsWith('/app/admin') ? 'secondary' : 'ghost'}
               asChild

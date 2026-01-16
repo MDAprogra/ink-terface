@@ -116,6 +116,7 @@ model User {
   image         String?
   createdAt     DateTime   @default(now())
   updatedAt     DateTime?  @updatedAt
+  isInactive    Boolean    @default(false)
   sessions      Session[]
   accounts      Account[]
   movements     Movement[]
