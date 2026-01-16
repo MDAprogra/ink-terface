@@ -12,12 +12,18 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import PopUpAdd, { type AddFieldConfig } from '../Components/PopUpAdd';
 
 export function UsersTable() {
+  const { data: allRoles = [] } = useQuery({
+    // " = []" assure que ce n'est jamais undefined
+    queryKey: ['admin_roles'],
+    queryFn: () => getAllRoles(), // Ton server action
+  });
   const roleFields: AddFieldConfig[] = [
     {
       label: 'Prénom & NOM',
       name: 'name', // Important: c'est la clé de l'objet
       placeholder: 'Ex: Matthias DAUVEL',
       required: true,
+      type: 'text',
     },
     {
       label: 'Email',
@@ -30,6 +36,16 @@ export function UsersTable() {
       name: 'password',
       placeholder: '********',
       required: true,
+    },
+    {
+      label: 'Rôle',
+      name: 'roleId',
+      type: 'select',
+      required: true,
+      options: allRoles.map((role) => ({
+        label: role.name,
+        value: role.id,
+      })),
     },
   ];
   const [isPending, startTransition] = useTransition();

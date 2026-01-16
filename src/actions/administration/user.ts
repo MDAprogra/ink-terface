@@ -54,18 +54,16 @@ type CreateUserInput = {
   name: string;
   email: string;
   password: string;
+  roleId: string;
 };
 
 export async function createUser(data: CreateUserInput) {
   //await requirePermission("view:admin"); // Idéalement une permission "role:create"
 
-  const { name, email, password } = data;
+  const { name, email, password, roleId } = data;
   const defaultPassword = password || 'ChangeMoi123!';
-  //if (!name || !email) return { success: false, error: "Le nom et l'email sont requis" };
 
   try {
-    // 1. TENTATIVE DE CRÉATION
-    // Si ça échoue (ex: email déjà pris), Better Auth VA STOPPER ICI et aller dans le "catch"
     const newUserResponse = await auth.api.signUpEmail({
       body: {
         email,
@@ -74,16 +72,16 @@ export async function createUser(data: CreateUserInput) {
       },
       asResponse: false,
     });
+    await prisma.user.update({
+      where: { email },
+      data: { roleId: roleId },
+    });
 
     revalidatePath('/app/admin/users');
-    return { success: true };
+    return { success: true, email: email };
   } catch (e: any) {
-    // 3. GESTION DES ERREURS
-    // Better Auth renvoie souvent l'erreur dans e.body.message ou e.message
-
     console.error('Erreur création user:', e);
 
-    // On essaie de récupérer le message précis de Better Auth (ex: "User already exists")
     const errorMessage = e.body?.message || e.message || "Impossible de créer l'utilisateur.";
 
     return { success: false, error: errorMessage };
