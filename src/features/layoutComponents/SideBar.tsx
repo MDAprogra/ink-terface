@@ -4,9 +4,9 @@ import {
   ArrowLeftRight,
   BookOpenText,
   Home,
+  LogIn,
   LogOut,
   Package,
-  Settings,
   ShieldCheck, // Icône pour l'admin
   User,
 } from 'lucide-react';
@@ -147,8 +147,14 @@ export function UserMenu() {
             </Button>
           </>
         ) : (
-          /* Cas rare (normalement géré par le middleware), mais on laisse au cas où */
-          <div className="text-center text-xs text-muted-foreground py-2">Non connecté</div>
+          <Button
+            variant="outline"
+            className="w-full justify-start gap-2 border-dashed text-muted-foreground hover:text-foreground hover:border-solid"
+            onClick={() => router.push('/sign-in')}
+          >
+            <LogIn className="h-4 w-4" />
+            <span>Se connecter</span>
+          </Button>
         )}
       </div>
     </div>
