@@ -16,20 +16,20 @@ export function UsersTable() {
     {
       label: 'Prénom & NOM',
       name: 'name', // Important: c'est la clé de l'objet
-      placeholder: 'EX: Matthias DAUVEL',
+      placeholder: 'Ex: Matthias DAUVEL',
       required: true,
     },
     {
       label: 'Email',
-      name: 'description',
-      placeholder: 'Accès complet au catalogue...',
-      required: false,
+      name: 'email',
+      placeholder: 'email@interfas.fr',
+      required: true,
     },
     {
-      label: 'Role',
-      name: 'role',
-      placeholder: 'Définition du role...',
-      required: false,
+      label: 'Mot de passe',
+      name: 'password',
+      placeholder: '********',
+      required: true,
     },
   ];
   const [isPending, startTransition] = useTransition();
@@ -71,10 +71,10 @@ export function UsersTable() {
     <>
       <div className="flex justify-end">
         <PopUpAdd
-          triggerLabel="Nouveau Rôle"
-          title="Créer un nouveau rôle"
+          triggerLabel="Nouvel utilisateur"
+          title="Créer un nouvel utilisateur"
           fields={roleFields}
-          queryKey={['admin_roles']}
+          queryKey={['admin_users']}
           action={createUser}
         />
       </div>

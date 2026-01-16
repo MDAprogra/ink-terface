@@ -3,14 +3,9 @@
 import { createId } from '@paralleldrive/cuid2';
 import { revalidatePath } from 'next/cache';
 
+import { auth } from '@/lib/auth';
 import { requirePermission } from '@/lib/auth-guard';
 import { prisma } from '@/lib/prisma';
-
-type CreateUserInput = {
-  name: string;
-  email: string;
-  roleId: string;
-};
 
 export async function getUsers() {
   //TODO: A décommenter une fois les roles et permissions
@@ -55,25 +50,42 @@ export async function updateUserRole(userId: string, roleId: string) {
   }
 }
 
+type CreateUserInput = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 export async function createUser(data: CreateUserInput) {
   //await requirePermission("view:admin"); // Idéalement une permission "role:create"
 
-  const { name, email, roleId: role_id } = data;
-
-  if (!name || !email) return { success: false, error: "Le nom et l'email sont requis" };
+  const { name, email, password } = data;
+  const defaultPassword = password || 'ChangeMoi123!';
+  //if (!name || !email) return { success: false, error: "Le nom et l'email sont requis" };
 
   try {
-    await prisma.user.create({
-      data: {
-        id: createId(),
-        name: name,
-        email: email,
-        roleId: role_id,
+    // 1. TENTATIVE DE CRÉATION
+    // Si ça échoue (ex: email déjà pris), Better Auth VA STOPPER ICI et aller dans le "catch"
+    const newUserResponse = await auth.api.signUpEmail({
+      body: {
+        email,
+        password: defaultPassword,
+        name,
       },
+      asResponse: false,
     });
-    //revalidatePath("/app/admin/roles");
+
+    revalidatePath('/app/admin/users');
     return { success: true };
-  } catch (_e) {
-    return { success: false, error: 'Erreur lors de la création (Email déjà utilisée?)' };
+  } catch (e: any) {
+    // 3. GESTION DES ERREURS
+    // Better Auth renvoie souvent l'erreur dans e.body.message ou e.message
+
+    console.error('Erreur création user:', e);
+
+    // On essaie de récupérer le message précis de Better Auth (ex: "User already exists")
+    const errorMessage = e.body?.message || e.message || "Impossible de créer l'utilisateur.";
+
+    return { success: false, error: errorMessage };
   }
 }
