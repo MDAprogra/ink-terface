@@ -30,7 +30,6 @@ export function UsersTable() {
     queryKey: ['admin_users'],
     queryFn: () => getUsers(),
   });
-  const [isPending, startTransition] = useTransition();
 
   const roleFields: AddFieldConfig[] = [
     {
