@@ -1,8 +1,10 @@
 'use server';
 
+import { requirePermission } from '@/lib/auth-guard';
 import { prisma } from '@/lib/prisma';
 
 export async function getItemRef(reference: string) {
+  const _session = await requirePermission('catalog', 'read');
   try {
     const item = await prisma.item.findUnique({
       where: { reference },

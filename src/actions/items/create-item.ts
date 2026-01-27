@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'; // ⚠️ Important pour rafraîchir la liste
 
+import { requirePermission } from '@/lib/auth-guard';
 import { prisma } from '@/lib/prisma';
 
 interface newItemProps {
@@ -18,6 +19,7 @@ interface newItemProps {
 }
 
 export async function createItem(n_item: newItemProps) {
+  const _session = await requirePermission('catalog', 'create');
   try {
     // 1. On crée l'item directement (pas besoin de transaction)
     const newItem = await prisma.item.create({

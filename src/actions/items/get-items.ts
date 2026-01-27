@@ -1,8 +1,10 @@
 'use server'; // 👈 Très important
 
+import { requirePermission } from '@/lib/auth-guard';
 import { prisma } from '@/lib/prisma';
 
 export async function getItems() {
+  const _session = await requirePermission('catalog', 'read');
   try {
     const items = await prisma.item.findMany({
       where: {

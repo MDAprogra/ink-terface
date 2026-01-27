@@ -1,6 +1,7 @@
 'use server';
 
 import { Prisma } from '@/generated/prisma/client';
+import { requirePermission } from '@/lib/auth-guard';
 import { prisma } from '@/lib/prisma';
 
 interface valueParams {
@@ -17,6 +18,8 @@ interface valueParams {
 }
 
 export async function editItem(value: valueParams) {
+  const _session = await requirePermission('catalog', 'update');
+
   if (!value.e_id) {
     throw new Error("L'id transmit est incorrect");
   }
