@@ -32,7 +32,6 @@ const formatCurrency = (value: number | string | null) => {
 };
 
 export function ListItems() {
-  const { data: session, isPending } = authClient.useSession();
   const router = useRouter();
 
   // 1. La logique de récupération de données
@@ -40,15 +39,6 @@ export function ListItems() {
     queryKey: ['items'],
     queryFn: () => getItems(),
   });
-
-  if (session) {
-    const userRole = session.user.role as OrgRole;
-    const roleConfig = ORG_ROLES[userRole];
-
-    const canAdd = (roleConfig as any).authorize({
-      catalog: ['create'],
-    });
-  }
   // 2. Gestion du chargement (Spinner centré)
   if (isLoading) {
     return (
