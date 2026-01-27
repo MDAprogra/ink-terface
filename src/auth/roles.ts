@@ -3,7 +3,7 @@ import { adminAc, defaultStatements } from 'better-auth/plugins/organization/acc
 
 const statement = {
   ...defaultStatements,
-  catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete'],
+  catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete', 'label'],
   organization: ['update', 'delete', 'read'],
   member: ['create', 'update', 'delete', 'read'],
   invitation: ['create', 'cancel', 'read'],
@@ -28,7 +28,7 @@ const manager = ac.newRole({
 });
 
 const admin = ac.newRole({
-  catalog: ['read', 'edit', 'create', 'update', 'soft-delete'],
+  catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'label'],
 
   organization: ['read', 'update'],
   member: ['read', 'update', 'delete'],
@@ -36,11 +36,11 @@ const admin = ac.newRole({
 });
 
 const developer = ac.newRole({
-  catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete'],
+  catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete', 'label'],
   ...adminAc.statements,
 });
 const owner = ac.newRole({
-  catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete'],
+  catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete', 'label'],
   ...adminAc.statements,
 });
 
