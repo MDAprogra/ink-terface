@@ -5,7 +5,6 @@ import { AlertCircle, Loader2, Lock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import { getItems } from '@/actions/items/get-items';
-import { ORG_ROLES, type OrgRole } from '@/auth/roles';
 import { PermissionGuard } from '@/components/auth/permission-guard';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
@@ -20,7 +19,6 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import CatalogueAdd from '@/features/Catalogue/CatalogueAdd';
-import { authClient } from '@/lib/auth-client';
 
 // Utilitaire de formatage
 const formatCurrency = (value: number | string | null) => {
