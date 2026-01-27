@@ -23,18 +23,23 @@ import { cn } from '@/lib/utils'; // Utilitaire classique de Shadcn pour fusionn
 const menuItems = [
   { label: 'Accueil', icon: Home, href: '/app', exact: true }, // exact: true pour l'accueil uniquement
   { label: 'Catalogue', icon: BookOpenText, href: '/app/catalogue' },
-  { label: 'Stock', icon: Package, href: '/app/stock' },
-  { label: 'Mouvements', icon: ArrowLeftRight, href: '/app/movement' },
-  // { label: 'Paramètres', icon: Settings, href: '/app/settings' },
+  {
+    label: 'Stock',
+    icon: Package,
+    href: '/app/stock',
+    roles: ['admin', 'manager', 'developer', 'owner'],
+  },
+  {
+    label: 'Mouvements',
+    icon: ArrowLeftRight,
+    href: '/app/movement',
+    roles: ['admin', 'manager', 'developer', 'owner'],
+  },
 ];
 
 export function UserMenu() {
   const { data: session, isPending } = authClient.useSession();
-  const userPermissions = ((session?.user as any)?.permissions as string[]) || [];
 
-  const hasPermission = (permission: string) => {
-    return userPermissions.includes(permission);
-  };
   const router = useRouter();
   const pathname = usePathname();
 
@@ -58,15 +63,18 @@ export function UserMenu() {
     );
   }
 
+  const filteredMenuItems = menuItems.filter((item) => {
+    if (!item.roles || item.roles.length === 0) return true;
+    if (!session?.user?.role) return false;
+    return item.roles.includes(session.user.role);
+  });
+
   return (
     <div className="flex flex-col h-full w-full">
       {/* --- NAVIGATION --- */}
       <nav className="flex-1 flex flex-col gap-1 p-2">
         {/* Liste standard */}
-        {menuItems.map((item) => {
-          // 2. Logique "Actif" intelligente
-          // Si 'exact' est true, on vérifie l'égalité stricte.
-          // Sinon, on vérifie si l'URL actuelle *commence* par le href du lien (pour les sous-pages).
+        {filteredMenuItems.map((item) => {
           const isActive = item.exact ? pathname === item.href : pathname.startsWith(item.href);
 
           return (
@@ -80,7 +88,9 @@ export function UserMenu() {
               )}
             >
               <Link href={item.href}>
-                <item.icon className={cn('h-4 w-4', isActive ? 'text-primary' : 'text-muted-foreground')} />
+                <item.icon
+                  className={cn('h-4 w-4', isActive ? 'text-primary' : 'text-muted-foreground')}
+                />
                 <span>{item.label}</span>
               </Link>
             </Button>
@@ -89,51 +99,31 @@ export function UserMenu() {
 
         <div className="my-2 border-t border-gray-100 dark:border-gray-800" />
 
-        <Button
-          variant={pathname.startsWith('/app/settings') ? 'secondary' : 'ghost'}
-          asChild
-          className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
-        >
-          <Link href="/app/settings">
-            <ShieldCheck className="h-4 w-4" />
-            <span>Paramètres</span>
-          </Link>
-        </Button>
+        {session && ['owner', 'developer', 'admin'].includes(session.user.role || '') && (
+          <>
+            <Button
+              variant={pathname.startsWith('/app/settings') ? 'secondary' : 'ghost'}
+              asChild
+              className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+            >
+              <Link href="/app/settings">
+                <ShieldCheck className="h-4 w-4" />
+                <span>Paramètres</span>
+              </Link>
+            </Button>
 
-        <Button
-          variant={pathname.startsWith('/app/admin') ? 'secondary' : 'ghost'}
-          asChild
-          className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
-        >
-          <Link href="/app/admin">
-            <ShieldCheck className="h-4 w-4" />
-            <span>Administration</span>
-          </Link>
-        </Button>
-
-        {/* <div className="my-2 border-t border-gray-100 dark:border-gray-800" />
-
-        <Button
-          variant={pathname.startsWith('/app/settings') ? 'secondary' : 'ghost'}
-          asChild
-          className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
-        >
-          <Link href="/app/settings">
-            <ShieldCheck className="h-4 w-4" />
-            <span>Paramètres</span>
-          </Link>
-        </Button>
-
-        <Button
-          variant={pathname.startsWith('/app/admin') ? 'secondary' : 'ghost'}
-          asChild
-          className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
-        >
-          <Link href="/app/admin">
-            <ShieldCheck className="h-4 w-4" />
-            <span>Administration</span>
-          </Link>
-        </Button> */}
+            <Button
+              variant={pathname.startsWith('/app/admin') ? 'secondary' : 'ghost'}
+              asChild
+              className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+            >
+              <Link href="/app/admin">
+                <ShieldCheck className="h-4 w-4" />
+                <span>Administration</span>
+              </Link>
+            </Button>
+          </>
+        )}
       </nav>
 
       {/* --- FOOTER UTILISATEUR --- */}
@@ -148,7 +138,12 @@ export function UserMenu() {
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col min-w-0">
-                <span className="text-sm font-medium truncate">{session.user.name}</span>
+                <span className="text-sm font-medium truncate">
+                  {session.user.name}{' '}
+                  <span className="text-xs text-muted-foreground truncate">
+                    {session.user.role}
+                  </span>
+                </span>
                 <span className="text-xs text-muted-foreground truncate" title={session.user.email}>
                   {session.user.email}
                 </span>
