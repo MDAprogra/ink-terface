@@ -4,7 +4,7 @@ import { Decimal } from '@prisma/client/runtime/client';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { Check, ChevronsUpDown, Lock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -14,10 +14,18 @@ import { getItemRef } from '@/actions/items/get-item-ref';
 import { getSupplier } from '@/actions/supplier/get-supplier';
 import { getTypeItem } from '@/actions/type-item/get-type-item';
 import { getUnit } from '@/actions/unit/get-unit';
+import { PermissionGuard } from '@/components/auth/permission-guard';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ButtonGroup } from '@/components/ui/button-group';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -92,12 +100,36 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
   return (
     <>
       <ButtonGroup className="ml-auto">
-        <Button variant="outline" onClick={() => setIsEditOpen(true)}>
-          Modifier
-        </Button>
-        <Button variant="outline" onClick={() => setIsDeletingOpen(true)} className="hover:bg-red-600 hover:text-white">
-          Supprimer
-        </Button>
+        <PermissionGuard
+          resource="catalog"
+          action="edit"
+          fallback={
+            <Button variant="outline" disabled className="opacity-50 cursor-not-allowed">
+              <Lock className="w-4 h-4 mr-2" /> Création Impossible
+            </Button>
+          }
+        >
+          <Button variant="outline" onClick={() => setIsEditOpen(true)}>
+            Modifier
+          </Button>
+        </PermissionGuard>
+        <PermissionGuard
+          resource="catalog"
+          action="soft-delete"
+          fallback={
+            <Button variant="outline" disabled className="opacity-50 cursor-not-allowed">
+              <Lock className="w-4 h-4 mr-2" /> Suppression Impossible
+            </Button>
+          }
+        >
+          <Button
+            variant="outline"
+            onClick={() => setIsDeletingOpen(true)}
+            className="hover:bg-red-600 hover:text-white"
+          >
+            Supprimer
+          </Button>
+        </PermissionGuard>
       </ButtonGroup>
       <div className="flex-col">
         <div className="flex flex-row justify-between w-full border-b-2 border-gray-400 mb-3">
@@ -126,10 +158,14 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
             />
           </div>
           <div className="flex flex-col text-sm justify-end text-right">
-            <i>Créé le : {format(new Date(data.createdAt), 'dd MMMM yyyy à HH:mm', { locale: fr })}</i>
+            <i>
+              Créé le : {format(new Date(data.createdAt), 'dd MMMM yyyy à HH:mm', { locale: fr })}
+            </i>
             <i>
               Mise à jour le :{' '}
-              {data.updatedAt ? format(new Date(data.updatedAt), 'dd MMMM yyyy à HH:mm', { locale: fr }) : ''}
+              {data.updatedAt
+                ? format(new Date(data.updatedAt), 'dd MMMM yyyy à HH:mm', { locale: fr })
+                : ''}
             </i>
           </div>
         </div>
@@ -176,7 +212,9 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
             <h1 className="text-xl">Stock et Mouvements :</h1>
             <div>
               <h3 className="underline font-semibold">Stock :</h3>
-              <span className="text-gray-600">{data.stocks.reduce((total, stock) => total + stock.quantity, 0)}</span>
+              <span className="text-gray-600">
+                {data.stocks.reduce((total, stock) => total + stock.quantity, 0)}
+              </span>
             </div>
 
             <div>
@@ -210,8 +248,10 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
           </div>
         </div>
       </div>
-      <ItemBarcode value={reference} />
-      <PrintableLabel reference={reference} name={data.name} />
+      <PermissionGuard resource="catalog" action="label">
+        <ItemBarcode value={reference} />
+        <PrintableLabel reference={reference} name={data.name} />
+      </PermissionGuard>
 
       <DialogConfirmDelete
         item={data}
@@ -221,6 +261,7 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
         queryKey={['items', reference]}
         onSuccess={() => router.push('/app/catalogue')}
       />
+
       {editedData && (
         <EditSheet
           open={isEditOpen}
@@ -333,7 +374,10 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
               placeholder="Renseignez une couleur (Optionnelle)"
               onChange={(e) => {
                 const val = e.target.value;
-                setEditedData({ ...editedData, securityStock: val ? new Decimal(val) : new Decimal(0) });
+                setEditedData({
+                  ...editedData,
+                  securityStock: val ? new Decimal(val) : new Decimal(0),
+                });
               }}
             />
           </div>
@@ -355,7 +399,12 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
             <Label htmlFor={`edit-unit-${data.id}`}>Unité</Label>
             <Popover open={openUnit} onOpenChange={setOpenUnit}>
               <PopoverTrigger asChild>
-                <Button variant="outline" role="combobox" aria-expanded={openUnit} className="w-full justify-between">
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={openUnit}
+                  className="w-full justify-between"
+                >
                   {editedData.idUnit
                     ? d_unit?.find((unit) => unit.id === editedData.idUnit)?.name
                     : 'Choisir une unité...'}
