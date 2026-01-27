@@ -3,10 +3,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import { Lock } from 'lucide-react';
 
 import { getMovement } from '@/actions/movement/get-movement';
+import { PermissionGuard } from '@/components/auth/permission-guard';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { Loading } from '@/features/Global/Loading';
 
 import { MVT_AddSheet } from './AddMovement';
@@ -32,7 +42,17 @@ export function ListMovement() {
           {/* <Badge variant="secondary" className="text-sm px-4 py-1">
             {data?.length || 0} Mouvements
           </Badge> */}
-          <MVT_AddSheet />
+          <PermissionGuard
+            resource="movement"
+            action="create"
+            fallback={
+              <Button variant="outline" disabled className="opacity-50 cursor-not-allowed">
+                <Lock className="w-4 h-4 mr-2" /> Création impossible
+              </Button>
+            }
+          >
+            <MVT_AddSheet />
+          </PermissionGuard>
         </CardHeader>
 
         <CardContent>
@@ -72,22 +92,30 @@ export function ListMovement() {
                           {Number(movement.quantity).toFixed(2)}
                           {/* Affichage conditionnel de l'unité */}
                           {/* @ts-ignore */}
-                          <span className="text-xs text-muted-foreground ml-1">{movement.stock.item.unit.code}</span>
+                          <span className="text-xs text-muted-foreground ml-1">
+                            {movement.stock.item.unit.code}
+                          </span>
                         </span>
                       ) : (
                         '-'
                       )}
                     </TableCell>
                     <TableCell>
-                      <span className="text-xs text-muted-foreground ml-1">{movement.stock.item.name}</span>
+                      <span className="text-xs text-muted-foreground ml-1">
+                        {movement.stock.item.name}
+                      </span>
                     </TableCell>
                     <TableCell>
-                      <span className="text-xs text-muted-foreground ml-1">{movement.user.name}</span>
+                      <span className="text-xs text-muted-foreground ml-1">
+                        {movement.user.name}
+                      </span>
                     </TableCell>
                     <TableCell>
                       <span className="text-xs text-muted-foreground ml-1">
                         {/* Affiche : 31 déc. 2025 */}
-                        {format(new Date(movement.createdAt), 'dd MMMM yyyy à HH:mm', { locale: fr })}
+                        {format(new Date(movement.createdAt), 'dd MMMM yyyy à HH:mm', {
+                          locale: fr,
+                        })}
                       </span>
                     </TableCell>
                   </TableRow>

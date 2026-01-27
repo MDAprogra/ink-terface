@@ -1,8 +1,11 @@
 'use server';
 
+import { requirePermission } from '@/lib/auth-guard';
 import { prisma } from '@/lib/prisma';
 
 export async function getMovement() {
+  const _session = await requirePermission('movement', 'read');
+
   try {
     const movements = await prisma.movement.findMany({
       orderBy: { createdAt: 'asc' },
@@ -28,8 +31,12 @@ export async function getMovement() {
         quantity: movement.stock.quantity ? movement.stock.quantity.toNumber() : null,
         item: {
           ...movement.stock.item,
-          securityStock: movement.stock.item.securityStock ? movement.stock.item.securityStock.toNumber() : null,
-          purchasePrice: movement.stock.item.purchasePrice ? movement.stock.item.purchasePrice.toNumber() : null,
+          securityStock: movement.stock.item.securityStock
+            ? movement.stock.item.securityStock.toNumber()
+            : null,
+          purchasePrice: movement.stock.item.purchasePrice
+            ? movement.stock.item.purchasePrice.toNumber()
+            : null,
         },
       },
     }));

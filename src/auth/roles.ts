@@ -4,6 +4,7 @@ import { adminAc, defaultStatements } from 'better-auth/plugins/organization/acc
 const statement = {
   ...defaultStatements,
   catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete', 'label'],
+  movement: ['read', 'create'],
   organization: ['update', 'delete', 'read'],
   member: ['create', 'update', 'delete', 'read'],
   invitation: ['create', 'cancel', 'read'],
@@ -13,15 +14,15 @@ const ac = createAccessControl(statement);
 
 const member = ac.newRole({
   catalog: ['read'],
-
+  movement: ['read'],
   organization: ['read'],
   member: ['read'],
   invitation: ['read'],
 });
 
 const manager = ac.newRole({
-  catalog: ['read', 'edit', 'create', 'update'],
-
+  catalog: ['read', 'edit', 'update'],
+  movement: ['read', 'create'],
   organization: ['read'],
   member: ['read'],
   invitation: ['read', 'create'],
@@ -29,7 +30,7 @@ const manager = ac.newRole({
 
 const admin = ac.newRole({
   catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'label'],
-
+  movement: ['read', 'create'],
   organization: ['read', 'update'],
   member: ['read', 'update', 'delete'],
   invitation: ['read', 'create', 'cancel'],
@@ -37,10 +38,12 @@ const admin = ac.newRole({
 
 const developer = ac.newRole({
   catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete', 'label'],
+  movement: ['read', 'create'],
   ...adminAc.statements,
 });
 const owner = ac.newRole({
   catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete', 'label'],
+  movement: ['read', 'create'],
   ...adminAc.statements,
 });
 

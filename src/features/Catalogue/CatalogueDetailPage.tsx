@@ -105,7 +105,7 @@ export default function CatalogueDetailPage({ reference }: CatalogueDetailProps)
           action="edit"
           fallback={
             <Button variant="outline" disabled className="opacity-50 cursor-not-allowed">
-              <Lock className="w-4 h-4 mr-2" /> Création Impossible
+              <Lock className="w-4 h-4 mr-2" /> Modification Impossible
             </Button>
           }
         >

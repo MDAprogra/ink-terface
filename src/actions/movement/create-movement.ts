@@ -1,6 +1,7 @@
 'use server';
 
 import type { Movement } from '@/generated/prisma/client';
+import { requirePermission } from '@/lib/auth-guard';
 import { prisma } from '@/lib/prisma';
 
 type NewMovementParam = Pick<Movement, 'idStock' | 'idMovementType' | 'idUser'> & {
@@ -8,6 +9,8 @@ type NewMovementParam = Pick<Movement, 'idStock' | 'idMovementType' | 'idUser'> 
 };
 
 export async function createMovement(movement: NewMovementParam) {
+  const _session = await requirePermission('movement', 'create');
+
   // 1. Validation basique des données
   if (!movement || !movement.quantity) {
     throw new Error('Données incorrectes : quantité manquante !');
@@ -39,7 +42,9 @@ export async function createMovement(movement: NewMovementParam) {
     const currentStock = stockWithItem.quantity.toNumber();
 
     if (currentStock < quantityNumber) {
-      throw new Error(`Stock insuffisant pour cette sortie (Dispo: ${currentStock}, Demandé: ${quantityNumber})`);
+      throw new Error(
+        `Stock insuffisant pour cette sortie (Dispo: ${currentStock}, Demandé: ${quantityNumber})`,
+      );
     }
   }
 

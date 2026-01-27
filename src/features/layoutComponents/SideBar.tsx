@@ -6,6 +6,7 @@ import {
   Home,
   LogIn,
   LogOut,
+  type LucideIcon,
   Package,
   ShieldCheck, // Icône pour l'admin
   User,
@@ -20,22 +21,27 @@ import { authClient } from '@/lib/auth-client';
 import { cn } from '@/lib/utils'; // Utilitaire classique de Shadcn pour fusionner les classes
 
 // Définition des items du menu standard
-const menuItems = [
+const menuItems: MenuItem[] = [
   { label: 'Accueil', icon: Home, href: '/app', exact: true }, // exact: true pour l'accueil uniquement
   { label: 'Catalogue', icon: BookOpenText, href: '/app/catalogue' },
   {
     label: 'Stock',
     icon: Package,
     href: '/app/stock',
-    roles: ['admin', 'manager', 'developer', 'owner'],
   },
   {
     label: 'Mouvements',
     icon: ArrowLeftRight,
     href: '/app/movement',
-    roles: ['admin', 'manager', 'developer', 'owner'],
   },
 ];
+interface MenuItem {
+  label: string;
+  icon: LucideIcon;
+  href: string;
+  exact?: boolean; // Optionnel (?)
+  roles?: string[]; // Optionnel (?) : Tableau de strings
+}
 
 export function UserMenu() {
   const { data: session, isPending } = authClient.useSession();
