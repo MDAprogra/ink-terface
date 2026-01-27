@@ -7,7 +7,7 @@ import { Loader2 } from 'lucide-react'; // Pour le spinner
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 
-import { createUser, getAllRoles, getUsers, setIsInactive, updateUserRole } from '@/actions/administration/user';
+import { createUser, getUsers, setIsInactive } from '@/actions/administration/user';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -17,14 +17,14 @@ import PopUpAdd, { type AddFieldConfig } from '../Components/PopUpAdd';
 export function UsersTable() {
   const queryClient = useQueryClient();
 
-  const { data: allRoles = [] } = useQuery({
-    queryKey: ['admin_roles'],
-    queryFn: () => getAllRoles(),
-  });
-  const { data: roles = [], isLoading: isLoadingRoles } = useQuery({
-    queryKey: ['admin_roles'], // C'était 'admin_users' avant (erreur)
-    queryFn: () => getAllRoles(),
-  });
+  // const { data: allRoles = [] } = useQuery({
+  //   queryKey: ['admin_roles'],
+  //   queryFn: () => getAllRoles(),
+  // });
+  // const { data: roles = [], isLoading: isLoadingRoles } = useQuery({
+  //   queryKey: ['admin_roles'], // C'était 'admin_users' avant (erreur)
+  //   queryFn: () => getAllRoles(),
+  // });
 
   const { data: users = [], isLoading: isLoadingUsers } = useQuery({
     queryKey: ['admin_users'],
@@ -58,16 +58,16 @@ export function UsersTable() {
       placeholder: '********',
       required: true,
     },
-    {
-      label: 'Rôle',
-      name: 'roleId',
-      type: 'select',
-      required: true,
-      options: allRoles.map((role) => ({
-        label: role.name,
-        value: role.id,
-      })),
-    },
+    // {
+    //   label: 'Rôle',
+    //   name: 'roleId',
+    //   type: 'select',
+    //   required: true,
+    //   options: allRoles.map((role) => ({
+    //     label: role.name,
+    //     value: role.id,
+    //   })),
+    // },
   ];
 
   const { mutate: mutateInactive, isPending: isPendingInactive } = useMutation({
@@ -97,45 +97,45 @@ export function UsersTable() {
     },
   });
 
-  const { mutate: mutateRole, isPending: isPendingRole } = useMutation({
-    mutationFn: async ({ id, roleId }: { id: string; roleId: string }) => {
-      const result = await updateUserRole(id, roleId);
-      if (!result.success) throw new Error(result.error);
-      return result;
-    },
-    // ⚡ Optimistic Update
-    onMutate: async ({ id, roleId }) => {
-      await queryClient.cancelQueries({ queryKey: ['admin_users'] });
-      const previousUsers = queryClient.getQueryData(['admin_users']);
+  // const { mutate: mutateRole, isPending: isPendingRole } = useMutation({
+  //   mutationFn: async ({ id, roleId }: { id: string; roleId: string }) => {
+  //     const result = await updateUserRole(id, roleId);
+  //     if (!result.success) throw new Error(result.error);
+  //     return result;
+  //   },
+  //   // ⚡ Optimistic Update
+  //   onMutate: async ({ id, roleId }) => {
+  //     await queryClient.cancelQueries({ queryKey: ['admin_users'] });
+  //     const previousUsers = queryClient.getQueryData(['admin_users']);
 
-      queryClient.setQueryData(['admin_users'], (old: any[]) => {
-        return old?.map((u) =>
-          // On met à jour le roleId localement tout de suite
-          u.id === id ? { ...u, roleId: roleId } : u,
-        );
-      });
+  //     queryClient.setQueryData(['admin_users'], (old: any[]) => {
+  //       return old?.map((u) =>
+  //         // On met à jour le roleId localement tout de suite
+  //         u.id === id ? { ...u, roleId: roleId } : u,
+  //       );
+  //     });
 
-      return { previousUsers };
-    },
-    onError: (_err, _variables, context) => {
-      queryClient.setQueryData(['admin_users'], context?.previousUsers);
-      toast.error('Impossible de changer le rôle');
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin_users'] });
-    },
-    onSuccess: () => {
-      toast.success('Rôle mis à jour');
-    },
-  });
+  //     return { previousUsers };
+  //   },
+  //   onError: (_err, _variables, context) => {
+  //     queryClient.setQueryData(['admin_users'], context?.previousUsers);
+  //     toast.error('Impossible de changer le rôle');
+  //   },
+  //   onSettled: () => {
+  //     queryClient.invalidateQueries({ queryKey: ['admin_users'] });
+  //   },
+  //   onSuccess: () => {
+  //     toast.success('Rôle mis à jour');
+  //   },
+  // });
 
-  if (isLoadingRoles || isLoadingUsers) {
-    return (
-      <div className="flex justify-center p-8">
-        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-      </div>
-    );
-  }
+  // if (isLoadingRoles || isLoadingUsers) {
+  //   return (
+  //     <div className="flex justify-center p-8">
+  //       <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+  //     </div>
+  //   );
+  // }
 
   if (!users.length) {
     return <div className="p-4 text-center text-muted-foreground">Aucun utilisateur trouvé.</div>;
@@ -169,7 +169,7 @@ export function UsersTable() {
                 <TableCell className="font-medium">{user.name || 'Sans nom'}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{format(new Date(user.createdAt), 'dd/MM/yyyy HH:mm')}</TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <Select
                     disabled={isPendingRole}
                     // IMPORTANT : On utilise 'value' pour que l'UI suive le cache optimiste
@@ -194,7 +194,7 @@ export function UsersTable() {
                       ))}
                     </SelectContent>
                   </Select>
-                </TableCell>
+                </TableCell> */}
                 <TableCell>
                   <Switch
                     id={user.id}

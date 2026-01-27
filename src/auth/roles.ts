@@ -1,0 +1,55 @@
+import { createAccessControl } from 'better-auth/plugins/access';
+import { adminAc, defaultStatements } from 'better-auth/plugins/organization/access';
+
+const statement = {
+  ...defaultStatements,
+  catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete'],
+  organization: ['update', 'delete', 'read'],
+  member: ['create', 'update', 'delete', 'read'],
+  invitation: ['create', 'cancel', 'read'],
+} as const;
+
+export const ac = createAccessControl(statement);
+
+const member = ac.newRole({
+  catalog: ['read'],
+
+  organization: ['read'],
+  member: ['read'],
+  invitation: ['read'],
+});
+
+const manager = ac.newRole({
+  catalog: ['read', 'edit', 'create', 'update'],
+
+  organization: ['read'],
+  member: ['read'],
+  invitation: ['read', 'create'],
+});
+
+const admin = ac.newRole({
+  catalog: ['read', 'edit', 'create', 'update', 'soft-delete'],
+
+  organization: ['read', 'update'],
+  member: ['read', 'update', 'delete'],
+  invitation: ['read', 'create', 'cancel'],
+});
+
+const developer = ac.newRole({
+  catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete'],
+  ...adminAc.statements,
+});
+const owner = ac.newRole({
+  catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete'],
+  ...adminAc.statements,
+});
+
+export const ORG_ROLES = {
+  developer,
+  admin,
+  manager,
+  member,
+  owner,
+} as const;
+
+export type OrgRole = keyof typeof ORG_ROLES;

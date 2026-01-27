@@ -1,9 +1,35 @@
 'use server';
 
+import { headers } from 'next/headers';
+
+import { ORG_ROLES, type OrgRole } from '@/auth/roles';
 import { Prisma } from '@/generated/prisma/client';
+import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 export async function deleteItem(m_id: string) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (!session) {
+    return { error: 'Non connecté' };
+  }
+
+  const userRole = session.user.role as OrgRole;
+  const roleConfig = ORG_ROLES[userRole];
+
+  if (!roleConfig) {
+    return { error: '⛔ Rôle inconnu ou invalide.' };
+  }
+
+  const check = (roleConfig as any).authorize({
+    catalog: ['soft-delete'],
+  });
+
+  if (!check.success) {
+    throw new Error(`Vous n'avez pas le droit de supprimer un article !`);
+  }
+
   if (!m_id) {
     throw new Error("Récupération de l'identifiant impossible : Veuillez réessayer !");
   }

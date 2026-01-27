@@ -1,43 +1,25 @@
-import type { Session, User } from 'better-auth';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
+import { admin, organization, role } from 'better-auth/plugins';
+
+import { ORG_ROLES } from '@/auth/roles';
 
 import { prisma } from './prisma';
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
-    provider: 'postgresql',
+    provider: 'postgresql', // or "mysql", "postgresql", ...etc
   }),
   emailAndPassword: {
     enabled: true,
   },
+  plugins: [
+    organization({
+      allowUserToCreateOrganization: true,
+      defaultRole: ORG_ROLES.member,
 
-  callbacks: {
-    session: async ({ session, user }: { session: Session; user: User }) => {
-      const userWithPermissions = await prisma.user.findUnique({
-        where: { id: user.id },
-        select: {
-          role: {
-            include: {
-              permissions: true,
-            },
-          },
-        },
-      });
-
-      const permissions = userWithPermissions?.role?.permissions.map((p) => p.action) || [];
-      const roleName = userWithPermissions?.role?.name || null;
-
-      // CORRECTION ICI
-      return {
-        session, // 1. On renvoie l'objet session tel quel
-        user: {
-          ...user, // 2. On spread l'objet 'user' (le 2ème argument), et non 'session.user'
-          role: roleName,
-          permissions: permissions,
-        },
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any; // 3. On ignore l'erreur de linter juste pour cette ligne
-    },
-  },
+      roles: ORG_ROLES,
+    }),
+    admin(),
+  ],
 });

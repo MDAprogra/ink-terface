@@ -30,6 +30,11 @@ const menuItems = [
 
 export function UserMenu() {
   const { data: session, isPending } = authClient.useSession();
+  const userPermissions = ((session?.user as any)?.permissions as string[]) || [];
+
+  const hasPermission = (permission: string) => {
+    return userPermissions.includes(permission);
+  };
   const router = useRouter();
   const pathname = usePathname();
 
@@ -52,10 +57,6 @@ export function UserMenu() {
       </div>
     );
   }
-
-  // Vérification du rôle admin (à adapter selon ta config Better Auth)
-  // Souvent c'est session.user.role === 'admin'
-  const isAdmin = true;
 
   return (
     <div className="flex flex-col h-full w-full">
@@ -86,33 +87,53 @@ export function UserMenu() {
           );
         })}
 
-        {/* Lien Admin séparé (Visible uniquement si Admin) */}
-        {isAdmin && (
-          <>
-            <div className="my-2 border-t border-gray-100 dark:border-gray-800" />
-            <Button
-              variant={pathname.startsWith('/app/settings') ? 'secondary' : 'ghost'}
-              asChild
-              className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
-            >
-              <Link href="/app/settings">
-                <ShieldCheck className="h-4 w-4" />
-                <span>Paramètres</span>
-              </Link>
-            </Button>
+        <div className="my-2 border-t border-gray-100 dark:border-gray-800" />
 
-            <Button
-              variant={pathname.startsWith('/app/admin') ? 'secondary' : 'ghost'}
-              asChild
-              className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
-            >
-              <Link href="/app/admin">
-                <ShieldCheck className="h-4 w-4" />
-                <span>Administration</span>
-              </Link>
-            </Button>
-          </>
-        )}
+        <Button
+          variant={pathname.startsWith('/app/settings') ? 'secondary' : 'ghost'}
+          asChild
+          className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+        >
+          <Link href="/app/settings">
+            <ShieldCheck className="h-4 w-4" />
+            <span>Paramètres</span>
+          </Link>
+        </Button>
+
+        <Button
+          variant={pathname.startsWith('/app/admin') ? 'secondary' : 'ghost'}
+          asChild
+          className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+        >
+          <Link href="/app/admin">
+            <ShieldCheck className="h-4 w-4" />
+            <span>Administration</span>
+          </Link>
+        </Button>
+
+        {/* <div className="my-2 border-t border-gray-100 dark:border-gray-800" />
+
+        <Button
+          variant={pathname.startsWith('/app/settings') ? 'secondary' : 'ghost'}
+          asChild
+          className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+        >
+          <Link href="/app/settings">
+            <ShieldCheck className="h-4 w-4" />
+            <span>Paramètres</span>
+          </Link>
+        </Button>
+
+        <Button
+          variant={pathname.startsWith('/app/admin') ? 'secondary' : 'ghost'}
+          asChild
+          className="w-full justify-start gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+        >
+          <Link href="/app/admin">
+            <ShieldCheck className="h-4 w-4" />
+            <span>Administration</span>
+          </Link>
+        </Button> */}
       </nav>
 
       {/* --- FOOTER UTILISATEUR --- */}

@@ -50,14 +50,14 @@ async function main() {
 
   console.log('🌱 Début des seeds...');
 
-  await seedUser(prisma);
+  //await seedUser(prisma);
   await seedSuppliers(prisma);
   await seedUnits(prisma);
   await seedMovementType(prisma);
   await seedItemType(prisma);
   await seedItem(prisma);
   await seedStocks(prisma);
-  await seedMovement(prisma);
+  //await seedMovement(prisma);
 
   console.log('✅ Seeds terminés avec succès.');
 }

@@ -5,15 +5,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { prisma } from '@/lib/prisma'; // Assure-toi que le chemin est bon
 
 // 1. Fonction pour récupérer les stats rapidement (Server Side)
-async function getAdminStats() {
-  const [userCount, roleCount] = await Promise.all([prisma.user.count(), prisma.role.count()]);
+// async function getAdminStats() {
+//   const [userCount, roleCount] = await Promise.all([prisma.user.count(), prisma.role.count()]);
 
-  return { userCount, roleCount };
-}
+//   return { userCount, roleCount };
+// }
 
 export default async function AdminPage() {
   // 2. On récupère les données
-  const stats = await getAdminStats();
+  //const stats = await getAdminStats();
 
   return (
     <div className="space-y-8">
@@ -25,7 +25,7 @@ export default async function AdminPage() {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.userCount}</div>
+            {/* <div className="text-2xl font-bold">{stats.userCount}</div> */}
             <p className="text-xs text-muted-foreground">Inscrits sur la plateforme</p>
           </CardContent>
         </Card>
@@ -36,7 +36,7 @@ export default async function AdminPage() {
             <ShieldCheck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.roleCount}</div>
+            {/* <div className="text-2xl font-bold">{stats.roleCount}</div> */}
             <p className="text-xs text-muted-foreground">Niveaux d'accès configurés</p>
           </CardContent>
         </Card>
@@ -90,6 +90,23 @@ export default async function AdminPage() {
               <CardContent>
                 <span className="text-sm font-medium text-primary flex items-center group-hover:underline">
                   Configurer les rôles{' '}
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link href="/app/admin/organization" className="block group">
+            <Card className="h-full transition-all hover:border-primary hover:shadow-md">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ShieldCheck className="h-5 w-5 text-purple-500" />
+                  Organisation
+                </CardTitle>
+                <CardDescription>Créer et Changer d'organisation</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <span className="text-sm font-medium text-primary flex items-center group-hover:underline">
+                  Configurer les organisations{' '}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </CardContent>

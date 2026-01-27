@@ -4,51 +4,36 @@ import { APIError } from 'better-auth';
 import { revalidatePath } from 'next/cache';
 
 import { auth } from '@/lib/auth';
-import { requirePermission } from '@/lib/auth-guard';
 import { prisma } from '@/lib/prisma';
 
 export async function getUsers() {
-  //TODO: A décommenter une fois les roles et permissions
   //await requirePermission('user:manage'); // 🔒 Sécurité
 
   return await prisma.user.findMany({
     orderBy: { createdAt: 'desc' },
-    include: {
-      role: true, // On veut le nom du rôle
-    },
   });
 }
 
-// 2. Récupérer la liste des rôles disponibles (pour le select)
-export async function getAllRoles() {
-  //TODO: A décommenter une fois les roles et permissions
-  //await requirePermission('user:manage');
+// // 3. Modifier le rôle d'un utilisateur
+// export async function updateUserRole(userId: string, roleId: string) {
+//   try {
+//     //TODO: A décommenter une fois les roles et permissions
+//     //await requirePermission('user:manage'); // 🔒 Seul un admin peut faire ça
 
-  return await prisma.role.findMany({
-    orderBy: { name: 'asc' },
-  });
-}
+//     await prisma.user.update({
+//       where: { id: userId },
+//       data: { roleId },
+//     });
 
-// 3. Modifier le rôle d'un utilisateur
-export async function updateUserRole(userId: string, roleId: string) {
-  try {
-    //TODO: A décommenter une fois les roles et permissions
-    //await requirePermission('user:manage'); // 🔒 Seul un admin peut faire ça
+//     // Rafraîchir la page admin pour voir le changement immédiatement
+//     revalidatePath('/app/admin/users');
 
-    await prisma.user.update({
-      where: { id: userId },
-      data: { roleId },
-    });
-
-    // Rafraîchir la page admin pour voir le changement immédiatement
-    revalidatePath('/app/admin/users');
-
-    return { success: true };
-  } catch (error) {
-    console.error('Erreur update role:', error);
-    return { success: false, error: 'Impossible de modifier le rôle.' };
-  }
-}
+//     return { success: true };
+//   } catch (error) {
+//     console.error('Erreur update role:', error);
+//     return { success: false, error: 'Impossible de modifier le rôle.' };
+//   }
+// }
 
 type CreateUserInput = {
   name: string;
@@ -61,7 +46,7 @@ type CreateUserInput = {
 export async function createUser(data: CreateUserInput) {
   //await requirePermission("view:admin"); // Idéalement une permission "role:create"
 
-  const { name, firstName, email, password, roleId } = data;
+  const { name, firstName, email, password } = data;
   const fullName = `${firstName} ${name.toLocaleUpperCase()}`;
   const defaultPassword = password || 'ChangeMoi123!';
 
@@ -73,10 +58,6 @@ export async function createUser(data: CreateUserInput) {
         name: fullName,
       },
       asResponse: false,
-    });
-    await prisma.user.update({
-      where: { email },
-      data: { roleId: roleId },
     });
 
     revalidatePath('/app/admin/users');

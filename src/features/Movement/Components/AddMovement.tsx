@@ -69,8 +69,6 @@ export const MVT_AddSheet = ({ pIdItem, isOpen, onOpenChange }: MVT_AddSheetProp
     const foundItem = dataItems.find((i) => i.id === pIdItem || i.reference === pIdItem);
 
     if (foundItem) {
-      console.log('✅ Article trouvé :', foundItem.name);
-
       // B. On cherche si un stock existe déjà pour cet article
       const associatedStock = dataStk?.find((s) => s.idItem === foundItem.id);
 
