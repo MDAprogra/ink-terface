@@ -1,15 +1,26 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { AlertCircle, Loader2 } from 'lucide-react';
+import { AlertCircle, Loader2, Lock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import { getItems } from '@/actions/items/get-items';
+import { ORG_ROLES, type OrgRole } from '@/auth/roles';
+import { PermissionGuard } from '@/components/auth/permission-guard';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import CatalogueAdd from '@/features/Catalogue/CatalogueAdd';
+import { authClient } from '@/lib/auth-client';
 
 // Utilitaire de formatage
 const formatCurrency = (value: number | string | null) => {
@@ -21,13 +32,23 @@ const formatCurrency = (value: number | string | null) => {
 };
 
 export function ListItems() {
+  const { data: session, isPending } = authClient.useSession();
   const router = useRouter();
+
   // 1. La logique de récupération de données
   const { data, isLoading, error } = useQuery({
     queryKey: ['items'],
     queryFn: () => getItems(),
   });
 
+  if (session) {
+    const userRole = session.user.role as OrgRole;
+    const roleConfig = ORG_ROLES[userRole];
+
+    const canAdd = (roleConfig as any).authorize({
+      catalog: ['create'],
+    });
+  }
   // 2. Gestion du chargement (Spinner centré)
   if (isLoading) {
     return (
@@ -45,7 +66,9 @@ export function ListItems() {
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Erreur</AlertTitle>
-          <AlertDescription>Impossible de charger les produits. Veuillez vérifier votre connexion.</AlertDescription>
+          <AlertDescription>
+            Impossible de charger les produits. Veuillez vérifier votre connexion.
+          </AlertDescription>
         </Alert>
       </div>
     );
@@ -68,8 +91,17 @@ export function ListItems() {
               {data?.length || 0} Produits
             </Badge>
 
-            {/* Intégration ici */}
-            <CatalogueAdd />
+            <PermissionGuard
+              resource="catalog"
+              action="create"
+              fallback={
+                <Button variant="outline" disabled className="opacity-50 cursor-not-allowed">
+                  <Lock className="w-4 h-4 mr-2" /> Création Impossible
+                </Button>
+              }
+            >
+              <CatalogueAdd />
+            </PermissionGuard>
           </div>
         </CardHeader>
 
@@ -115,7 +147,10 @@ export function ListItems() {
                       </div>
                     </TableCell>
 
-                    <TableCell className="max-w-75 truncate text-muted-foreground" title={item.description || ''}>
+                    <TableCell
+                      className="max-w-75 truncate text-muted-foreground"
+                      title={item.description || ''}
+                    >
                       {item.description || <span className="italic opacity-50 text-xs">N/A</span>}
                     </TableCell>
 
@@ -124,15 +159,21 @@ export function ListItems() {
                         // {data.stocks.reduce((total, stock) => total + stock.quantity, 0)}
                         <span
                           className={
-                            Number(item.stocks.reduce((total, stock) => total + stock.quantity, 0)) === 0
+                            Number(
+                              item.stocks.reduce((total, stock) => total + stock.quantity, 0),
+                            ) === 0
                               ? 'text-red-500'
                               : ''
                           }
                         >
-                          {Number(item.stocks.reduce((total, stock) => total + stock.quantity, 0)).toFixed(2)}
+                          {Number(
+                            item.stocks.reduce((total, stock) => total + stock.quantity, 0),
+                          ).toFixed(2)}
                           {/* Affichage conditionnel de l'unité */}
                           {/* @ts-ignore */}
-                          <span className="text-xs text-muted-foreground ml-1">{item.unit?.name}</span>
+                          <span className="text-xs text-muted-foreground ml-1">
+                            {item.unit?.name}
+                          </span>
                         </span>
                       ) : (
                         '-'
@@ -140,11 +181,15 @@ export function ListItems() {
                     </TableCell>
                     <TableCell className="text-center font-mono">
                       {item.securityStock !== null ? (
-                        <span className={Number(item.securityStock) > 5 ? 'text-red-500 font-bold' : ''}>
+                        <span
+                          className={Number(item.securityStock) > 5 ? 'text-red-500 font-bold' : ''}
+                        >
                           {Number(item.securityStock).toFixed(2)}
                           {/* Affichage conditionnel de l'unité */}
                           {/* @ts-ignore */}
-                          <span className="text-xs text-muted-foreground ml-1">{item.unit?.name}</span>
+                          <span className="text-xs text-muted-foreground ml-1">
+                            {item.unit?.name}
+                          </span>
                         </span>
                       ) : (
                         '-'
@@ -152,7 +197,9 @@ export function ListItems() {
                     </TableCell>
 
                     <TableCell className="text-right font-mono tabular-nums">
-                      {formatCurrency(item.purchasePrice ? Number(item.purchasePrice).toFixed(2) : '00,00')}
+                      {formatCurrency(
+                        item.purchasePrice ? Number(item.purchasePrice).toFixed(2) : '00,00',
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
