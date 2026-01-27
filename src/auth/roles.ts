@@ -9,7 +9,7 @@ const statement = {
   invitation: ['create', 'cancel', 'read'],
 } as const;
 
-export const ac = createAccessControl(statement);
+const ac = createAccessControl(statement);
 
 const member = ac.newRole({
   catalog: ['read'],

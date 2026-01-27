@@ -7,8 +7,6 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 export async function getUsers() {
-  //await requirePermission('user:manage'); // 🔒 Sécurité
-
   return await prisma.user.findMany({
     orderBy: { createdAt: 'desc' },
   });
@@ -18,7 +16,6 @@ export async function getUsers() {
 // export async function updateUserRole(userId: string, roleId: string) {
 //   try {
 //     //TODO: A décommenter une fois les roles et permissions
-//     //await requirePermission('user:manage'); // 🔒 Seul un admin peut faire ça
 
 //     await prisma.user.update({
 //       where: { id: userId },
@@ -44,8 +41,6 @@ type CreateUserInput = {
 };
 
 export async function createUser(data: CreateUserInput) {
-  //await requirePermission("view:admin"); // Idéalement une permission "role:create"
-
   const { name, firstName, email, password } = data;
   const fullName = `${firstName} ${name.toLocaleUpperCase()}`;
   const defaultPassword = password || 'ChangeMoi123!';
