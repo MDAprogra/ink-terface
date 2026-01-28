@@ -146,7 +146,12 @@ export const AddSheet = ({
 
             <SheetClose asChild>
               {/* ✅ CORRECTION : Le bouton Annuler ferme via le wrapper */}
-              <Button variant="outline" type="button" onClick={() => handleOpenChange(false)} disabled={isPending}>
+              <Button
+                variant="outline"
+                type="button"
+                onClick={() => handleOpenChange(false)}
+                disabled={isPending}
+              >
                 Annuler
               </Button>
             </SheetClose>
