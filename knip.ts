@@ -25,6 +25,7 @@ const config: KnipConfig = {
     'postcss', // On l'ignore pour éviter l'erreur "Unlisted"
     '@radix-ui/react-select',
     '@paralleldrive/cuid2',
+    'baseline-browser-mapping',
   ],
 };
 
