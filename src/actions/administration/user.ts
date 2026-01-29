@@ -37,11 +37,11 @@ type CreateUserInput = {
   firstName: string;
   email: string;
   password: string;
-  roleId: string;
+  role: string;
 };
 
 export async function createUser(data: CreateUserInput) {
-  const { name, firstName, email, password } = data;
+  const { name, firstName, email, password, role } = data;
   const fullName = `${firstName} ${name.toLocaleUpperCase()}`;
   const defaultPassword = password || 'ChangeMoi123!';
 
@@ -53,6 +53,11 @@ export async function createUser(data: CreateUserInput) {
         name: fullName,
       },
       asResponse: false,
+    });
+
+    await prisma.user.update({
+      where: { id: newUserResponse.user.id },
+      data: { role: role }, // Assure-toi que la colonne 'role' existe dans ton schema.prisma sur le modèle User
     });
 
     revalidatePath('/app/admin/users');

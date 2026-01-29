@@ -65,16 +65,16 @@ export function UsersTable() {
       placeholder: '********',
       required: true,
     },
-    // {
-    //   label: 'Rôle',
-    //   name: 'roleId',
-    //   type: 'select',
-    //   required: true,
-    //   options: allRoles.map((role) => ({
-    //     label: role.name,
-    //     value: role.id,
-    //   })),
-    // },
+    {
+      label: 'Rôle',
+      name: 'role', // Assure-toi que ton action 'createUser' attend bien un champ nommé 'role'
+      type: 'select',
+      required: true,
+      options: Object.entries(ROLE_LABELS).map(([key, label]) => ({
+        label: label,
+        value: key,
+      })),
+    },
   ];
 
   const { mutate: mutateInactive, isPending: isPendingInactive } = useMutation({
