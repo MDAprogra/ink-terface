@@ -9,6 +9,7 @@ const statement = {
   member: ['create', 'update', 'delete', 'read'],
   invitation: ['create', 'cancel', 'read'],
   settings: ['create', 'edit', 'soft-delete', 'hard-delete', 'read'],
+  users: ['read', 'create', 'setInactif', 'setRole'],
 } as const;
 
 const ac = createAccessControl(statement);
@@ -28,7 +29,6 @@ const manager = ac.newRole({
   organization: ['read'],
   member: ['read'],
   invitation: ['read', 'create'],
-  settings: ['read'],
 });
 
 const admin = ac.newRole({
@@ -38,18 +38,21 @@ const admin = ac.newRole({
   member: ['read', 'update', 'delete'],
   invitation: ['read', 'create', 'cancel'],
   settings: ['create', 'edit', 'soft-delete', 'read'],
+  users: ['read', 'create', 'setInactif'],
 });
 
 const developer = ac.newRole({
   catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete', 'label'],
   movement: ['read', 'create'],
   settings: ['create', 'edit', 'soft-delete', 'hard-delete', 'read'],
+  users: ['read', 'create', 'setInactif', 'setRole'],
   ...adminAc.statements,
 });
 const owner = ac.newRole({
   catalog: ['read', 'edit', 'create', 'update', 'soft-delete', 'hard-delete', 'label'],
   movement: ['read', 'create'],
   settings: ['create', 'edit', 'soft-delete', 'hard-delete', 'read'],
+  users: ['read', 'create', 'setInactif', 'setRole'],
   ...adminAc.statements,
 });
 

@@ -3,14 +3,27 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
-import { Controller, type SubmitHandler, useForm } from 'react-hook-form'; // 👈 Import Controller
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'; // 👈 Import des composants Select
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 // 1. On enrichit la configuration
 export type AddFieldConfig = {
@@ -40,7 +53,7 @@ export default function PopUpAdd({ triggerLabel, title, fields, queryKey, action
     register,
     handleSubmit,
     reset,
-    control, // 👈 Indispensable pour piloter le Select Shadcn
+    control,
     formState: { errors },
   } = useForm();
 
@@ -118,13 +131,20 @@ export default function PopUpAdd({ triggerLabel, title, fields, queryKey, action
                   />
                 )}
 
-                {errors[field.name] && <span className="text-sm text-red-500">Ce champ est requis</span>}
+                {errors[field.name] && (
+                  <span className="text-sm text-red-500">Ce champ est requis</span>
+                )}
               </div>
             ))}
           </div>
 
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setOpen(false)} disabled={isPending}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setOpen(false)}
+              disabled={isPending}
+            >
               Annuler
             </Button>
             <Button type="submit" disabled={isPending}>
