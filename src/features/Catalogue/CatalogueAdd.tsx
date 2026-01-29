@@ -9,7 +9,14 @@ import { getTypeItem } from '@/actions/type-item/get-type-item';
 import { getUnit } from '@/actions/unit/get-unit';
 // Tes composants UI
 import { Button } from '@/components/ui/button';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
 import {
   Dialog,
   DialogClose,
@@ -117,7 +124,17 @@ export default function CatalogueAdd() {
             </div>
             <div className="grid gap-3">
               <Label htmlFor="ref-1">Référence*</Label>
-              <Input id="ref-1" name="ref" required placeholder="[10 Caractères max.] (Obligatoire)" />
+              <Input
+                id="ref-1"
+                name="ref"
+                required
+                placeholder="[10 Caractères max.] (Obligatoire)"
+                maxLength={10}
+                minLength={10}
+                onInput={(e) => {
+                  e.currentTarget.value = e.currentTarget.value.toUpperCase();
+                }}
+              />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="username-1">Description</Label>
@@ -132,7 +149,13 @@ export default function CatalogueAdd() {
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-3">
                 <Label htmlFor="securityStock-1">Stock sécu.</Label>
-                <Input id="securityStock-1" name="securityStock" type="number" step="0.01" placeholder="0" />
+                <Input
+                  id="securityStock-1"
+                  name="securityStock"
+                  type="number"
+                  step="0.01"
+                  placeholder="0"
+                />
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="shelfLife-1">Conservation (j)</Label>
@@ -142,7 +165,14 @@ export default function CatalogueAdd() {
 
             <div className="grid gap-3">
               <Label htmlFor="purchasePrice-1">Prix d'achat*</Label>
-              <Input id="purchasePrice-1" name="purchasePrice" type="number" step="0.01" required placeholder="0.00" />
+              <Input
+                id="purchasePrice-1"
+                name="purchasePrice"
+                type="number"
+                step="0.01"
+                required
+                placeholder="0.00"
+              />
             </div>
 
             {/* --- SELECT: TYPE ITEM --- */}
@@ -194,7 +224,9 @@ export default function CatalogueAdd() {
               <Popover open={openUnit} onOpenChange={setOpenUnit} modal={true}>
                 <PopoverTrigger asChild>
                   <Button variant="outline" role="combobox" className="w-full justify-between">
-                    {newData?.idUnit ? d_unit?.find((u) => u.id === newData.idUnit)?.name : 'Choisir une unité...'}
+                    {newData?.idUnit
+                      ? d_unit?.find((u) => u.id === newData.idUnit)?.name
+                      : 'Choisir une unité...'}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
                 </PopoverTrigger>
