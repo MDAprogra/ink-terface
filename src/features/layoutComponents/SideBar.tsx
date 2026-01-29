@@ -147,7 +147,7 @@ export function UserMenu() {
                 <span className="text-sm font-medium truncate">
                   {session.user.name}{' '}
                   <span className="text-xs text-muted-foreground truncate">
-                    {session.user.role}
+                    ({session.user.role})
                   </span>
                 </span>
                 <span className="text-xs text-muted-foreground truncate" title={session.user.email}>
