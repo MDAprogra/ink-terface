@@ -1,10 +1,11 @@
 'use client';
 
-import { MoreHorizontalIcon, Pencil, Trash2Icon } from 'lucide-react';
+import { Lock, MoreHorizontalIcon, Pencil, Trash2Icon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { deleteUnit } from '@/actions/unit/delete-unit';
 import { editUnit } from '@/actions/unit/edit-unit';
+import { PermissionGuard } from '@/components/auth/permission-guard';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -47,28 +48,38 @@ export const UnitRow = ({ unit }: UnitRowProps) => {
       <TableCell className="font-medium">{unit.name}</TableCell>
       <TableCell className="font-medium">{unit.code}</TableCell>
       <TableCell className="text-right">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon" aria-label="More Options">
-              <MoreHorizontalIcon />
+        <PermissionGuard
+          resource="settings"
+          action="edit"
+          fallback={
+            <Button variant="outline" disabled className="opacity-50 cursor-not-allowed">
+              <Lock className="w-4 h-4" />
             </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-52">
-            <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => setIsEditOpen(true)}>
-                <Pencil className="mr-2 h-4 w-4" />
-                Modifier
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem variant="destructive" onClick={() => setIsDeletingOpen(true)}>
-                <Trash2Icon className="mr-2 h-4 w-4" />
-                Supprimer
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+          }
+        >
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon" aria-label="More Options">
+                <MoreHorizontalIcon />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-52">
+              <DropdownMenuGroup>
+                <DropdownMenuItem onClick={() => setIsEditOpen(true)}>
+                  <Pencil className="mr-2 h-4 w-4" />
+                  Modifier
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem variant="destructive" onClick={() => setIsDeletingOpen(true)}>
+                  <Trash2Icon className="mr-2 h-4 w-4" />
+                  Supprimer
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </PermissionGuard>
 
         <EditSheet
           open={isEditOpen}
@@ -80,12 +91,20 @@ export const UnitRow = ({ unit }: UnitRowProps) => {
         >
           <div className="grid gap-2">
             <Label htmlFor={`edit-name-${unit.name}`}>Nom</Label>
-            <Input id={`edit-name-${unit.name}`} value={name} onChange={(e) => setName(e.target.value)} />
+            <Input
+              id={`edit-name-${unit.name}`}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor={`edit-name-${unit.code}`}>Code</Label>
-            <Input id={`edit-name-${unit.code}`} value={code} onChange={(e) => setCode(e.target.value)} />
+            <Input
+              id={`edit-name-${unit.code}`}
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+            />
           </div>
         </EditSheet>
 

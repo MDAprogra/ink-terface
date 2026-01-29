@@ -1,11 +1,20 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { PackageOpen } from 'lucide-react';
+import { Lock, PackageOpen } from 'lucide-react';
 
 import { getTypeItem } from '@/actions/type-item/get-type-item';
+import { PermissionGuard } from '@/components/auth/permission-guard';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
 import { ErrorAlert } from '../../Global/ErrorAlert';
 import { Loading } from '../../Global/Loading';
@@ -29,7 +38,17 @@ export const ItemTypeComponent = () => {
               Types de produits
             </CardTitle>
           </div>
-          <TI_AddSheet />
+          <PermissionGuard
+            resource="settings"
+            action="create"
+            fallback={
+              <Button variant="outline" disabled className="opacity-50 cursor-not-allowed">
+                <Lock className="w-4 h-4 mr-2" /> Ajout Impossible
+              </Button>
+            }
+          >
+            <TI_AddSheet />
+          </PermissionGuard>
         </CardHeader>
         <CardContent>
           <div className="rounded-md border">

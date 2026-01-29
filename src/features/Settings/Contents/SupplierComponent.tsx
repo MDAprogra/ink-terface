@@ -1,11 +1,20 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { PackageOpen } from 'lucide-react';
+import { Lock, PackageOpen } from 'lucide-react';
 
 import { getSupplier } from '@/actions/supplier/get-supplier';
+import { PermissionGuard } from '@/components/auth/permission-guard';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
 import { ErrorAlert } from '../../Global/ErrorAlert';
 import { Loading } from '../../Global/Loading';
@@ -29,7 +38,17 @@ export const SupplierComponent = () => {
               Fournisseur
             </CardTitle>
           </div>
-          <S_AddSheet />
+          <PermissionGuard
+            resource="settings"
+            action="edit"
+            fallback={
+              <Button variant="outline" disabled className="opacity-50 cursor-not-allowed">
+                <Lock className="w-4 h-4 mr-4" /> Ajout Impossible
+              </Button>
+            }
+          >
+            <S_AddSheet />
+          </PermissionGuard>
         </CardHeader>
         <CardContent>
           <div className="rounded-md border">
