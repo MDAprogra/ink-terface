@@ -7,4 +7,4 @@ export const ROLE_LABELS: Record<string, string> = {
 };
 
 // Si tu as besoin juste de la liste des clés (['owner', 'admin', ...])
-export const AVAILABLE_ROLES = Object.keys(ROLE_LABELS);
+const AVAILABLE_ROLES = Object.keys(ROLE_LABELS);
